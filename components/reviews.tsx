@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { Star, Sparkles, Quote } from 'lucide-react'
 
 interface ReviewItem {
@@ -79,6 +80,8 @@ const reviews: ReviewItem[] = [
 ]
 
 export function Reviews() {
+  const [activeIdx, setActiveIdx] = useState<number | null>(null)
+
   // Duplicate reviews array to ensure seamless infinite looping
   const duplicatedReviews = [...reviews, ...reviews]
 
@@ -127,52 +130,110 @@ export function Reviews() {
 
         {/* Moving Ticker with Smoked Obsidian & Champagne Brass Cards */}
         <div className="animate-marquee-reviews flex items-stretch gap-4 sm:gap-5 py-3 px-4">
-          {duplicatedReviews.map((review, idx) => (
-            <div
-              key={`${review.name}-${idx}`}
-              className="relative shrink-0 w-[310px] sm:w-[360px] md:w-[390px] rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#0F1611]/85 via-[#0B120E]/90 to-[#070D09]/95 backdrop-blur-xl border border-[#C5A880]/15 hover:border-[#C5A880]/40 shadow-[0_12px_40px_rgba(0,0,0,0.55),inset_0_1px_1px_rgba(197,168,128,0.12)] hover:shadow-[0_16px_45px_rgba(0,0,0,0.65),inset_0_1px_2px_rgba(197,168,128,0.25)] transition-all duration-500 flex flex-col justify-between group overflow-hidden"
-            >
-              {/* Top Subtle Champagne Brass Sheen */}
-              <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 w-48 h-20 bg-[#C5A880]/[0.06] rounded-full blur-2xl group-hover:bg-[#C5A880]/[0.14] transition-all duration-500" />
+          {duplicatedReviews.map((review, idx) => {
+            const isActive = activeIdx === idx
+            return (
+              <div
+                key={`${review.name}-${idx}`}
+                tabIndex={0}
+                onClick={() => setActiveIdx(activeIdx === idx ? null : idx)}
+                className={`relative shrink-0 w-[310px] sm:w-[360px] md:w-[390px] rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#0F1611]/90 via-[#0B120E]/95 to-[#070D09] border transition-all duration-300 flex flex-col justify-between group overflow-hidden cursor-pointer select-none touch-manipulation ${
+                  isActive
+                    ? 'border-[#C5A880] shadow-[0_0_35px_rgba(197,168,128,0.35),inset_0_0_25px_rgba(197,168,128,0.15)] -translate-y-1'
+                    : 'border-[#C5A880]/20 hover:border-[#C5A880] active:border-[#C5A880] shadow-[0_12px_40px_rgba(0,0,0,0.55),inset_0_1px_1px_rgba(197,168,128,0.12)] hover:shadow-[0_0_35px_rgba(197,168,128,0.3),inset_0_0_25px_rgba(197,168,128,0.1)] active:shadow-[0_0_35px_rgba(197,168,128,0.3),inset_0_0_25px_rgba(197,168,128,0.1)] hover:-translate-y-1 active:-translate-y-1'
+                }`}
+              >
+                {/* Dynamic Golden Ambient Fill Sheen on Hover & Touch */}
+                <div
+                  className={`pointer-events-none absolute inset-0 bg-gradient-to-b from-[#C5A880]/15 via-[#C5A880]/5 to-transparent transition-opacity duration-300 ${
+                    isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 group-active:opacity-100'
+                  }`}
+                />
+                <div
+                  className={`pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 w-48 h-20 bg-[#C5A880]/[0.08] rounded-full blur-2xl transition-all duration-300 ${
+                    isActive ? 'bg-[#C5A880]/30' : 'group-hover:bg-[#C5A880]/30 group-active:bg-[#C5A880]/30'
+                  }`}
+                />
 
-              <div className="relative z-10">
-                {/* Top Row: Stars + Muted Champagne Category Tag */}
-                <div className="flex items-center justify-between gap-2 mb-3.5">
-                  <div className="flex items-center gap-1">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} size={13.5} className="fill-[#D8BC95] text-[#D8BC95] drop-shadow-[0_0_4px_rgba(216,188,149,0.3)]" />
-                    ))}
+                <div className="relative z-10">
+                  {/* Top Row: Stars + Muted Champagne Category Tag */}
+                  <div className="flex items-center justify-between gap-2 mb-3.5">
+                    <div className="flex items-center gap-1">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <Star
+                          key={i}
+                          size={13.5}
+                          className="fill-[#D8BC95] text-[#D8BC95] drop-shadow-[0_0_4px_rgba(216,188,149,0.3)] group-hover:drop-shadow-[0_0_8px_rgba(216,188,149,0.6)] transition-all"
+                        />
+                      ))}
+                    </div>
+                    <span
+                      className={`text-[10px] px-2.5 py-0.5 rounded-full font-sans font-medium tracking-wider uppercase transition-all ${
+                        isActive
+                          ? 'border-[#C5A880]/50 bg-[#C5A880]/20 text-[#FFF2DC]'
+                          : 'bg-[#C5A880]/10 border border-[#C5A880]/20 text-[#D8BC95] group-hover:border-[#C5A880]/50 group-hover:bg-[#C5A880]/20'
+                      }`}
+                    >
+                      {review.tag}
+                    </span>
                   </div>
-                  <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-[#C5A880]/10 border border-[#C5A880]/20 text-[#D8BC95] font-sans font-medium tracking-wider uppercase shadow-[inset_0_1px_1px_rgba(197,168,128,0.08)]">
-                    {review.tag}
-                  </span>
-                </div>
 
-                {/* Subtle Decorative Quote Icon */}
-                <Quote className="w-5 h-5 text-[#C5A880]/20 mb-1.5 stroke-[1.5]" />
+                  {/* Decorative Quote Icon - Fills Solid Gold with Radiant Glow on Hover & Touch */}
+                  <div className="relative inline-block mb-2">
+                    <Quote
+                      className={`w-6 h-6 transition-all duration-300 stroke-[1.5] ${
+                        isActive
+                          ? 'fill-[#D8BC95] text-[#FFEABF] drop-shadow-[0_0_14px_rgba(216,188,149,0.95)] drop-shadow-[0_0_24px_rgba(197,168,128,0.5)] scale-110'
+                          : 'text-[#C5A880]/35 fill-transparent group-hover:fill-[#D8BC95] group-hover:text-[#FFEABF] group-hover:drop-shadow-[0_0_14px_rgba(216,188,149,0.95)] group-hover:drop-shadow-[0_0_24px_rgba(197,168,128,0.5)] group-hover:scale-110 group-active:fill-[#D8BC95] group-active:text-[#FFEABF] group-active:drop-shadow-[0_0_14px_rgba(216,188,149,0.95)] group-active:drop-shadow-[0_0_24px_rgba(197,168,128,0.5)] group-active:scale-110'
+                      }`}
+                    />
+                  </div>
 
-                {/* Review Narrative in Editorial Warm Linen */}
-                <p className="text-[#EAE6DF] leading-relaxed text-xs sm:text-[13px] font-normal italic">
-                  &ldquo;{review.text}&rdquo;
-                </p>
-              </div>
-
-              {/* Bottom Row: Client Identity with Signet Bronze Monogram */}
-              <div className="pt-4 mt-4 border-t border-[#C5A880]/15 flex items-center gap-3 relative z-10">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#1C261E] to-[#121A14] text-[#D8BC95] border border-[#C5A880]/30 font-serif font-bold text-xs flex items-center justify-center shrink-0 shadow-[0_2px_10px_rgba(0,0,0,0.3)] group-hover:border-[#C5A880]/50 transition-colors">
-                  {review.initials}
-                </div>
-                <div className="min-w-0">
-                  <p className="font-bold text-[#FAF8F5] text-xs sm:text-sm truncate group-hover:text-[#D8BC95] transition-colors">
-                    {review.name}
-                  </p>
-                  <p className="text-[10px] sm:text-[11px] text-[#9E978C] truncate mt-0.5">
-                    {review.property}
+                  {/* Review Narrative in Editorial Warm Linen */}
+                  <p
+                    className={`leading-relaxed text-xs sm:text-[13px] font-normal italic transition-colors ${
+                      isActive ? 'text-white' : 'text-[#EAE6DF] group-hover:text-white'
+                    }`}
+                  >
+                    &ldquo;{review.text}&rdquo;
                   </p>
                 </div>
+
+                {/* Bottom Row: Client Identity with Signet Bronze Monogram */}
+                <div
+                  className={`pt-4 mt-4 border-t flex items-center gap-3 relative z-10 transition-colors ${
+                    isActive ? 'border-[#C5A880]/35' : 'border-[#C5A880]/15 group-hover:border-[#C5A880]/35'
+                  }`}
+                >
+                  <div
+                    className={`w-9 h-9 rounded-full bg-gradient-to-br from-[#1C261E] to-[#121A14] text-[#D8BC95] border font-serif font-bold text-xs flex items-center justify-center shrink-0 transition-all duration-300 ${
+                      isActive
+                        ? 'border-[#C5A880] bg-[#C5A880]/20 shadow-[0_0_15px_rgba(197,168,128,0.5)]'
+                        : 'border-[#C5A880]/30 shadow-[0_2px_10px_rgba(0,0,0,0.3)] group-hover:border-[#C5A880] group-hover:bg-[#C5A880]/20 group-hover:shadow-[0_0_15px_rgba(197,168,128,0.5)] group-active:border-[#C5A880] group-active:bg-[#C5A880]/20 group-active:shadow-[0_0_15px_rgba(197,168,128,0.5)]'
+                    }`}
+                  >
+                    {review.initials}
+                  </div>
+                  <div className="min-w-0">
+                    <p
+                      className={`font-bold text-xs sm:text-sm truncate transition-colors ${
+                        isActive ? 'text-[#F4E6D0]' : 'text-[#FAF8F5] group-hover:text-[#F4E6D0]'
+                      }`}
+                    >
+                      {review.name}
+                    </p>
+                    <p
+                      className={`text-[10px] sm:text-[11px] truncate mt-0.5 transition-colors ${
+                        isActive ? 'text-[#D5CFC5]' : 'text-[#9E978C] group-hover:text-[#D5CFC5]'
+                      }`}
+                    >
+                      {review.property}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
 

@@ -184,7 +184,8 @@
   will-change: transform;
 }
 
-.animate-marquee-reviews:hover {
+.animate-marquee-reviews:hover,
+.animate-marquee-reviews:active {
   animation-play-state: paused !important;
 }
 
