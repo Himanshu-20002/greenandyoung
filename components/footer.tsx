@@ -1,7 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Phone, MapPin, MessageCircle, Star, Sparkles } from 'lucide-react'
+import { ArrowUpRight, Phone, MapPin, MessageCircle, Star, Sparkles, Shield } from 'lucide-react'
 import { siteConfig } from '@/lib/site-config'
 
 export function Footer() {
@@ -261,6 +262,15 @@ export function Footer() {
             >
               Terms
             </a>
+            <span className="hidden sm:inline text-white/10">|</span>
+            <Link
+              href="/admin"
+              className="inline-flex items-center gap-1.5 text-[#C5A880]/80 hover:text-[#C5A880] transition-colors font-medium hover:underline"
+              title="Studio Management Console"
+            >
+              <Shield className="w-3 h-3 text-[#C5A880]" />
+              <span>Admin Studio</span>
+            </Link>
           </div>
         </div>
 

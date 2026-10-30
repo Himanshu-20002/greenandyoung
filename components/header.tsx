@@ -3,17 +3,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
-import { Menu, X, LogOut, Shield } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { authClient } from '@/lib/auth-client'
-import { useSessionContext } from '@/components/session-provider'
+import { Menu, X } from 'lucide-react'
 import TopBar from './TopBar'
 import { siteConfig } from '@/lib/site-config'
 
 export function Header() {
-  const router = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { session } = useSessionContext()
 
   const primaryNavLinks = [
     { href: '#services', label: 'Designs' },
@@ -33,11 +28,6 @@ export function Header() {
     { href: '#faq', label: 'FAQ' },
     { href: '#contact', label: 'Contact Studio' },
   ]
-
-  const handleSignOut = async () => {
-    await authClient.signOut()
-    window.location.reload()
-  }
 
   return (
     <header className="absolute top-0 left-0 right-0 z-50 transition-all">
@@ -70,29 +60,8 @@ export function Header() {
             ))}
           </div>
 
-          {/* Minimal Action Area */}
+          {/* Action Area */}
           <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
-            {session && (
-              <div className="flex items-center gap-3">
-                {(session.user.role === 'ADMIN' || session.user.role === 'SUPER_ADMIN') && (
-                  <Link
-                    href="/admin"
-                    className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0A140F]/15 hover:bg-[#0A140F]/25 text-[#0A140F] text-xs font-bold tracking-wide transition-colors"
-                  >
-                    <Shield className="w-3.5 h-3.5 text-[#0A140F]" />
-                    <span>Admin</span>
-                  </Link>
-                )}
-                <button
-                  onClick={handleSignOut}
-                  className="text-[#0A140F]/60 hover:text-red-700 text-xs p-1 transition-colors cursor-pointer"
-                  title="Sign Out"
-                >
-                  <LogOut className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            )}
-
             <a
               href="#booking"
               className="inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#0A140F] hover:bg-[#15241D] text-[#FAF8F5] font-bold text-xs tracking-wide shadow-md hover:shadow-xl transition-all duration-300"
@@ -126,47 +95,10 @@ export function Header() {
                 </a>
               ))}
 
-              {/* Mobile Auth / Admin */}
-              <div className="pt-2 flex flex-col gap-2">
-                {session ? (
-                  <>
-                    <div className="text-white/50 text-xs">
-                      Logged in as {session.user.name}
-                    </div>
-                    {(session.user.role === 'ADMIN' || session.user.role === 'SUPER_ADMIN') && (
-                      <Link
-                        href="/admin"
-                        className="text-[#C5A880] text-xs font-semibold uppercase tracking-wider py-1"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        Admin Console
-                      </Link>
-                    )}
-                    <button
-                      onClick={() => {
-                        handleSignOut()
-                        setMobileMenuOpen(false)
-                      }}
-                      className="text-red-400 hover:text-red-300 text-left text-xs uppercase tracking-wider py-1 cursor-pointer"
-                    >
-                      Sign Out
-                    </button>
-                  </>
-                ) : (
-                  <Link
-                    href="/auth"
-                    className="text-[#C5A880] text-xs font-medium py-1"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Sign In / Register
-                  </Link>
-                )}
-              </div>
-
               <a
                 href="#booking"
                 onClick={() => setMobileMenuOpen(false)}
-                className="mt-2 text-center py-3 rounded-full bg-[#E4D7BE] hover:bg-white text-[#0A140F] font-semibold text-xs tracking-wide shadow-md transition-all block"
+                className="mt-4 text-center py-3 rounded-full bg-[#E4D7BE] hover:bg-white text-[#0A140F] font-semibold text-xs tracking-wide shadow-md transition-all block"
               >
                 Book Consultation
               </a>
