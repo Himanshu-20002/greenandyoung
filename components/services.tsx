@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
 import {
   Sparkles,
   PhoneCall,
@@ -9,6 +10,10 @@ import {
   Zap,
   ShieldCheck,
   Video,
+  Compass,
+  Layers,
+  ChevronRight,
+  ArrowRight,
 } from 'lucide-react'
 import { GY_28_DESIGN_ELEMENTS } from '@/lib/interior-packages'
 
@@ -42,6 +47,90 @@ export function Services() {
           <p className="text-sm sm:text-base text-[#2C3531]/75 max-w-xl font-sans leading-relaxed">
             From bare-shell 3D laser measurement to factory-calibrated German millwork, explore our comprehensive interior solutions for luxury residences across Delhi NCR.
           </p>
+        </div>
+
+        
+
+
+
+
+        {/* Cinematic Video Showcase & 3D Interior Configurator Banner */}
+        <div className="relative rounded-[28px] sm:rounded-[36px] overflow-hidden mb-16 shadow-2xl border border-[#2C3531]/15 group min-h-[460px] sm:min-h-[520px] md:min-h-[580px] flex items-center justify-center p-6 sm:p-10 md:p-14 text-center">
+          {/* Background Loop Video */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/videos/hero-bg-poster.jpg"
+            className="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out pointer-events-none"
+          >
+            <source src="/videos/hero-bg.mp4" type="video/mp4" />
+          </video>
+
+          {/* Cinematic Dark & Gold Atmosphere Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F0D]/95 via-[#0B0F0D]/75 to-[#0B0F0D]/60 pointer-events-none" />
+          <div
+            className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(197,168,128,0.2)_0%,transparent_70%)] pointer-events-none"
+            aria-hidden="true"
+          />
+
+          {/* Center Interactive Hero Card */}
+          <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+            {/* Pill Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#C5A880]/40 text-[#E8D8C4] text-[10px] sm:text-xs font-mono tracking-widest uppercase mb-5 shadow-lg">
+              <Sparkles className="w-3.5 h-3.5 text-[#C5A880] animate-pulse" />
+              <span>/ BESPOKE INTERIOR CONFIGURATOR</span>
+            </div>
+
+            {/* Main Headline */}
+            <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight leading-[1.15] text-balance">
+              Design Your Luxury Home, <br className="hidden sm:inline" />
+              <span className="bg-gradient-to-r from-[#C5A880] via-[#F4E6D0] to-[#C5A880] bg-clip-text text-transparent">
+                Space by Space
+              </span>
+            </h3>
+
+            {/* Narrative Subtitle */}
+            <p className="mt-4 sm:mt-5 text-xs sm:text-sm md:text-base text-white/80 max-w-2xl font-sans leading-relaxed text-balance">
+              Take complete architectural control. Select your room, explore curated German joinery and Italian stone finishes, assemble your custom combinations, and receive a tailored quotation.
+            </p>
+
+            {/* 6-Step Visual Journey Flow */}
+            <div className="hidden md:flex items-center gap-2 my-7 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-[11px] font-mono text-white/70">
+              <span className="text-[#C5A880] font-semibold">1. Select Space</span>
+              <ChevronRight className="w-3.5 h-3.5 text-white/30" />
+              <span>2. Explore Designs</span>
+              <ChevronRight className="w-3.5 h-3.5 text-white/30" />
+              <span>3. Customize Finishes</span>
+              <ChevronRight className="w-3.5 h-3.5 text-white/30" />
+              <span>4. Build Combination</span>
+              <ChevronRight className="w-3.5 h-3.5 text-white/30" />
+              <span className="text-[#C5A880] font-semibold">5. Get Custom Quote</span>
+            </div>
+
+            {/* Action CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto mt-6 md:mt-0">
+              {/* Primary Configurator Launch CTA */}
+              <Link
+                href="/gallery"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-[#C5A880] via-[#E2CDAE] to-[#C5A880] text-[#121614] font-mono font-bold text-xs sm:text-sm tracking-wider uppercase shadow-[0_0_30px_rgba(197,168,128,0.35)] hover:shadow-[0_0_45px_rgba(197,168,128,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 group/btn"
+              >
+                <Compass className="w-4 h-4 text-[#121614] group-hover/btn:rotate-45 transition-transform duration-300" />
+                <span>Launch Interior Configurator</span>
+                <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+              </Link>
+
+              {/* Secondary Gallery Explorer */}
+              <Link
+                href="/gallery"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/20 text-white font-mono text-xs sm:text-sm tracking-wider uppercase transition-all duration-300"
+              >
+                <Layers className="w-3.5 h-3.5 text-[#C5A880]" />
+                <span>Explore Design Gallery</span>
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* 28-Element Interactive Design Cloud (Directly from greenandyoung.in) */}
