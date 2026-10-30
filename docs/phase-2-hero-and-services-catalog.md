@@ -12,7 +12,7 @@ All changes are architected to **strictly preserve 100% of the luxury dark obsid
 
 ## 🎯 Phase 2 Goals & Acceptance Criteria
 
-1. **Brand Alignment**: Zero legacy salon references in the Hero section, slide captions, or catalog drawers.
+1. **Brand Alignment**: Zero legacy studio references in the Hero section, slide captions, or catalog drawers.
 2. **Real Business Data Integration**:
    - Hero headlines and taglines match the live site (`https://greenandyoung.in/`): *"Design Your Home With The Experts • 3D Design & Measurement"*.
    - Hero action buttons utilize verified phone numbers (`+91 99718 13161`) and WhatsApp direct links from `siteConfig`.
@@ -50,12 +50,12 @@ graph TD
 ### Step 1: Upgrading the Hero Section (`components/hero.tsx`)
 
 #### Issues in Current Code:
-- Line 54: `imageAlt: 'Luxury Hair Rejuvenation Styling at Habibs'`
-- Line 272: `Welcome to Habibs`
-- Lines 274–278: Hair salon headlines (*"Your Style. Your Confidence. Your Signature Look."*)
-- Lines 282–284: Legacy salon subtitle referencing Greater Noida West hair customers.
+- Line 54: `imageAlt: 'Luxury Hair Rejuvenation Styling at Green & Young'`
+- Line 272: `Welcome to Green & Young`
+- Lines 274–278: Hair studio headlines (*"Your Style. Your Confidence. Your Signature Look."*)
+- Lines 282–284: Legacy studio subtitle referencing Greater Noida West hair customers.
 - Lines 343 & 350: Random hardcoded phone number `tel:+09217769009` and WhatsApp link.
-- Lines 308–328: Salon stats bar (*"15+ Stylists"*, etc.).
+- Lines 308–328: studio stats bar (*"15+ Stylists"*, etc.).
 
 #### Optimization Strategy:
 1. **Connect to `siteConfig`**:
@@ -80,8 +80,8 @@ graph TD
    - Metric 3: **10-Year** `Material Warranty`
 4. **Hero Fallback Slide**:
    - Replace legacy hair slide with a high-end interior architecture slide:
-     - `bgImage`: `/images/gallery-salon-interior.webp` (luxury contemporary interior backdrop)
-     - `frameImage`: `/images/gallery-salon-interior-2.webp`
+     - `bgImage`: `/images/gallery-studio-interior.webp` (luxury contemporary interior backdrop)
+     - `frameImage`: `/images/gallery-studio-interior-2.webp`
      - `imageAlt`: `"Luxury Turnkey Interior Design by G&Y Interiors"`
      - `badgeText`: `"Free 3D Design & Space Planning"`
      - `badgeLabel`: `"Signature Offer"`
@@ -92,7 +92,7 @@ graph TD
 ### Step 2: Updating Server-Side Hero Prop Mapping (`app/page.tsx`)
 
 #### Issues in Current Code:
-- Line 109: `imageAlt: slide.imageAlt || 'Habibs Salon Styling'`
+- Line 109: `imageAlt: slide.imageAlt || 'Green & Young studio Styling'`
 
 #### Optimization Strategy:
 - Update fallback to `slide.imageAlt || 'G&Y Interior Design & Turnkey Execution'`.
@@ -103,8 +103,8 @@ graph TD
 ### Step 3: Upgrading the Service & Package Catalog (`components/services.tsx`)
 
 #### Issues in Current Code:
-- Currently structured around salon haircuts, facials, and spa rituals.
-- Line 776: `"Welcome to Habibs Premiere"`
+- Currently structured around studio haircuts, facials, and spa rituals.
+- Line 776: `"Welcome to Green & Young Premiere"`
 - Line 779: `"Elevate Your Beauty"`
 
 #### Optimization Strategy:
@@ -126,7 +126,7 @@ graph TD
      - *Executive Cabins & Boardrooms* (Ergonomic Executive Desks, Acoustic Ceiling Baffles, Video Conference Setups)
      - *Collaborative Open Workspaces* (Modular Workstations, Breakout Cafeteria, Biophilic Wall Planters)
 3. **Package Inspection Drawer**:
-   - Line 776: Update `"Welcome to Habibs Premiere"` ➡️ `"Welcome to G&Y Premiere Interiors"`.
+   - Line 776: Update `"Welcome to Green & Young Premiere"` ➡️ `"Welcome to G&Y Premiere Interiors"`.
    - Line 779: Update `"Elevate Your Beauty"` ➡️ `"Elevate Your Living Space"`.
    - Action Button: `"Book Free 3D Consultation"`.
 

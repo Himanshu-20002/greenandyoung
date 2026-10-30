@@ -41,7 +41,7 @@ flowchart TD
 | **Reviews** | `components/reviews.tsx` | Static / DB (`prisma.review`) | Star rating, verified customer testimonials, Google review link |
 | **Gallery** | `components/gallery.tsx` | Static / Cloudinary | Category-filtered gallery grid (Hair, Bridal, Skin, Interior) |
 | **Before / After** | `components/before-after.tsx` | Database (`prisma.beforeAfterImage`) | Draggable split comparison slider with touch and mouse support |
-| **About** | `components/about.tsx` | Static + DB image | Brand story, experience statistics, key salon pillars |
+| **About** | `components/about.tsx` | Static + DB image | Brand story, experience statistics, key studio pillars |
 | **Booking** | `components/booking.tsx` | Database / API | Embedded booking form with date, time, service selection |
 | **Booking Modal** | `components/booking-modal.tsx` | Client State + API | Pop-up overlay triggered from any "Book Now" CTA |
 | **Contact** | `components/contact.tsx` | Static + Interactive Map | Quick call, WhatsApp card, opening hours, Google Maps embed |
@@ -71,7 +71,7 @@ sequenceDiagram
     par Async Dispatch
         API->>Zapier: Webhook POST (Sync to Google Sheets & WhatsApp)
         API->>Resend: Send Customer Confirmation Email
-        API->>Resend: Send Salon Admin Alert Email
+        API->>Resend: Send studio Admin Alert Email
     end
     API-->>UI: 200 OK + Booking Confirmation
     UI-->>Customer: Display Success Screen with Appointment ID
@@ -81,7 +81,7 @@ sequenceDiagram
 
 ## 4. Admin Management Modules (`app/admin`)
 
-The `/admin` portal gives the salon manager and staff full control over the website's dynamic content without touching code:
+The `/admin` portal gives the studio manager and staff full control over the website's dynamic content without touching code:
 
 1. **Appointments (`/admin/appointments`)**: Live table of all scheduled bookings, filtering by date, status, and service. Quick status transition buttons (`Confirm`, `Complete`, `Cancel`).
 2. **Catalog (`/admin/catalog`)**: Create and edit categories, service items, pricing, package bundles, and durations.

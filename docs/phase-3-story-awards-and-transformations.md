@@ -2,11 +2,11 @@
 
 ## 📋 Executive Summary
 
-Phase 3 transitions the website's core **social proof, storytelling, and credibility engines** from the legacy salon template to **G&Y Interiors — Green Young**:
+Phase 3 transitions the website's core **social proof, storytelling, and credibility engines** from the legacy studio template to **G&Y Interiors — Green Young**:
 1. **The Interactive Reel & Wall of Fame (`components/why-choose-us-premium.tsx`)**: Upgrading the smartphone reel mockup to `@greenandyoung.in` and integrating the celebrity/government awards (Dainik Jagran Gaurav Ratan, Sunil Shetty Business Titans Award, Gulshan Grover High-Rise Heroes Award).
 2. **The Brand Story (`components/about.tsx`)**: Showcasing G&Y's 5+ years of turnkey architectural design, modular excellence, and spatial planning.
 3. **The Interactive Before/After Transformation Slider (`components/before-after.tsx`)**: Rebranding the interactive slider to highlight bare-shell-to-luxury home makeovers.
-4. **World-Class Partner Brands (`components/brand-showcase.tsx`)**: Shifting from hair salon brands to global architectural and interior materials (Blum, Hettich, Hafele, Saint-Gobain, Asian Paints, CenturyPly).
+4. **World-Class Partner Brands (`components/brand-showcase.tsx`)**: Shifting from hair studio brands to global architectural and interior materials (Blum, Hettich, Hafele, Saint-Gobain, Asian Paints, CenturyPly).
 5. **Verified Client Testimonials (`components/reviews.tsx`)**: Incorporating live client reviews from `greenandyoung.in` (Nisha, Pooja, Mukesh, Dr. Sameer, Kunal Malhotra).
 
 All visual styling—dark obsidian surfaces (`#0D0C0B`), warm champagne/gold highlights (`#C5A880` / `#D4AF37`), border glows, and Framer Motion micro-interactions—remains **100% preserved**.
@@ -15,7 +15,7 @@ All visual styling—dark obsidian surfaces (`#0D0C0B`), warm champagne/gold hig
 
 ## 🎯 Phase 3 Goals & Acceptance Criteria
 
-1. **Zero Legacy References**: Eliminate all occurrences of Habibs, hair treatments, and salon terminology from About, Reviews, Brands, and Why Choose Us.
+1. **Zero Legacy References**: Eliminate all occurrences of Green & Young, hair treatments, and studio terminology from About, Reviews, Brands, and Why Choose Us.
 2. **High-Impact Social Proof & Wall of Fame**:
    - Feature the prestigious awards extracted from `greenandyoung.in`:
      - *Dainik Jagran Gaurav Ratan Award* (presented by Commissioner Laxmi Singh).
@@ -48,12 +48,12 @@ graph TD
 ### Step 1: Upgrading Why Choose Us & Wall of Fame (`components/why-choose-us-premium.tsx`)
 
 #### Issues in Current Code:
-- Line 95: `"Why Habibs Hair & Beauty Salon Stands Out"`
+- Line 95: `"Why Green & Young Hair & Beauty studio Stands Out"`
 - Line 105: `"Trusted by 191+ happy clients across Greater Noida West for exceptional hair, beauty and grooming services."`
-- Lines 146–149: Instagram mockup handle `habibs.salon`, `"Greater Noida"`.
-- Line 196: `"Original Audio - habibs.salon"`.
-- Line 241: `"Ready to experience the Habibs difference?"`.
-- Lines 7–28: Salon trust items (*"Certified Stylists"*, *"Hygiene First"*).
+- Lines 146–149: Instagram mockup handle `Green & Young.studio`, `"Greater Noida"`.
+- Line 196: `"Original Audio - Green & Young.studio"`.
+- Line 241: `"Ready to experience the Green & Young difference?"`.
+- Lines 7–28: studio trust items (*"Certified Stylists"*, *"Hygiene First"*).
 
 #### Optimization Strategy:
 1. **Headlines & Subtitles**:
@@ -77,11 +77,11 @@ graph TD
 ### Step 2: Upgrading Brand Story & Heritage (`components/about.tsx`)
 
 #### Issues in Current Code:
-- Line 63: `"Habibs Hair & Beauty Salon is dedicated to delivering exceptional hair..."`
+- Line 63: `"Green & Young Hair & Beauty studio is dedicated to delivering exceptional hair..."`
 - Line 69: `"With over 10 years of excellence in the beauty industry and 191+ satisfied customers..."`
-- Line 101: `alt="Habibs Salon Story"`
-- Line 114: `"Behind the scenes at Habibs"`
-- Lines 76–80: Salon team and hygiene checklists.
+- Line 101: `alt="Green & Young studio Story"`
+- Line 114: `"Behind the scenes at Green & Young"`
+- Lines 76–80: studio team and hygiene checklists.
 
 #### Optimization Strategy:
 1. **Narrative & Core Copy**:
@@ -110,7 +110,7 @@ graph TD
 ### Step 3: Upgrading the Before/After Slider (`components/before-after.tsx`)
 
 #### Issues in Current Code:
-- Line 124: `"See the Habibs Difference"`
+- Line 124: `"See the Green & Young Difference"`
 - Hair makeover descriptions.
 
 #### Optimization Strategy:
@@ -126,7 +126,7 @@ graph TD
 ### Step 4: Upgrading Partner Brands (`components/brand-showcase.tsx`)
 
 #### Issues in Current Code:
-- Lists hair care cosmetics: `L'Oréal`, `Matrix`, `Schwarzkopf`, `Wella`, `Habibs`, `Kerastase`.
+- Lists hair care cosmetics: `L'Oréal`, `Matrix`, `Schwarzkopf`, `Wella`, `Green & Young`, `Kerastase`.
 
 #### Optimization Strategy:
 1. **Section Heading**:
@@ -187,6 +187,6 @@ graph TD
 - [x] Update `components/why-choose-us-premium.tsx` (connected to `siteConfig`, updated trust items, Instagram handle `@greenandyoung.in`, audio, and awards).
 - [x] Update `components/about.tsx` (connected to `siteConfig`, updated brand narrative, 3D spatial planning pillars, and 500+ homes metrics).
 - [x] Update `components/before-after.tsx` (updated title, subtitle, raw handover vs finished residence labels, and interior execution highlights).
-- [x] Update `components/brand-showcase.tsx` (replaced salon cosmetics with Blum, Hettich, Hafele, Saint-Gobain, Asian Paints, CenturyPly, Greenlam, Kohler, Livspace).
-- [x] Update `components/reviews.tsx` (replaced placeholder salon reviews with verified G&Y client feedback across Noida & Delhi NCR).
+- [x] Update `components/brand-showcase.tsx` (replaced studio cosmetics with Blum, Hettich, Hafele, Saint-Gobain, Asian Paints, CenturyPly, Greenlam, Kohler, Livspace).
+- [x] Update `components/reviews.tsx` (replaced placeholder studio reviews with verified G&Y client feedback across Noida & Delhi NCR).
 - [x] Run `npx tsc --noEmit` to verify 100% error-free compilation (Passed with 0 errors).

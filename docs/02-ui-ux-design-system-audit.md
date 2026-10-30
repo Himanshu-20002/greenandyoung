@@ -9,7 +9,7 @@ This document establishes the exact visual language, color tokens, layout hierar
 
 ## 1. Visual Theme & Aesthetics Breakdown
 
-The website utilizes a **High-End Editorial Dark-Mode Salon Aesthetic**, reminiscent of luxury beauty publications and flagship five-star salon brands.
+The website utilizes a **High-End Editorial Dark-Mode studio Aesthetic**, reminiscent of luxury beauty publications and flagship five-star studio brands.
 
 ```
        Dark Obsidian Background               Warm Champagne Accent             Luminous Off-White
@@ -29,7 +29,7 @@ The website utilizes a **High-End Editorial Dark-Mode Salon Aesthetic**, reminis
 | `--border` | `#E7E3DC` | `#272522` | Hairline dividers, subtle glass borders |
 
 > [!IMPORTANT]
-> **Preservation Rule**: Do not overwrite or replace `--accent` or `--background` tokens with generic green hues. "Green and Young" is a luxury lifestyle salon; its elegance relies on the gold, obsidian, and champagne tones already calibrated across gradients and glass surfaces.
+> **Preservation Rule**: Do not overwrite or replace `--accent` or `--background` tokens with generic green hues. "Green and Young" is a luxury lifestyle studio; its elegance relies on the gold, obsidian, and champagne tones already calibrated across gradients and glass surfaces.
 
 ---
 

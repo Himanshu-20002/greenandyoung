@@ -15,7 +15,7 @@ This document provides a technical deep-dive into the architectural foundations,
 | **Animation Engine** | [Framer Motion](https://www.framer.com/motion/) | Framer Motion v12 for scroll-linked animations, parallax effects, tab transitions |
 | **Database & ORM** | [Prisma](https://www.prisma.io/) + [Neon](https://neon.tech/) | Prisma 7.8 with Neon Serverless PostgreSQL / `@prisma/adapter-pg` |
 | **Authentication** | [Better-Auth](https://www.better-auth.com/) | Better-Auth 1.6 with credentials, session cookies, and role-based permissions |
-| **Media Management** | [Cloudinary](https://cloudinary.com/) | Cloudinary SDK v2.10 for salon imagery, before/after media, and video delivery |
+| **Media Management** | [Cloudinary](https://cloudinary.com/) | Cloudinary SDK v2.10 for studio imagery, before/after media, and video delivery |
 | **Email Service** | [Resend](https://resend.com/) | Resend v6 for customer confirmations and staff alert emails |
 | **Automation** | [Zapier](https://zapier.com/) | Webhook triggers for CRM, Google Sheets, and WhatsApp dispatch |
 | **Analytics & Telemetry** | Google Tag Manager + GA4 + Vercel Analytics | Custom `dataLayer` push events on phone clicks, bookings, and service selections |
@@ -59,7 +59,7 @@ greenAndYoung/
 │   ├── reviews.tsx                   # Testimonial reviews carousel
 │   ├── gallery.tsx                   # Filterable media showcase
 │   ├── before-after.tsx              # Interactive drag comparison slider
-│   ├── about.tsx                     # Brand story & salon credentials
+│   ├── about.tsx                     # Brand story & studio credentials
 │   ├── booking.tsx                   # Integrated booking section
 │   ├── booking-modal.tsx             # Dynamic multi-step appointment modal
 │   ├── contact.tsx                   # Contact details, map, and inquiry form
@@ -79,7 +79,7 @@ greenAndYoung/
 │   ├── seed.ts                       # Master database seeder
 │   └── seed-gallery.ts               # Gallery media seeder
 ├── public/                           # Static assets
-│   ├── images/                       # Salon images, backgrounds, icons
+│   ├── images/                       # studio images, backgrounds, icons
 │   ├── robots.txt                    # Search crawler rules
 │   └── sitemap.xml                   # SEO sitemap
 └── docs/                             # Project documentation (You are here)
@@ -105,12 +105,12 @@ erDiagram
 ```
 
 ### Core Models:
-1. **Category**: High-level salon departments (Hair Care, Skin Care, Nail Salon, Makeup & Bridal, Massage Spa) filtered by `GenderType` (`WOMEN`, `MEN`, `UNISEX`).
+1. **Category**: High-level studio departments (Hair Care, Skin Care, Nail studio, Makeup & Bridal, Massage Spa) filtered by `GenderType` (`WOMEN`, `MEN`, `UNISEX`).
 2. **ExperiencePackage**: Curated service packages (e.g., "Balayage Couture & Gloss", "Royal Charcoal Detan"). Contains duration, pricing, badge tags, and inclusions.
 3. **Service**: Individual treatment offerings linked to packages via `PackageService`.
 4. **HeroSlide**: Slides rendered on the top hero carousel, linked to a category, package, and promotional badge.
 5. **Booking**: Customer appointment records storing customer contact, scheduled slot, booked service/package, status (`PENDING`, `CONFIRMED`, `COMPLETED`, `CANCELLED`), and payment state.
-6. **BeforeAfterImage**: Interactive before-and-after image pairs demonstrating salon results.
+6. **BeforeAfterImage**: Interactive before-and-after image pairs demonstrating studio results.
 7. **User & Session**: Auth tables managed by Better-Auth with roles (`SUPER_ADMIN`, `ADMIN`, `MANAGER`, `STAFF`, `CUSTOMER`).
 
 ---

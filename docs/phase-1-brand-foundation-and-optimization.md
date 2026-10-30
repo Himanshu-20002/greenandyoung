@@ -140,8 +140,8 @@ export const siteConfig: SiteConfig = {
     whatsapp: "https://wa.me/+919971813161",
   },
   assets: {
-    logo: "/images/habibs.webp", // Will point to gy-logo once asset is placed
-    icon: "/images/habibs.webp",
+    logo: "/images/Green & Young.webp", // Will point to gy-logo once asset is placed
+    icon: "/images/Green & Young.webp",
     ogImage: "/images/booking-bg.webp",
   },
   navLinks: [
@@ -176,7 +176,7 @@ export const siteConfig: SiteConfig = {
 ### Step 3: Optimizing `components/header.tsx`
 
 #### Issues in Current Code:
-- Hardcoded `/images/habibs.webp` and `"Habibs Hair & Beauty Logo"`.
+- Hardcoded `/images/Green & Young.webp` and `"Green & Young Hair & Beauty Logo"`.
 - Hardcoded navigation array duplicated inside component scope on each render.
 
 #### Optimization Strategy:
@@ -190,7 +190,7 @@ export const siteConfig: SiteConfig = {
 ### Step 4: Optimizing `components/footer.tsx`
 
 #### Issues in Current Code:
-- Hardcoded copyright `"© 2024 Habibs Hair & Beauty Salon. All rights reserved."` (stale year and legacy brand).
+- Hardcoded copyright `"© 2024 Green & Young Hair & Beauty studio. All rights reserved."` (stale year and legacy brand).
 - Hardcoded contact phone and address.
 - Redundant empty `#` href social links without proper target and `rel="noopener noreferrer"`.
 
@@ -206,8 +206,8 @@ export const siteConfig: SiteConfig = {
 ### Step 5: Optimizing `components/floating-actions.tsx`
 
 #### Issues in Current Code:
-- Hardcoded legacy WhatsApp message referencing Habibs:
-  `wa.me/919731732547?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20Habibs%20Salon.`
+- Hardcoded legacy WhatsApp message referencing Green & Young:
+  `wa.me/919971813161?text=Hi%2C%20I%20would%20like%20to%20book%20a%20consultation%20at%20Green%20%26%20Young%20Studio.`
 - Scroll event listener without `{ passive: true }` option, causing minor scroll thread friction.
 
 #### Optimization Strategy:
@@ -220,7 +220,7 @@ export const siteConfig: SiteConfig = {
 ### Step 6: Layout & Dynamic SEO Setup (`app/layout.tsx`)
 
 #### Issues in Current Code:
-- 10+ lines of static metadata mentioning legacy salon.
+- 10+ lines of static metadata mentioning legacy studio.
 - Hardcoded Schema.org JSON-LD with legacy URLs.
 - Placeholder GTM ID (`GTM-MOCK1234`).
 
