@@ -132,43 +132,39 @@ export function PhotoFilmStrip() {
           {frames.map((frame, index) => (
             <div
               key={`${frame.id}-${index}`}
-              className="group relative shrink-0 w-[240px] sm:w-[280px] md:w-[320px] bg-black border border-white/15 p-2 rounded-sm shadow-xl transition-transform duration-500 hover:scale-[1.02]"
+              className="group relative shrink-0 w-[250px] sm:w-[290px] md:w-[330px] bg-[#0E1210] border border-white/20 p-2 sm:p-2.5 rounded-xs shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:border-[#C5A880]/60"
             >
               {/* Frame Margin Info */}
-              <div className="flex items-center justify-between text-[9px] font-mono text-[#8E9F96]/70 pb-1.5 px-0.5 tracking-wider">
-                <span>▶ {frame.frameNumber}</span>
-                <span className="truncate max-w-[140px] uppercase">{frame.title}</span>
+              <div className="flex items-center justify-between text-[9px] font-mono text-[#8E9F96] pb-1.5 px-0.5 tracking-wider">
+                <span className="text-[#C5A880] font-bold">▶ {frame.frameNumber}</span>
+                <span className="truncate max-w-[150px] uppercase font-semibold text-white/90">{frame.title}</span>
                 <span>35mm</span>
               </div>
 
-              {/* Photo in Full Natural Color */}
-              <div className="relative w-full h-44 sm:h-52 bg-[#121614] overflow-hidden">
+              {/* Photo in 100% Full Natural Color - Zero Black Tint */}
+              <div className="relative w-full h-48 sm:h-56 bg-neutral-900 overflow-hidden">
                 <Image
                   src={frame.src}
                   alt={frame.title}
                   fill
-                  sizes="(max-width: 640px) 240px, (max-width: 768px) 280px, 320px"
+                  sizes="(max-width: 640px) 250px, (max-width: 768px) 290px, 330px"
                   className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                  quality={95}
                 />
-
-                {/* Subtle Film Exposure Vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10 pointer-events-none" />
-
-                {/* Film Frame Stamp */}
-                <div className="absolute bottom-2 left-2.5 right-2.5 z-10">
-                  <div className="text-[11px] font-serif font-bold text-white tracking-wide truncate">
-                    {frame.title}
-                  </div>
-                  <div className="text-[9px] font-sans text-neutral-300 truncate">
-                    {frame.caption}
-                  </div>
-                </div>
               </div>
 
-              {/* Bottom Frame Stamp */}
-              <div className="flex items-center justify-between text-[9px] font-mono text-[#8E9F96]/60 pt-1.5 px-0.5">
-                <span>G&Y ARCHIVAL</span>
-                <span>EXP 24+</span>
+              {/* Bottom Frame Stamp with Clean Archival Typography */}
+              <div className="pt-2 px-1 space-y-0.5">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="text-[11px] sm:text-xs font-serif font-bold text-white tracking-wide truncate">
+                    {frame.title}
+                  </div>
+                  <span className="text-[9px] font-mono text-[#C5A880] shrink-0 font-semibold">EXP 24+</span>
+                </div>
+                <div className="flex items-center justify-between text-[9px] text-neutral-300 truncate">
+                  <span className="truncate font-sans text-neutral-400">{frame.caption}</span>
+                  <span className="font-mono text-[#8E9F96]/70 text-[8px] shrink-0 uppercase tracking-widest pl-2">G&amp;Y ARCHIVAL</span>
+                </div>
               </div>
             </div>
           ))}
