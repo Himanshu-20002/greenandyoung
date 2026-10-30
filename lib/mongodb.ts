@@ -32,12 +32,28 @@ if (process.env.NODE_ENV === 'development') {
   if (!global._mongoClient) {
     global._mongoClient = new MongoClient(uri, options)
     global._mongoClientPromise = global._mongoClient.connect()
+      .then((c) => {
+        console.log(`✅ [MongoDB] Connected successfully to Atlas/Mongo DB: "${dbName}"`)
+        return c
+      })
+      .catch((err) => {
+        console.error(`❌ [MongoDB] Connection failed:`, err.message)
+        throw err
+      })
   }
   client = global._mongoClient
   clientPromise = global._mongoClientPromise!
 } else {
   client = new MongoClient(uri, options)
   clientPromise = client.connect()
+    .then((c) => {
+      console.log(`✅ [MongoDB] Connected successfully to Atlas/Mongo DB: "${dbName}"`)
+      return c
+    })
+    .catch((err) => {
+      console.error(`❌ [MongoDB] Connection failed:`, err.message)
+      throw err
+    })
 }
 
 export const db: Db = client.db(dbName)

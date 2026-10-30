@@ -9,7 +9,7 @@ import Link from 'next/link'
 function AuthForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const redirect = searchParams.get('redirect') || '/'
+  const redirect = searchParams.get('redirect') || '/admin'
 
   const [isLogin, setIsLogin] = useState(true)
   const [email, setEmail] = useState('')
@@ -27,6 +27,7 @@ function AuthForm() {
         callbackURL: window.location.origin + redirect
       })
     } catch (err: any) {
+      console.error('[Auth Client] Google login error:', err)
       setError(err.message || 'Google login failed')
       setLoading(false)
     }
@@ -37,16 +38,23 @@ function AuthForm() {
     setLoading(true)
     setError('')
 
+    const cleanEmail = email.trim().toLowerCase()
+    console.log('[Auth Client] Attempting login with:', cleanEmail)
+
     try {
       if (isLogin) {
         const res = await authClient.signIn.email({
-          email,
+          email: cleanEmail,
           password
         })
+        console.log('[Auth Client] Sign-in response:', res)
         if (res?.error) {
+          console.error('[Auth Client] Sign-in error details:', res.error)
           setError(res.error.message || 'Invalid email or password')
         } else {
+          console.log('[Auth Client] Login successful, redirecting to:', redirect)
           router.push(redirect)
+          router.refresh()
         }
       } else {
         if (!name) {
@@ -55,17 +63,22 @@ function AuthForm() {
           return
         }
         const res = await authClient.signUp.email({
-          email,
+          email: cleanEmail,
           password,
-          name
+          name: name.trim()
         })
+        console.log('[Auth Client] Sign-up response:', res)
         if (res?.error) {
+          console.error('[Auth Client] Sign-up error details:', res.error)
           setError(res.error.message || 'Failed to create account')
         } else {
+          console.log('[Auth Client] Registration successful, redirecting to:', redirect)
           router.push(redirect)
+          router.refresh()
         }
       }
     } catch (err: any) {
+      console.error('[Auth Client] Unexpected exception during authentication:', err)
       setError(err.message || 'Authentication failed')
     } finally {
       setLoading(false)
