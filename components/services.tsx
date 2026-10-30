@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import Link from 'next/link'
 import {
   Sparkles,
@@ -18,6 +18,29 @@ import {
 import { GY_28_DESIGN_ELEMENTS } from '@/lib/interior-packages'
 
 export function Services() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  // 120 FPS Optimization: Pause video decoding when scrolled off-screen
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {})
+          } else {
+            video.pause()
+          }
+        })
+      },
+      { threshold: 0.05 }
+    )
+
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <section id="services" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#FAF8F5] relative overflow-hidden select-none border-b border-[#2C3531]/10">
@@ -54,16 +77,21 @@ export function Services() {
 
 
 
-        {/* Cinematic Video Showcase & 3D Interior Configurator Banner */}
-        <div className="relative rounded-[28px] sm:rounded-[36px] overflow-hidden mb-16 shadow-2xl border border-[#2C3531]/15 group min-h-[460px] sm:min-h-[520px] md:min-h-[580px] flex items-center justify-center p-6 sm:p-10 md:p-14 text-center">
-          {/* Background Loop Video */}
+        {/* Cinematic Video Showcase & 3D Interior Configurator Banner (Optimized for locked 120 FPS) */}
+        <div
+          className="relative rounded-[28px] sm:rounded-[36px] overflow-hidden mb-16 shadow-2xl border border-[#2C3531]/15 min-h-[460px] sm:min-h-[520px] md:min-h-[580px] flex items-center justify-center p-6 sm:p-10 md:p-14 text-center transform-gpu"
+          style={{ willChange: 'transform', contain: 'paint' }}
+        >
+          {/* Background Loop Video with Intelligent Pause */}
           <video
-            autoPlay
+            ref={videoRef}
             loop
             muted
             playsInline
+            preload="metadata"
             poster="/videos/hero-bg-poster.jpg"
-            className="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out pointer-events-none"
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none transform-gpu"
+            style={{ transform: 'translateZ(0)' }}
           >
             <source src="/videos/hero-bg.mp4" type="video/mp4" />
           </video>
@@ -75,11 +103,11 @@ export function Services() {
             aria-hidden="true"
           />
 
-          {/* Center Interactive Hero Card */}
+          {/* Center Interactive Hero Card (Uses clean translucent fills instead of costly backdrop-blur for 120 FPS) */}
           <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#C5A880]/40 text-[#E8D8C4] text-[10px] sm:text-xs font-mono tracking-widest uppercase mb-5 shadow-lg">
-              <Sparkles className="w-3.5 h-3.5 text-[#C5A880] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#18201C]/85 border border-[#C5A880]/40 text-[#E8D8C4] text-[10px] sm:text-xs font-mono tracking-widest uppercase mb-5 shadow-lg">
+              <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
               <span>/ BESPOKE INTERIOR CONFIGURATOR</span>
             </div>
 
@@ -97,7 +125,7 @@ export function Services() {
             </p>
 
             {/* 6-Step Visual Journey Flow */}
-            <div className="hidden md:flex items-center gap-2 my-7 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-[11px] font-mono text-white/70">
+            <div className="hidden md:flex items-center gap-2 my-7 px-5 py-2.5 rounded-full bg-[#111613]/90 border border-white/10 text-[11px] font-mono text-white/70">
               <span className="text-[#C5A880] font-semibold">1. Select Space</span>
               <ChevronRight className="w-3.5 h-3.5 text-white/30" />
               <span>2. Explore Designs</span>
@@ -124,7 +152,7 @@ export function Services() {
               {/* Secondary Gallery Explorer */}
               <Link
                 href="/gallery"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/20 text-white font-mono text-xs sm:text-sm tracking-wider uppercase transition-all duration-300"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-[#18201C]/85 hover:bg-[#202B25] border border-white/20 text-white font-mono text-xs sm:text-sm tracking-wider uppercase transition-all duration-300"
               >
                 <Layers className="w-3.5 h-3.5 text-[#C5A880]" />
                 <span>Explore Design Gallery</span>

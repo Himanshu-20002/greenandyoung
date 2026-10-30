@@ -80,10 +80,10 @@ export function PhotoFilmStrip() {
       <style>{`
         @keyframes photoFilmStripScroll {
           0% {
-            transform: translateX(0);
+            transform: translate3d(0, 0, 0);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translate3d(-50%, 0, 0);
           }
         }
         .photo-film-strip-track {
@@ -91,6 +91,9 @@ export function PhotoFilmStrip() {
           width: max-content;
           animation: photoFilmStripScroll 42s linear infinite;
           will-change: transform;
+          transform: translate3d(0, 0, 0);
+          backface-visibility: hidden;
+          contain: layout style paint;
         }
         .photo-film-strip-track:hover {
           animation-play-state: paused;
