@@ -1,4 +1,13 @@
 import { MongoClient, Db } from 'mongodb'
+import dns from 'dns'
+
+if (typeof window === 'undefined') {
+  try {
+    dns.setServers(['8.8.8.8', '8.8.4.4'])
+  } catch {
+    // Ignore in non-Node environments
+  }
+}
 
 const uri = process.env.MONGODB_URI || process.env.DATABASE_URL || 'mongodb://127.0.0.1:27017/greenandyoung'
 const dbName = process.env.MONGODB_DB || 'greenandyoung'
