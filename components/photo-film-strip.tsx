@@ -153,6 +153,7 @@ export function PhotoFilmStrip() {
                   sizes="(max-width: 640px) 250px, (max-width: 768px) 290px, 330px"
                   className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                   quality={95}
+                  loading="eager"
                 />
               </div>
 

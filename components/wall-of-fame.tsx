@@ -213,8 +213,9 @@ export function WallOfFame() {
                     fill
                     sizes="(max-width: 640px) 310px, (max-width: 768px) 345px, 360px"
                     className="object-cover object-[center_8%] transition-transform duration-500 ease-out group-hover:scale-105"
-                    priority={index < 2}
-                    loading={index < 2 ? 'eager' : 'lazy'}
+                    priority={index < 8}
+                    loading="eager"
+                    quality={90}
                   />
 
                   {/* Top-Left Category Transparent Glass Micro-Pill */}
