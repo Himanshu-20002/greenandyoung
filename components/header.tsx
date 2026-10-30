@@ -9,6 +9,7 @@ import { siteConfig } from '@/lib/site-config'
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [logoError, setLogoError] = useState(false)
 
   const primaryNavLinks = [
     { href: '#services', label: 'Designs' },
@@ -36,15 +37,27 @@ export function Header() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-3.5 flex items-center justify-between gap-6">
           {/* Logo */}
           <Link href="/" className="flex items-center text-[#0A140F] group flex-shrink-0">
-            <Image
-              src={siteConfig.assets.logo}
-              alt={`${siteConfig.name} Logo`}
-              width={180}
-              height={42}
-              style={{ width: 'auto' }}
-              className="object-contain h-8 sm:h-9 md:h-10 w-auto transition-transform duration-300 group-hover:scale-105"
-              priority
-            />
+            {!logoError ? (
+              <Image
+                src={siteConfig.assets.logo}
+                alt={`${siteConfig.name} Logo`}
+                width={180}
+                height={42}
+                style={{ width: 'auto' }}
+                className="object-contain h-8 sm:h-9 md:h-10 w-auto transition-transform duration-300 group-hover:scale-105"
+                priority
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-[#0A140F] text-[#D8BC95] font-serif font-bold text-xs flex items-center justify-center border border-[#C5A880]/30 shadow-sm">
+                  G&amp;Y
+                </div>
+                <span className="font-serif font-bold text-base sm:text-lg text-[#0A140F] tracking-tight">
+                  G&amp;Y <span className="text-[#C5A880] font-sans text-xs tracking-widest uppercase font-semibold">Interiors</span>
+                </span>
+              </div>
+            )}
           </Link>
 
           {/* Minimal Desktop Navigation */}

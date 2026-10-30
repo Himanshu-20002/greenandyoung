@@ -105,9 +105,9 @@ export const siteConfig: SiteConfig = {
     whatsapp: "https://wa.me/+919971813161",
   },
   assets: {
-    logo: "/images/logo/Logo.png",
+    logo: "/images/logo/logo.png",
     icon: "/images/logo/Tab_logo.png",
-    ogImage: "/images/logo/Logo.png",
+    ogImage: "/images/logo/logo.png",
   },
   navLinks: [
     { href: "#home", label: "Home" },
