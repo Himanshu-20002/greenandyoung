@@ -47,7 +47,7 @@ const PhotoFilmStrip = dynamicImport(() => import('@/components/photo-film-strip
 })
 const Footer = dynamicImport(() => import('@/components/footer').then(mod => mod.Footer), { ssr: true })
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 export default async function Page() {
   let plainSlides: any[] = []
@@ -163,17 +163,23 @@ export default async function Page() {
       <ErrorBoundary>
         <ClientQuote />
       </ErrorBoundary>
-      <ErrorBoundary>
-        <WallOfFame />
-      </ErrorBoundary>
+      <div className="section-render-optimize">
+        <ErrorBoundary>
+          <WallOfFame />
+        </ErrorBoundary>
+      </div>
 
-      <ErrorBoundary>
-        <GyAdvantage />
-      </ErrorBoundary>
+      <div className="section-render-optimize">
+        <ErrorBoundary>
+          <GyAdvantage />
+        </ErrorBoundary>
+      </div>
 
-      <ErrorBoundary>
-        <MarketIntelligence />
-      </ErrorBoundary>
+      <div className="section-render-optimize">
+        <ErrorBoundary>
+          <MarketIntelligence />
+        </ErrorBoundary>
+      </div>
 
       <Footer />
       <ErrorBoundary>

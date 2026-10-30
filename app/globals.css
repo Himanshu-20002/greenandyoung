@@ -123,10 +123,15 @@
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 }
 
@@ -188,6 +193,25 @@
 .animate-marquee-reviews:active {
   animation-play-state: paused !important;
 }
+
+/* Hardware Composite Layers for Stutter-free 120 FPS Motion */
+.animate-marquee-scroll,
+.animate-marquee-reviews,
+.photo-film-strip-track,
+.fame-marquee-track {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  contain: layout paint;
+}
+
+/* Off-screen section rendering virtualization for instantaneous scroll responsiveness */
+.section-render-optimize {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 650px;
+}
+
 
 
 

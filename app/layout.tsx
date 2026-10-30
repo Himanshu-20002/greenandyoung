@@ -4,7 +4,11 @@ import { Geist } from 'next/font/google'
 import './globals.css'
 import { siteConfig } from '@/lib/site-config'
 
-const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: `${siteConfig.legalName} | Luxury Interior Designers in Noida & Delhi NCR`,
