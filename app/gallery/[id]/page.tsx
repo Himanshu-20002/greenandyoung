@@ -149,7 +149,7 @@ export default function ProjectDetailPage({ params }: PageProps) {
               {/* Watermark / Archival Stamp */}
               <div className="absolute bottom-4 left-4 sm:left-6 z-10 flex items-center gap-2 text-white/90 text-xs sm:text-sm font-mono tracking-wider">
                 <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20">
-                  G&amp;Y ARCHIVAL · 35MM TURNKEY HANDOVER
+                  GREEN &amp; YOUNG ARCHIVAL · 35MM TURNKEY HANDOVER
                 </span>
               </div>
             </div>

@@ -1,8 +1,9 @@
-import { db } from './mongodb'
+import { getDb } from './mongodb'
 import { normalizeDocs } from './db-helpers'
 
 export async function getHomepageSlides() {
   try {
+    const db = await getDb()
     const now = new Date()
     const slides = await db
       .collection('hero_slides')
@@ -25,6 +26,7 @@ export async function getHomepageSlides() {
 
 export async function getHomepageGalleryImages() {
   try {
+    const db = await getDb()
     const images = await db
       .collection('gallery_images')
       .find({ active: true })
@@ -40,6 +42,7 @@ export async function getHomepageGalleryImages() {
 
 export async function getHomepageBeforeAfterImages() {
   try {
+    const db = await getDb()
     const images = await db
       .collection('before_after_images')
       .find({ active: true })

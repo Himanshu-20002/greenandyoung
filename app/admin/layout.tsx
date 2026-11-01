@@ -113,7 +113,7 @@ export default function AdminLayout({
                 </div>
                 <div>
                   <span className="font-serif font-extrabold text-xs sm:text-sm tracking-widest uppercase block text-foreground">
-                    G&Y Interiors Admin
+                    Green &amp; Young Admin
                   </span>
                   <span className="text-[8px] text-accent tracking-widest font-extrabold uppercase block mt-0.5">
                     Executive Portal

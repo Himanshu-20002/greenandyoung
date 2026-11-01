@@ -11,6 +11,7 @@ import { Services } from '@/components/services'
 import { ClientQuote } from '@/components/client-quote'
 import { StatsStrip } from '@/components/stats-strip'
 import { ErrorBoundary } from '@/components/error-boundary'
+import { BottomSheetForm } from '@/components/bottom-sheet-form'
 
 const GyAdvantage = dynamicImport(() => import('@/components/gy-advantage').then(mod => mod.GyAdvantage), {
   ssr: true,
@@ -34,6 +35,10 @@ const BeforeAfter = dynamicImport(() => import('@/components/before-after').then
   loading: () => <div className="h-[400px] animate-pulse bg-card/10 rounded-[32px] my-10" />
 })
 const WallOfFame = dynamicImport(() => import('@/components/wall-of-fame').then(mod => mod.WallOfFame), {
+  ssr: true,
+  loading: () => <div className="h-96 animate-pulse bg-card/10 rounded-[32px] my-10" />
+})
+const LatestTrends = dynamicImport(() => import('@/components/latest-trends').then(mod => mod.LatestTrends), {
   ssr: true,
   loading: () => <div className="h-96 animate-pulse bg-card/10 rounded-[32px] my-10" />
 })
@@ -171,6 +176,12 @@ export default async function Page() {
 
       <div className="section-render-optimize">
         <ErrorBoundary>
+          <LatestTrends />
+        </ErrorBoundary>
+      </div>
+
+      <div className="section-render-optimize">
+        <ErrorBoundary>
           <GyAdvantage />
         </ErrorBoundary>
       </div>
@@ -185,7 +196,7 @@ export default async function Page() {
       <ErrorBoundary>
         <FilmStrip />
       </ErrorBoundary>
-
+      <BottomSheetForm />
     </main>
   )
 }

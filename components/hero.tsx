@@ -9,6 +9,7 @@ import { authClient } from '@/lib/auth-client'
 import { useSessionContext } from '@/components/session-provider'
 import { trackHeroEvent } from '@/app/admin/actions/heroSlides'
 import { siteConfig } from '@/lib/site-config'
+import { openEstimateSheet } from './bottom-sheet-form'
 
 
 interface PortfolioItem {
@@ -209,13 +210,9 @@ export function Hero({ slides = [] }: Props) {
     setCurrentIndex(idx)
   }
 
-  const handleCTAClick = (e: React.MouseEvent) => {
+  const handleCTAClick = (_e?: React.MouseEvent) => {
     if (activeSlide && !activeSlide.id.startsWith('fallback-')) {
       trackHeroEvent(activeSlide.id, 'CLICK')
-    }
-    if (!session) {
-      e.preventDefault()
-      router.push('/auth?redirect=%23services')
     }
   }
 
@@ -276,132 +273,125 @@ export function Hero({ slides = [] }: Props) {
       <section
         id="home"
         className="min-h-[100dvh] lg:h-[100dvh] bg-[#0F0D0C] pt-40 sm:pt-32 lg:pt-22 pb-4 sm:pb-6 px-4 md:px-8 relative overflow-hidden flex flex-col justify-between"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-    >
-      {/* Background Slides Carousel - Covers the full first fold; dark fade only on the bottom 20% */}
-      <div className="absolute inset-0 z-0 overflow-hidden select-none">
-        {activeSlides.map((slide, idx) => {
-          // Lazy load non-active slides (only mount image tag for current, next or previous slides)
-          const isNear = Math.abs(idx - currentIndex) <= 1 || (idx === 0 && currentIndex === activeSlides.length - 1) || (idx === activeSlides.length - 1 && currentIndex === 0)
-          if (!isNear) return null
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Background Slides Carousel - Covers the full first fold; dark fade only on the bottom 20% */}
+        <div className="absolute inset-0 z-0 overflow-hidden select-none">
+          {activeSlides.map((slide, idx) => {
+            // Lazy load non-active slides (only mount image tag for current, next or previous slides)
+            const isNear = Math.abs(idx - currentIndex) <= 1 || (idx === 0 && currentIndex === activeSlides.length - 1) || (idx === activeSlides.length - 1 && currentIndex === 0)
+            if (!isNear) return null
 
-          return (
+            return (
+              <div
+                key={slide.id}
+                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                  }`}
+              >
+                <Image
+                  src={slide.bgImage}
+                  alt={slide.imageAlt || 'Luxury backdrop'}
+                  fill
+                  priority={idx === 0}
+                  sizes="100vw"
+                  className="object-cover object-center scale-105"
+                />
+              </div>
+            )
+          })}
+          {/* Light overall tint for text legibility + dark fade covering only the bottom 20% */}
+          <div className="absolute inset-0 bg-black/30" />
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to top, #0F0D0C 0%, rgba(15,13,12,0.9) 6%, rgba(15,13,12,0) 20%)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0D0D0D]/40 via-transparent to-[#0D0D0D]/40" />
+        </div>
+
+        {/* Glow overlays */}
+        <div className="absolute top-1/4 left-1/10 w-80 h-80 bg-accent/5 rounded-full blur-[120px] pointer-events-none z-0" />
+        <div className="absolute bottom-1/3 right-1/10 w-96 h-96 bg-accent/5 rounded-full blur-[140px] pointer-events-none z-0" />
+
+        {/* Main Split Grid (Content & Model) */}
+        <div className="max-w-7xl mx-auto w-full flex-grow flex items-center z-10 py-1 sm:py-2 relative">
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-center w-full">
+
+            {/* LEFT COLUMN: Text Content & Actions */}
             <div
-              key={slide.id}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              className={`lg:col-span-7 space-y-3 sm:space-y-4 md:space-y-4 transform transition-all duration-1000 order-2 lg:order-1 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
             >
-              <Image
-                src={slide.bgImage}
-                alt={slide.imageAlt || 'Luxury backdrop'}
-                fill
-                priority={idx === 0}
-                sizes="100vw"
-                className="object-cover object-center scale-105"
-              />
-            </div>
-          )
-        })}
-        {/* Light overall tint for text legibility + dark fade covering only the bottom 20% */}
-        <div className="absolute inset-0 bg-black/30" />
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(to top, #0F0D0C 0%, rgba(15,13,12,0.9) 6%, rgba(15,13,12,0) 20%)' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0D0D0D]/40 via-transparent to-[#0D0D0D]/40" />
-      </div>
-
-      {/* Glow overlays */}
-      <div className="absolute top-1/4 left-1/10 w-80 h-80 bg-accent/5 rounded-full blur-[120px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/3 right-1/10 w-96 h-96 bg-accent/5 rounded-full blur-[140px] pointer-events-none z-0" />
-
-      {/* Main Split Grid (Content & Model) */}
-      <div className="max-w-7xl mx-auto w-full flex-grow flex items-center z-10 py-1 sm:py-2 relative">
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-center w-full">
-
-          {/* LEFT COLUMN: Text Content & Actions */}
-          <div
-            className={`lg:col-span-7 space-y-3 sm:space-y-4 md:space-y-4 transform transition-all duration-1000 order-2 lg:order-1 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-          >
-            {/* Tagline */}
-            <div className="space-y-1.5 sm:space-y-2">
-              <span className="text-accent font-semibold text-[11px] sm:text-xs tracking-[0.3em] uppercase block">
-                Welcome to {siteConfig.name}
-              </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-[38px] xl:text-[44px] font-serif font-extrabold text-white leading-[1.15] tracking-tight drop-shadow-md">
-                Design Your Home<br />
-                With The <span className="bg-gradient-to-r from-[#DFBA73] via-[#FFEAA7] to-[#B59250] bg-clip-text text-transparent font-serif italic font-medium drop-shadow-[0_0_12px_rgba(223,186,115,0.4)]">Experts.</span><br />
-                3D Design &amp; Measurement.
-              </h1>
-            </div>
-
-            {/* Subtitle */}
-            <p className="text-xs sm:text-sm text-white/70 max-w-md leading-relaxed font-medium drop-shadow line-clamp-2">
-              5+ Years of Design Excellence. Turning bare-shell houses into luxury dream homes across Noida &amp; Delhi NCR.
-            </p>
-
-            {/* Dynamic Custom Promotions Badge */}
-            <div className="inline-flex items-center gap-3 bg-black/60 border border-accent/20 rounded-xl p-2 sm:p-2.5 pr-4 max-w-md shadow-xl backdrop-blur-md">
-              <div className="bg-gradient-to-r from-accent to-[#A38865] text-black font-extrabold text-[8.5px] uppercase tracking-widest px-2.5 py-1 rounded-lg shadow-sm">
-                {activeSlide.badgeLabel || 'FREE 3D CONSULTATION'}
-              </div>
-              <div className="text-left">
-                <span className="block text-white font-serif font-bold text-xs sm:text-sm tracking-wide leading-tight">
-                  {activeSlide.badgeText || '3D Design & Measurement'}
+              {/* Tagline */}
+              <div className="space-y-1.5 sm:space-y-2">
+                <span className="text-accent font-semibold text-[11px] sm:text-xs tracking-[0.3em] uppercase block">
+                  Welcome to {siteConfig.name}
                 </span>
-                <span className="block text-[8px] uppercase tracking-widest text-white/50 mt-0.5">
-                  Turnkey Interior Execution
-                </span>
+                <h1 className="text-3xl sm:text-4xl lg:text-[38px] xl:text-[44px] font-serif font-extrabold text-white leading-[1.15] tracking-tight drop-shadow-md">
+                  Design Your Home<br />
+                  With The <span className="bg-gradient-to-r from-[#DFBA73] via-[#FFEAA7] to-[#B59250] bg-clip-text text-transparent font-serif italic font-medium drop-shadow-[0_0_12px_rgba(223,186,115,0.4)]">Experts.</span><br />
+                  3D Design &amp; Measurement.
+                </h1>
               </div>
-            </div>
 
-            {/* Stats Badges */}
-            <div className="grid grid-cols-3 gap-2.5 max-w-md border-t border-b border-white/5 py-2.5">
-              <div className="text-center sm:text-left flex flex-col sm:flex-row items-center gap-2">
-                <div className="w-8 h-8 rounded-full border border-accent/35 flex items-center justify-center bg-accent/5 shrink-0">
-                  <Users className="w-4 h-4 text-accent" />
-                </div>
-                <div>
-                  <span className="block text-sm sm:text-base font-extrabold text-white tracking-wide leading-tight">500+</span>
-                  <span className="block text-[8.5px] text-white/60 uppercase font-bold tracking-wider mt-0.5">Homes Crafted</span>
-                </div>
-              </div>
-              <div className="text-center sm:text-left flex flex-col sm:flex-row items-center gap-2 border-l border-r border-white/5 px-2">
-                <div className="w-8 h-8 rounded-full border border-accent/35 flex items-center justify-center bg-accent/5 shrink-0">
-                  <Star className="w-4 h-4 text-accent" />
-                </div>
-                <div>
-                  <span className="block text-sm sm:text-base font-extrabold text-white tracking-wide leading-tight">5+ Years</span>
-                  <span className="block text-[8.5px] text-white/60 uppercase font-bold tracking-wider mt-0.5">Excellence</span>
-                </div>
-              </div>
-              <div className="text-center sm:text-left flex flex-col sm:flex-row items-center gap-2">
-                <div className="w-8 h-8 rounded-full border border-accent/35 flex items-center justify-center bg-accent/5 shrink-0">
-                  <Award className="w-4 h-4 text-accent" />
-                </div>
-                <div>
-                  <span className="block text-sm sm:text-base font-extrabold text-white tracking-wide leading-tight">10-Year</span>
-                  <span className="block text-[8.5px] text-white/60 uppercase font-bold tracking-wider mt-0.5">Warranty</span>
-                </div>
-              </div>
-            </div>
+              {/* Subtitle */}
+              <p className="text-xs sm:text-sm text-white/70 max-w-md leading-relaxed font-medium drop-shadow line-clamp-2">
+                7+ Years of Design Excellence. Turning bare-shell houses into luxury dream homes across Noida &amp; Delhi NCR.
+              </p>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <a
-                href={linkedHref}
-                onClick={handleCTAClick}
-                className="bg-gradient-to-r from-[#DFBA73] to-[#B59250] text-black text-center font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-xl shadow-lg shadow-accent/10 hover:from-[#8A7142] hover:to-[#6E5932] transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Calendar className="w-4 h-4" />
-                Book Free Consultation
-              </a>
+              {/* Dynamic Custom Promotions Badge */}
+              <div className="inline-flex items-center gap-3 bg-black/60 border border-accent/20 rounded-xl p-2 sm:p-2.5 pr-4 max-w-md shadow-xl backdrop-blur-md">
+                <div className="bg-gradient-to-r from-accent to-[#A38865] text-black font-extrabold text-[8.5px] uppercase tracking-widest px-2.5 py-1 rounded-lg shadow-sm">
+                  {activeSlide.badgeLabel || 'FREE 3D CONSULTATION'}
+                </div>
+                <div className="text-left">
+                  <span className="block text-white font-serif font-bold text-xs sm:text-sm tracking-wide leading-tight">
+                    {activeSlide.badgeText || '3D Design & Measurement'}
+                  </span>
+                  <span className="block text-[8px] uppercase tracking-widest text-white/50 mt-0.5">
+                    Turnkey Interior Execution
+                  </span>
+                </div>
+              </div>
+
+              {/* Stats Badges */}
+              <div className="grid grid-cols-3 gap-2.5 max-w-md border-t border-b border-white/5 py-2.5">
+                <div className="text-center sm:text-left flex flex-col sm:flex-row items-center gap-2">
+                  <div className="w-8 h-8 rounded-full border border-accent/35 flex items-center justify-center bg-accent/5 shrink-0">
+                    <Users className="w-4 h-4 text-accent" />
+                  </div>
+                  <div>
+                    <span className="block text-sm sm:text-base font-extrabold text-white tracking-wide leading-tight">500+</span>
+                    <span className="block text-[8.5px] text-white/60 uppercase font-bold tracking-wider mt-0.5">Homes Crafted</span>
+                  </div>
+                </div>
+                <div className="text-center sm:text-left flex flex-col sm:flex-row items-center gap-2 border-l border-r border-white/5 px-2">
+                  <div className="w-8 h-8 rounded-full border border-accent/35 flex items-center justify-center bg-accent/5 shrink-0">
+                    <Star className="w-4 h-4 text-accent" />
+                  </div>
+                  <div>
+                    <span className="block text-sm sm:text-base font-extrabold text-white tracking-wide leading-tight">7+ Years</span>
+                    <span className="block text-[8.5px] text-white/60 uppercase font-bold tracking-wider mt-0.5">Excellence</span>
+                  </div>
+                </div>
+                <div className="text-center sm:text-left flex flex-col sm:flex-row items-center gap-2">
+                  <div className="w-8 h-8 rounded-full border border-accent/35 flex items-center justify-center bg-accent/5 shrink-0">
+                    <Award className="w-4 h-4 text-accent" />
+                  </div>
+                  <div>
+                    <span className="block text-sm sm:text-base font-extrabold text-white tracking-wide leading-tight">10-Year</span>
+                    <span className="block text-[8.5px] text-white/60 uppercase font-bold tracking-wider mt-0.5">Warranty</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <button type="button" onClick={(e) => { handleCTAClick(e); openEstimateSheet(); }} className="bg-gradient-to-r from-[#DFBA73] to-[#B59250] text-black text-center font-extrabold text-xs uppercase tracking-widest px-7 py-3.5 rounded-xl shadow-lg shadow-accent/10 hover:from-[#8A7142] hover:to-[#6E5932] transition-all flex items-center justify-center gap-2 cursor-pointer"><Calendar className="w-4 h-4" /> Plan Your Dream Home</button>
                 <a
                   href={`tel:${siteConfig.phone.primaryRaw}`}
                   className="bg-black/40 border border-white/10 hover:bg-black/60 text-white text-center font-extrabold text-xs uppercase tracking-widest px-6 py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
@@ -423,9 +413,8 @@ export function Hero({ slides = [] }: Props) {
 
             {/* RIGHT COLUMN: Glowing Gold Circle & Model Portrait */}
             <div
-              className={`lg:col-span-5 flex flex-col justify-center items-center order-1 lg:order-2 relative py-4 sm:py-6 ${
-                isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-              } transition-all duration-1000`}
+              className={`lg:col-span-5 flex flex-col justify-center items-center order-1 lg:order-2 relative py-4 sm:py-6 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                } transition-all duration-1000`}
             >
               {/* Glowing Golden Circle (Behind Model) */}
               <div className="absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] rounded-full border border-accent/30 bg-gradient-to-tr from-accent/5 via-accent/20 to-transparent shadow-[0_0_80px_rgba(197,168,128,0.15)] animate-pulse" />
@@ -514,13 +503,7 @@ export function Hero({ slides = [] }: Props) {
                 <span className="text-[8px] font-extrabold uppercase tracking-widest text-accent">{activeSlide.badgeLabel}</span>
                 <span className="font-serif text-base font-bold text-white leading-tight">{activeSlide.badgeText}</span>
                 <span className="text-[8px] uppercase tracking-wider text-white/70 font-semibold leading-normal">Exclusive Experience</span>
-                <a
-                  href={linkedHref}
-                  onClick={handleCTAClick}
-                  className="mt-1.5 text-[8px] font-extrabold uppercase tracking-widest text-black bg-gradient-to-r from-[#DFBA73] to-[#B59250] px-3.5 py-1.5 rounded-lg flex items-center gap-1 hover:from-[#8A7142] hover:to-[#6E5932] transition-all cursor-pointer"
-                >
-                  Book <ArrowRight className="w-2.5 h-2.5" />
-                </a>
+                <button type="button" onClick={() => openEstimateSheet()} className="mt-1.5 text-[8px] font-extrabold uppercase tracking-widest text-black bg-gradient-to-r from-[#DFBA73] to-[#B59250] px-3.5 py-1.5 rounded-lg flex items-center gap-1 hover:from-[#8A7142] hover:to-[#6E5932] transition-all cursor-pointer">Plan <ArrowRight className="w-2.5 h-2.5" /></button>
               </div>
 
               {/* Indicator Dots and Navigation Controls */}
@@ -538,9 +521,8 @@ export function Hero({ slides = [] }: Props) {
                     <button
                       key={idx}
                       onClick={() => handleDotClick(idx)}
-                      className={`h-1.5 rounded-full cursor-pointer transition-all ${
-                        idx === currentIndex ? 'bg-accent w-6' : 'bg-white/20 hover:bg-white/40 w-1.5'
-                      }`}
+                      className={`h-1.5 rounded-full cursor-pointer transition-all ${idx === currentIndex ? 'bg-accent w-6' : 'bg-white/20 hover:bg-white/40 w-1.5'
+                        }`}
                       aria-label={`Go to slide ${idx + 1}`}
                     />
                   ))}
@@ -663,27 +645,27 @@ export function Hero({ slides = [] }: Props) {
           </div>
 
           {/* Value Proposition Cards at the bottom (Preserved Original Luxury Ivory Cards) */}
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+          <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 pt-3 sm:pt-4">
             {values.map((v, idx) => {
               const Icon = v.icon
               return (
                 <motion.div
                   key={idx}
-                  className="bg-gradient-to-br from-[#FCF9F2] to-[#F5ECD7] border border-accent/25 rounded-2xl p-4 flex items-center gap-4 backdrop-blur-md hover:border-accent/50 hover:shadow-md transition-all duration-500 group overflow-hidden relative shadow-sm cursor-pointer"
+                  className="bg-gradient-to-br from-[#FCF9F2] to-[#F5ECD7] border border-accent/25 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 flex items-center gap-2 sm:gap-4 backdrop-blur-md hover:border-accent/50 hover:shadow-md transition-all duration-500 group overflow-hidden relative shadow-sm cursor-pointer"
                   whileHover={{ y: -4 }}
                   whileTap={{ scale: 0.96 }}
                 >
                   {/* Subtle gold shine sweep */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out pointer-events-none" />
 
-                  <div className="w-10 h-10 rounded-full border border-accent/30 flex items-center justify-center bg-accent/5 text-accent flex-shrink-0 group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-500 relative z-10">
-                    <Icon className="w-4.5 h-4.5" />
+                  <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-full border border-accent/30 flex items-center justify-center bg-accent/5 text-accent flex-shrink-0 group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-500 relative z-10">
+                    <Icon className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5" />
                   </div>
-                  <div className="relative z-10">
-                    <span className="block text-xs font-extrabold text-[#1A140E] uppercase tracking-wider group-hover:text-accent transition-colors duration-300">
+                  <div className="relative z-10 min-w-0">
+                    <span className="block text-[10px] sm:text-xs font-extrabold text-[#1A140E] uppercase tracking-tight sm:tracking-wider truncate group-hover:text-accent transition-colors duration-300">
                       {v.title}
                     </span>
-                    <span className="block text-[10px] text-[#4A3E36] mt-0.5 leading-normal font-medium group-hover:text-[#1A140E] transition-colors duration-300">
+                    <span className="block text-[8.5px] sm:text-[10px] text-[#4A3E36] mt-0.5 leading-tight font-medium line-clamp-1 sm:line-clamp-none group-hover:text-[#1A140E] transition-colors duration-300">
                       {v.desc}
                     </span>
                   </div>

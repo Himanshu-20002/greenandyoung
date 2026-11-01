@@ -41,7 +41,7 @@ export default function TopBar() {
           <span className="hidden sm:inline-block text-[#DFBA73]/40">|</span>
           <a
             href={`tel:${siteConfig.phone.primaryRaw}`}
-            className="hover:text-[#FFEAA7] transition-colors flex items-center gap-1.5"
+            className="text-[#FFEAA7] transition-colors flex items-center gap-1.5"
           >
             <Phone className="w-3.5 h-3.5 text-[#DFBA73]" /> {siteConfig.phone.primary}
           </a>

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
 import {
   Sparkles,
@@ -17,8 +17,42 @@ import {
 } from 'lucide-react'
 import { GY_28_DESIGN_ELEMENTS } from '@/lib/interior-packages'
 
+const PILLARS = [
+  {
+    number: '01',
+    title: 'Meet Designer',
+    icon: UserCheck,
+    desc: 'One-on-one session with our senior interior designer to understand your vision, lifestyle, and floor plan.',
+  },
+  {
+    number: '02',
+    title: 'Creative Design',
+    icon: PenTool,
+    desc: 'Custom 3D walkthroughs, moodboards, and space planning tailored to your exact taste and budget.',
+  },
+  {
+    number: '03',
+    title: 'Fast Execution',
+    icon: Zap,
+    desc: 'Factory-calibrated modular manufacturing and rapid on-site assembly with zero delay guarantee.',
+  },
+  {
+    number: '04',
+    title: 'Material Guarantee',
+    icon: ShieldCheck,
+    desc: '10-year warranty with 100% genuine BWR marine plywood, German Blum hardware, and certified materials.',
+  },
+  {
+    number: '05',
+    title: 'Live CCTV Feed',
+    icon: Video,
+    desc: '24/7 high-definition live site cameras accessible right from your smartphone for complete peace of mind.',
+  },
+]
+
 export function Services() {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [activePillar, setActivePillar] = useState<number>(0)
 
   // 120 FPS Optimization: Pause video decoding when scrolled off-screen
   useEffect(() => {
@@ -206,110 +240,69 @@ export function Services() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
-            {/* 01: Meet Designer */}
-            <div className="group p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFBA73]/50 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-8 h-8 rounded-lg  border border-white/10 flex items-center justify-center text-green/70 bg-[#DFBA73] group-hover:text-[#121614] group-hover:border-[#DFBA73] group-hover:scale-105 transition-all duration-300">
-                    <UserCheck className="w-4 h-4" />
-                  </div>
-                  <span className="text-base font-mono font-bold text-white/20 group-hover:text-[#DFBA73]/40 transition-colors duration-300">01</span>
-                </div>
-                <h4 className="text-sm font-serif font-bold text-white mb-1.5 group-hover:text-[#DFBA73] transition-colors duration-300">
-                  Meet Designer
-                </h4>
-                <p className="text-xs text-[#8E9F96] leading-relaxed mb-3.5">
-                  One-on-one session with our senior interior designer to understand your vision, lifestyle, and floor plan.
-                </p>
-              </div>
-              <div className="relative w-full h-[2.5px] flex items-center justify-center mt-1">
-                <span className="h-full rounded-full bg-[#DFBA73] w-10 group-hover:w-full transition-all duration-500 ease-out shadow-[0_0_8px_rgba(223,186,115,0.4)] group-hover:shadow-[0_0_16px_rgba(223,186,115,0.85)]" />
-              </div>
-            </div>
+            {PILLARS.map((pillar, idx) => {
+              const Icon = pillar.icon
+              const isActive = activePillar === idx
 
-            {/* 02: Creative Design */}
-            <div className="group p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFBA73]/50 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/70 group-hover:bg-[#DFBA73] group-hover:text-[#121614] group-hover:border-[#DFBA73] group-hover:scale-105 transition-all duration-300">
-                    <PenTool className="w-4 h-4" />
+              return (
+                <div
+                  key={pillar.number}
+                  onClick={() => setActivePillar(idx)}
+                  onTouchStart={() => setActivePillar(idx)}
+                  onMouseEnter={() => setActivePillar(idx)}
+                  className={`group p-5 rounded-2xl transition-all duration-300 flex flex-col justify-between cursor-pointer select-none touch-manipulation ${
+                    isActive
+                      ? 'bg-white/[0.08] border border-[#DFBA73]/60 -translate-y-1 shadow-[0_8px_25px_rgba(223,186,115,0.15)]'
+                      : 'bg-white/5 border border-white/10 hover:border-[#DFBA73]/50 hover:-translate-y-1 hover:bg-white/[0.07]'
+                  }`}
+                  style={{ WebkitTapHighlightColor: 'transparent' }}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <div
+                        className={`w-8 h-8 rounded-lg border transition-all duration-300 flex items-center justify-center ${
+                          isActive
+                            ? 'bg-[#DFBA73] text-[#121614] border-[#DFBA73] scale-105 shadow-sm shadow-[#DFBA73]/30'
+                            : 'bg-white/5 border-white/10 text-white/70 group-hover:bg-[#DFBA73] group-hover:text-[#121614] group-hover:border-[#DFBA73] group-hover:scale-105'
+                        }`}
+                      >
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <span
+                        className={`text-base font-mono font-bold transition-colors duration-300 ${
+                          isActive
+                            ? 'text-[#DFBA73]/60'
+                            : 'text-white/20 group-hover:text-[#DFBA73]/40'
+                        }`}
+                      >
+                        {pillar.number}
+                      </span>
+                    </div>
+                    <h4
+                      className={`text-sm font-serif font-bold mb-1.5 transition-colors duration-300 ${
+                        isActive
+                          ? 'text-[#DFBA73]'
+                          : 'text-white group-hover:text-[#DFBA73]'
+                      }`}
+                    >
+                      {pillar.title}
+                    </h4>
+                    <p className="text-xs text-[#8E9F96] leading-relaxed mb-3.5">
+                      {pillar.desc}
+                    </p>
                   </div>
-                  <span className="text-base font-mono font-bold text-white/20 group-hover:text-[#DFBA73]/40 transition-colors duration-300">02</span>
-                </div>
-                <h4 className="text-sm font-serif font-bold text-white mb-1.5 group-hover:text-[#DFBA73] transition-colors duration-300">
-                  Creative Design
-                </h4>
-                <p className="text-xs text-[#8E9F96] leading-relaxed mb-3.5">
-                  Custom 3D walkthroughs, moodboards, and space planning tailored to your exact taste and budget.
-                </p>
-              </div>
-              <div className="relative w-full h-[2.5px] flex items-center justify-center mt-1">
-                <span className="h-full rounded-full bg-[#DFBA73] w-10 group-hover:w-full transition-all duration-500 ease-out shadow-[0_0_8px_rgba(223,186,115,0.4)] group-hover:shadow-[0_0_16px_rgba(223,186,115,0.85)]" />
-              </div>
-            </div>
-
-            {/* 03: Fast Execution */}
-            <div className="group p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFBA73]/50 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/70 group-hover:bg-[#DFBA73] group-hover:text-[#121614] group-hover:border-[#DFBA73] group-hover:scale-105 transition-all duration-300">
-                    <Zap className="w-4 h-4" />
+                  <div className="relative w-full h-[2.5px] flex items-center justify-center mt-1 overflow-hidden">
+                    <span
+                      className={`h-full rounded-full bg-[#DFBA73] transition-all duration-500 ease-out ${
+                        isActive
+                          ? 'w-full shadow-[0_0_16px_rgba(223,186,115,0.85)]'
+                          : 'w-10 group-hover:w-full shadow-[0_0_8px_rgba(223,186,115,0.4)] group-hover:shadow-[0_0_16px_rgba(223,186,115,0.85)]'
+                      }`}
+                    />
                   </div>
-                  <span className="text-base font-mono font-bold text-white/20 group-hover:text-[#DFBA73]/40 transition-colors duration-300">03</span>
                 </div>
-                <h4 className="text-sm font-serif font-bold text-white mb-1.5 group-hover:text-[#DFBA73] transition-colors duration-300">
-                  Fast Execution
-                </h4>
-                <p className="text-xs text-[#8E9F96] leading-relaxed mb-3.5">
-                  Factory-calibrated modular manufacturing and rapid on-site assembly with zero delay guarantee.
-                </p>
-              </div>
-              <div className="relative w-full h-[2.5px] flex items-center justify-center mt-1">
-                <span className="h-full rounded-full bg-[#DFBA73] w-10 group-hover:w-full transition-all duration-500 ease-out shadow-[0_0_8px_rgba(223,186,115,0.4)] group-hover:shadow-[0_0_16px_rgba(223,186,115,0.85)]" />
-              </div>
-            </div>
-
-            {/* 04: Material Guarantee */}
-            <div className="group p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFBA73]/50 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/70 group-hover:bg-[#DFBA73] group-hover:text-[#121614] group-hover:border-[#DFBA73] group-hover:scale-105 transition-all duration-300">
-                    <ShieldCheck className="w-4 h-4" />
-                  </div>
-                  <span className="text-base font-mono font-bold text-white/20 group-hover:text-[#DFBA73]/40 transition-colors duration-300">04</span>
-                </div>
-                <h4 className="text-sm font-serif font-bold text-white mb-1.5 group-hover:text-[#DFBA73] transition-colors duration-300">
-                  Material Guarantee
-                </h4>
-                <p className="text-xs text-[#8E9F96] leading-relaxed mb-3.5">
-                  10-year warranty with 100% genuine BWR marine plywood, German Blum hardware, and certified materials.
-                </p>
-              </div>
-              <div className="relative w-full h-[2.5px] flex items-center justify-center mt-1">
-                <span className="h-full rounded-full bg-[#DFBA73] w-10 group-hover:w-full transition-all duration-500 ease-out shadow-[0_0_8px_rgba(223,186,115,0.4)] group-hover:shadow-[0_0_16px_rgba(223,186,115,0.85)]" />
-              </div>
-            </div>
-
-            {/* 05: Live CCTV Feed */}
-            <div className="group p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFBA73]/50 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/70 group-hover:bg-[#DFBA73] group-hover:text-[#121614] group-hover:border-[#DFBA73] group-hover:scale-105 transition-all duration-300">
-                    <Video className="w-4 h-4" />
-                  </div>
-                  <span className="text-base font-mono font-bold text-white/20 group-hover:text-[#DFBA73]/40 transition-colors duration-300">05</span>
-                </div>
-                <h4 className="text-sm font-serif font-bold text-white mb-1.5 group-hover:text-[#DFBA73] transition-colors duration-300">
-                  Live CCTV Feed
-                </h4>
-                <p className="text-xs text-[#8E9F96] leading-relaxed mb-3.5">
-                  24/7 high-definition live site cameras accessible right from your smartphone for complete peace of mind.
-                </p>
-              </div>
-              <div className="relative w-full h-[2.5px] flex items-center justify-center mt-1">
-                <span className="h-full rounded-full bg-[#DFBA73] w-10 group-hover:w-full transition-all duration-500 ease-out shadow-[0_0_8px_rgba(223,186,115,0.4)] group-hover:shadow-[0_0_16px_rgba(223,186,115,0.85)]" />
-              </div>
-            </div>
+              )
+            })}
           </div>
         </div>
       </div>

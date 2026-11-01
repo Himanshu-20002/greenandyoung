@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Phone, MapPin, MessageCircle, Star, Sparkles, Shield } from 'lucide-react'
 import { siteConfig } from '@/lib/site-config'
+import { openEstimateSheet } from './bottom-sheet-form'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -24,15 +25,16 @@ export function Footer() {
 
   const exploreLinks = [
     { label: 'Home', href: '#hero' },
-    { label: 'About Story', href: '#about' },
-    { label: 'Wall of Fame', href: '#wall-of-fame', badge: 'AWARDS' },
+    { label: 'About Story', href: '/about' },
+    { label: 'Achievements', href: '#achievements', badge: 'AWARDS' },
     { label: 'Transformations', href: '#transformations' },
-    { label: 'Client Reviews', href: '#testimonials' },
+    { label: 'Client Reviews', href: '#reviews' },
     { label: '3D Configurator', href: '#booking' },
   ]
 
   return (
-    <footer className="bg-background px-2 sm:px-4 md:px-6 pb-4 sm:pb-6 pt-6 sm:pt-12 antialiased">
+    <footer id="contact" className="bg-background px-2 sm:px-4 md:px-6 pb-4 sm:pb-6 pt-6 sm:pt-12 antialiased">
+      <div id="booking" className="-top-24 relative" />
       {/* Outer Floating Panoramic Card Shell */}
       <div className="relative w-full max-w-[1700px] mx-auto bg-[#07110C] text-[#8E9F96] rounded-[24px] sm:rounded-[36px] md:rounded-[44px] border border-[#14281E] px-6 sm:px-10 md:px-12 py-7 sm:py-9 md:py-10 overflow-hidden shadow-2xl">
         
@@ -97,12 +99,7 @@ export function Footer() {
             {/* Pill CTA + Google Review Validation */}
             <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1">
               <motion.a
-                href="#booking"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:py-3 rounded-full bg-[#E4D7BE] hover:bg-[#F2E7D0] text-[#0A140F] font-semibold text-xs sm:text-sm tracking-wide shadow-md transition-all duration-300 group"
-              >
-                <span>Book 3D Consultation</span>
+                href="#estimate" onClick={(e) => { e.preventDefault(); openEstimateSheet(); }} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:py-3 rounded-full bg-[#E4D7BE] hover:bg-[#F2E7D0] text-[#0A140F] font-semibold text-xs sm:text-sm tracking-wide shadow-md transition-all duration-300 group cursor-pointer"><span>Plan Your Dream Home</span>
                 <ArrowUpRight className="w-4 h-4 text-[#0A140F] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </motion.a>
 
@@ -237,7 +234,7 @@ export function Footer() {
         <div className="pt-4 sm:pt-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#6E8278]">
           {/* Brand Legal Name */}
           <div className="flex items-center gap-2">
-            <span className="font-bold text-white text-xs sm:text-sm">G&amp;Y Interiors.</span>
+            <span className="font-bold text-white text-xs sm:text-sm">Green &amp; Young Interiors.</span>
             <span>&copy; Green &amp; Young Interior Designers {currentYear}</span>
             <span className="hidden sm:inline">&middot; NCR Studio Reg.</span>
           </div>

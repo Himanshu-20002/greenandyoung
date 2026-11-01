@@ -103,14 +103,14 @@ export function Gallery({ initialImages = [] }: Props) {
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 max-w-3xl mx-auto mb-10 sm:mb-12">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
-              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 cursor-pointer ${
+              className={`px-3.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full font-medium transition-all duration-300 cursor-pointer ${
                 selectedCategory === category
-                  ? 'bg-primary text-primary-foreground shadow-lg'
+                  ? 'bg-primary text-primary-foreground shadow-md'
                   : 'bg-background border border-border text-foreground hover:border-accent'
               }`}
             >

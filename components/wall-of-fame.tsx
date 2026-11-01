@@ -112,10 +112,11 @@ export function WallOfFame() {
 
   return (
     <section
-      id="wall-of-fame"
+      id="achievements"
       className="relative w-full pt-8 sm:pt-10 md:pt-12 pb-12 sm:pb-16 bg-[#FAF8F5] overflow-hidden"
-      aria-label="Wall of Fame - Awards and Recognitions"
+      aria-label="Achievements - Awards and Recognitions"
     >
+      <div id="wall-of-fame" className="-top-24 relative" />
       {/* 120 FPS Hardware-Accelerated Marquee Animation */}
       <style>{`
         @keyframes fameMarqueeTrack {
@@ -161,7 +162,7 @@ export function WallOfFame() {
         </div>
 
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-[#1C1917] tracking-tight">
-          Wall of <span className="text-[#8C6D3F] italic font-serif">Fame</span>
+          Our <span className="text-[#8C6D3F] italic font-serif">Achievements</span>
         </h2>
 
         <p className="mt-3.5 max-w-2xl mx-auto text-sm sm:text-base text-[#78716C] leading-relaxed">

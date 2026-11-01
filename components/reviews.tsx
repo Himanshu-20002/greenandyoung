@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Star, Sparkles, Quote } from 'lucide-react'
+import { openEstimateSheet } from './bottom-sheet-form'
 
 interface ReviewItem {
   name: string
@@ -19,7 +20,7 @@ const reviews: ReviewItem[] = [
     property: 'Godrej Woods, Sector 43, Noida (4 BHK)',
     rating: 5,
     tag: 'Turnkey Handover',
-    text: 'From the Italian marble polishing to the custom fluted acoustic living room, G&Y delivered pure perfection in 45 days. The 3D VR walkthrough matched the physical handover 1:1.',
+    text: 'From the Italian marble polishing to the custom fluted acoustic living room, Green & Young delivered pure perfection in 45 days. The 3D VR walkthrough matched the physical handover 1:1.',
   },
   {
     name: 'Col. Rajeshwar & Sunita Bakshi',
@@ -59,7 +60,7 @@ const reviews: ReviewItem[] = [
     property: 'Ace Starlit, Sector 152, Noida (4 BHK)',
     rating: 5,
     tag: 'Turnkey Handover',
-    text: 'The master suite with its floating vanity and ambient warm cove lighting exceeded every expectation. G&Y turned our bare apartment shell into an architectural masterpiece.',
+    text: 'The master suite with its floating vanity and ambient warm cove lighting exceeded every expectation. Green & Young turned our bare apartment shell into an architectural masterpiece.',
   },
   {
     name: 'Deepak & Ritu Sen',
@@ -244,10 +245,7 @@ export function Reviews() {
             Ready to turn your bare flat or villa into an architectural masterpiece?
           </span>
           <a
-            href="#booking"
-            className="inline-flex items-center justify-center px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#D8BC95] via-[#EAE1D0] to-[#D8BC95] hover:from-white hover:to-[#EAE1D0] text-[#0A110D] font-bold text-xs tracking-wide shadow-md hover:shadow-[0_0_20px_rgba(197,168,128,0.35)] transition-all duration-300"
-          >
-            Book Free 3D Consultation
+            href="#estimate" onClick={(e) => { e.preventDefault(); openEstimateSheet(); }} className="inline-flex items-center justify-center px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#D8BC95] via-[#EAE1D0] to-[#D8BC95] hover:from-white hover:to-[#EAE1D0] text-[#0A110D] font-bold text-xs tracking-wide shadow-md hover:shadow-[0_0_20px_rgba(197,168,128,0.35)] transition-all duration-300 cursor-pointer">Plan Your Dream Home
           </a>
         </div>
       </div>

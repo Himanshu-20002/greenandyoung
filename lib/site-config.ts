@@ -54,13 +54,13 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "G&Y Interiors",
-  legalName: "G&Y Interiors — Green Young",
+  name: "Green & Young Interiors",
+  legalName: "Green & Young Interiors",
   shortName: "Green & Young",
   tagline: "Design Your Home With The Experts",
   subTagline: "3D Design & Measurement • Turnkey Home & Office Interiors",
   description:
-    "Transform your living space with G&Y Interiors. Premier turnkey interior design, modular kitchens, luxury living spaces, and 3D architectural planning across Noida, Greater Noida, and Delhi NCR.",
+    "Transform your living space with Green & Young Interiors. Premier turnkey interior design, modular kitchens, luxury living spaces, and 3D architectural planning across Noida, Greater Noida, and Delhi NCR.",
   url: "https://greenandyoung.in",
   phone: {
     primary: "+91 99718 13161",
@@ -71,9 +71,9 @@ export const siteConfig: SiteConfig = {
   whatsapp: {
     number: "919971813161",
     directLink:
-      "https://wa.me/+919971813161?text=Hi%20G%26Y%20Interiors%2C%20I%20would%20like%20to%20book%20a%20free%203D%20design%20consultation.",
+      "https://wa.me/+919971813161?text=Hi%20Green%20%26%20Young%20Interiors%2C%20I%20would%20like%20to%20book%20a%20free%203D%20design%20consultation.",
     prefilledMessage:
-      "Hi G&Y Interiors, I would like to book a free 3D design consultation.",
+      "Hi Green & Young Interiors, I would like to book a free 3D design consultation.",
   },
   email: {
     info: "info@greenandyoung.in",
@@ -93,7 +93,7 @@ export const siteConfig: SiteConfig = {
   },
   hours: {
     display: "Mon - Sun: 10:00 AM - 8:00 PM",
-    statusText: "3D Design & Measurement Consultation Active",
+    statusText: "3D Design & Measurement  Active",
   },
   analytics: {
     gtmId: "GTM-5GJPZVZG",
@@ -105,17 +105,16 @@ export const siteConfig: SiteConfig = {
     whatsapp: "https://wa.me/+919971813161",
   },
   assets: {
-    logo: "/images/logo/logo.png",
+    logo: "/images/logo/logo.webp",
     icon: "/images/logo/Tab_logo.png",
-    ogImage: "/images/logo/logo.png",
+    ogImage: "/images/logo/logo.webp",
   },
   navLinks: [
-    { href: "#home", label: "Home" },
-    { href: "#services", label: "Designs & Services" },
-    { href: "#gallery", label: "Portfolio" },
-    { href: "#why-choose-us", label: "Why G&Y" },
-    { href: "#about", label: "About Us" },
-    { href: "#reviews", label: "Testimonials" },
-    { href: "#faq", label: "FAQ" },
+    { href: "/", label: "Home" },
+    { href: "/#services", label: "Designs" },
+    { href: "/#gallery", label: "Portfolio" },
+    { href: "/#transformations", label: "Transformations" },
+    { href: "/#latest-trends", label: "Latest Trends" },
+    { href: "/about", label: "About" },
   ],
 }

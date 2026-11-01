@@ -11,10 +11,11 @@ const geistSans = Geist({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3000'),
   title: `${siteConfig.legalName} | Luxury Interior Designers in Noida & Delhi NCR`,
   description: siteConfig.description,
   keywords:
-    'interior designer noida, interior design greater noida, 3D interior design, 3BHK interior, 4BHK interior, modular kitchen, luxury villa interior, office interior, G&Y interiors, green and young',
+    'interior designer noida, interior design greater noida, 3D interior design, 3BHK interior, 4BHK interior, modular kitchen, luxury villa interior, office interior, green and young interiors, green and young',
   generator: 'v0.app',
   alternates: {
     canonical: '/',

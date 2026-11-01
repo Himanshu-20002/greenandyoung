@@ -59,9 +59,19 @@ if (process.env.NODE_ENV === 'development') {
 export const db: Db = client.db(dbName)
 
 export async function getDb(): Promise<Db> {
-  await clientPromise
+  try {
+    await clientPromise
+  } catch (err) {
+    console.warn('[MongoDB] Initial connection failed, attempting reconnection with fallback:', err)
+    // Try fallback local connection
+    const fallbackUri = 'mongodb://127.0.0.1:27017/greenandyoung'
+    client = new MongoClient(fallbackUri, options)
+    clientPromise = client.connect()
+    await clientPromise
+  }
   return client.db(dbName)
 }
+
 
 export { client, clientPromise }
 export default clientPromise

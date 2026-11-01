@@ -108,7 +108,7 @@ export function PhotoFilmStrip() {
             <span>◆ KODACHROME COLOR FILM ◆</span>
             <span>35MM ARCHIVE</span>
             <span>ISO 400</span>
-            <span>G&Y CINEMATIC</span>
+            <span>GREEN & YOUNG CINEMATIC</span>
           </div>
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {Array.from({ length: 40 }).map((_, i) => (
@@ -167,7 +167,7 @@ export function PhotoFilmStrip() {
                 </div>
                 <div className="flex items-center justify-between text-[9px] text-neutral-300 truncate">
                   <span className="truncate font-sans text-neutral-400">{frame.caption}</span>
-                  <span className="font-mono text-[#8E9F96]/70 text-[8px] shrink-0 uppercase tracking-widest pl-2">G&amp;Y ARCHIVAL</span>
+                  <span className="font-mono text-[#8E9F96]/70 text-[8px] shrink-0 uppercase tracking-widest pl-2">GREEN &amp; YOUNG ARCHIVAL</span>
                 </div>
               </div>
             </div>
