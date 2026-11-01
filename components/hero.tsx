@@ -479,7 +479,7 @@ export function Hero({ slides = [] }: Props) {
 
               {/* Royal Triptych Mirror Ensemble */}
               <div className="relative flex items-center justify-center">
-                {/* LEFT COMPANION MIRROR (Cascading 3-Panel Faceted Shape - Subtle Ambient Wing) */}
+                {/* LEFT COMPANION MIRROR (Cascading 3-Panel Faceted Shape - Vanishing Faded Top, No Top Border) */}
                 <button
                   type="button"
                   onClick={handlePrev}
@@ -492,6 +492,30 @@ export function Hero({ slides = [] }: Props) {
                       <clipPath id="leftMirrorClip">
                         <path d="M 0 380 L 0 135 L 52 90 L 106 45 Q 135 15 160 30 L 160 380 Z" />
                       </clipPath>
+                      {/* Top Fade Mask: Dissolves the top of the mirror into thin air */}
+                      <linearGradient id="leftTopFadeGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+                        <stop offset="25%" stopColor="#ffffff" stopOpacity="0.2" />
+                        <stop offset="50%" stopColor="#ffffff" stopOpacity="0.75" />
+                        <stop offset="75%" stopColor="#ffffff" stopOpacity="1" />
+                        <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
+                      </linearGradient>
+                      <mask id="leftTopMask">
+                        <rect width="160" height="380" fill="url(#leftTopFadeGrad)" />
+                      </mask>
+                      {/* Fading Gold Stroke Gradient (Border fades to 0 at the top) */}
+                      <linearGradient id="leftGoldBorderFade" x1="0" y1="1" x2="0" y2="0">
+                        <stop offset="0%" stopColor="#DFBA73" stopOpacity="0.85" />
+                        <stop offset="50%" stopColor="#DFBA73" stopOpacity="0.65" />
+                        <stop offset="75%" stopColor="#DFBA73" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#DFBA73" stopOpacity="0" />
+                      </linearGradient>
+                      <linearGradient id="leftGoldDashFade" x1="0" y1="1" x2="0" y2="0">
+                        <stop offset="0%" stopColor="#B59250" stopOpacity="0.6" />
+                        <stop offset="50%" stopColor="#B59250" stopOpacity="0.45" />
+                        <stop offset="75%" stopColor="#B59250" stopOpacity="0.1" />
+                        <stop offset="100%" stopColor="#B59250" stopOpacity="0" />
+                      </linearGradient>
                       <linearGradient id="leftMirrorGrad" x1="0" y1="1" x2="0" y2="0">
                         <stop offset="0%" stopColor="#000000" stopOpacity="0.55" />
                         <stop offset="50%" stopColor="#000000" stopOpacity="0.2" />
@@ -503,8 +527,8 @@ export function Hero({ slides = [] }: Props) {
                       </radialGradient>
                     </defs>
 
-                    {/* Clipped Image & Subtle Translucent Overlay */}
-                    <g clipPath="url(#leftMirrorClip)">
+                    {/* Clipped Image & Vignette with Top Fade Mask */}
+                    <g clipPath="url(#leftMirrorClip)" mask="url(#leftTopMask)">
                       <image
                         href={prevSlide.frameImage}
                         width="160"
@@ -516,31 +540,31 @@ export function Hero({ slides = [] }: Props) {
                       <rect width="160" height="380" fill="url(#leftMirrorVignette)" />
                     </g>
 
-                    {/* Outer Gold Border */}
+                    {/* Outer Gold Border - NO BORDER AT THE TOP, Open path fading upwards */}
                     <path
-                      d="M 1.5 379 L 1.5 135 L 52 90 L 106 45 Q 135 15 158.5 30 L 158.5 379 Z"
-                      stroke="#DFBA73"
+                      d="M 1.5 135 L 1.5 379 L 158.5 379 L 158.5 45"
+                      stroke="url(#leftGoldBorderFade)"
                       strokeWidth="2.5"
-                      strokeOpacity="0.85"
+                      strokeLinecap="round"
                       fill="none"
                       className="drop-shadow-[0_0_6px_rgba(223,186,115,0.3)]"
                     />
 
-                    {/* Inner Dashed Gold Stitching */}
+                    {/* Inner Dashed Gold Stitching - NO BORDER AT THE TOP */}
                     <path
-                      d="M 4.5 376 L 4.5 138 L 52 94 L 106 50 Q 133 21 155.5 34 L 155.5 376 Z"
-                      stroke="#B59250"
+                      d="M 4.5 138 L 4.5 376 L 155.5 376 L 155.5 48"
+                      stroke="url(#leftGoldDashFade)"
                       strokeWidth="1"
                       strokeDasharray="3 3"
-                      strokeOpacity="0.6"
+                      strokeLinecap="round"
                       fill="none"
                     />
 
-                    {/* Vertical Panel Divider Line 1 (Dotted) */}
-                    <line x1="52" y1="90" x2="52" y2="380" stroke="#DFBA73" strokeWidth="1.2" strokeDasharray="2 3.5" strokeOpacity="0.6" />
+                    {/* Vertical Panel Divider Line 1 (Dotted & Fading to Top) */}
+                    <line x1="52" y1="90" x2="52" y2="380" stroke="url(#leftGoldBorderFade)" strokeWidth="1.2" strokeDasharray="2 3.5" />
 
-                    {/* Vertical Panel Divider Line 2 (Dotted) */}
-                    <line x1="106" y1="45" x2="106" y2="380" stroke="#DFBA73" strokeWidth="1.2" strokeDasharray="2 3.5" strokeOpacity="0.6" />
+                    {/* Vertical Panel Divider Line 2 (Dotted & Fading to Top) */}
+                    <line x1="106" y1="45" x2="106" y2="380" stroke="url(#leftGoldBorderFade)" strokeWidth="1.2" strokeDasharray="2 3.5" />
                   </svg>
 
                   {/* Left Pill Tag Indicator */}
@@ -597,7 +621,7 @@ export function Hero({ slides = [] }: Props) {
                   </a>
                 </div>
 
-                {/* RIGHT COMPANION MIRROR (Cascading 3-Panel Faceted Shape - Subtle Ambient Wing) */}
+                {/* RIGHT COMPANION MIRROR (Cascading 3-Panel Faceted Shape - Vanishing Faded Top, No Top Border) */}
                 <button
                   type="button"
                   onClick={handleNext}
@@ -610,6 +634,30 @@ export function Hero({ slides = [] }: Props) {
                       <clipPath id="rightMirrorClip">
                         <path d="M 0 380 L 0 30 Q 25 15 54 45 L 108 90 L 160 135 L 160 380 Z" />
                       </clipPath>
+                      {/* Top Fade Mask: Dissolves the top of the mirror into thin air */}
+                      <linearGradient id="rightTopFadeGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+                        <stop offset="25%" stopColor="#ffffff" stopOpacity="0.2" />
+                        <stop offset="50%" stopColor="#ffffff" stopOpacity="0.75" />
+                        <stop offset="75%" stopColor="#ffffff" stopOpacity="1" />
+                        <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
+                      </linearGradient>
+                      <mask id="rightTopMask">
+                        <rect width="160" height="380" fill="url(#rightTopFadeGrad)" />
+                      </mask>
+                      {/* Fading Gold Stroke Gradient (Border fades to 0 at the top) */}
+                      <linearGradient id="rightGoldBorderFade" x1="0" y1="1" x2="0" y2="0">
+                        <stop offset="0%" stopColor="#DFBA73" stopOpacity="0.85" />
+                        <stop offset="50%" stopColor="#DFBA73" stopOpacity="0.65" />
+                        <stop offset="75%" stopColor="#DFBA73" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#DFBA73" stopOpacity="0" />
+                      </linearGradient>
+                      <linearGradient id="rightGoldDashFade" x1="0" y1="1" x2="0" y2="0">
+                        <stop offset="0%" stopColor="#B59250" stopOpacity="0.6" />
+                        <stop offset="50%" stopColor="#B59250" stopOpacity="0.45" />
+                        <stop offset="75%" stopColor="#B59250" stopOpacity="0.1" />
+                        <stop offset="100%" stopColor="#B59250" stopOpacity="0" />
+                      </linearGradient>
                       <linearGradient id="rightMirrorGrad" x1="0" y1="1" x2="0" y2="0">
                         <stop offset="0%" stopColor="#000000" stopOpacity="0.55" />
                         <stop offset="50%" stopColor="#000000" stopOpacity="0.2" />
@@ -621,8 +669,8 @@ export function Hero({ slides = [] }: Props) {
                       </radialGradient>
                     </defs>
 
-                    {/* Clipped Image & Subtle Translucent Overlay */}
-                    <g clipPath="url(#rightMirrorClip)">
+                    {/* Clipped Image & Vignette with Top Fade Mask */}
+                    <g clipPath="url(#rightMirrorClip)" mask="url(#rightTopMask)">
                       <image
                         href={nextSlide.frameImage}
                         width="160"
@@ -634,31 +682,31 @@ export function Hero({ slides = [] }: Props) {
                       <rect width="160" height="380" fill="url(#rightMirrorVignette)" />
                     </g>
 
-                    {/* Outer Gold Border */}
+                    {/* Outer Gold Border - NO BORDER AT THE TOP, Open path fading upwards */}
                     <path
-                      d="M 1.5 379 L 1.5 30 Q 25 15 54 45 L 108 90 L 158.5 135 L 158.5 379 Z"
-                      stroke="#DFBA73"
+                      d="M 1.5 45 L 1.5 379 L 158.5 379 L 158.5 135"
+                      stroke="url(#rightGoldBorderFade)"
                       strokeWidth="2.5"
-                      strokeOpacity="0.85"
+                      strokeLinecap="round"
                       fill="none"
                       className="drop-shadow-[0_0_6px_rgba(223,186,115,0.3)]"
                     />
 
-                    {/* Inner Dashed Gold Stitching */}
+                    {/* Inner Dashed Gold Stitching - NO BORDER AT THE TOP */}
                     <path
-                      d="M 4.5 376 L 4.5 34 Q 27 21 54 50 L 108 94 L 155.5 138 L 155.5 376 Z"
-                      stroke="#B59250"
+                      d="M 4.5 48 L 4.5 376 L 155.5 376 L 155.5 138"
+                      stroke="url(#rightGoldDashFade)"
                       strokeWidth="1"
                       strokeDasharray="3 3"
-                      strokeOpacity="0.6"
+                      strokeLinecap="round"
                       fill="none"
                     />
 
-                    {/* Vertical Panel Divider Line 1 (Dotted) */}
-                    <line x1="54" y1="45" x2="54" y2="380" stroke="#DFBA73" strokeWidth="1.2" strokeDasharray="2 3.5" strokeOpacity="0.6" />
+                    {/* Vertical Panel Divider Line 1 (Dotted & Fading to Top) */}
+                    <line x1="54" y1="45" x2="54" y2="380" stroke="url(#rightGoldBorderFade)" strokeWidth="1.2" strokeDasharray="2 3.5" />
 
-                    {/* Vertical Panel Divider Line 2 (Dotted) */}
-                    <line x1="108" y1="90" x2="108" y2="380" stroke="#DFBA73" strokeWidth="1.2" strokeDasharray="2 3.5" strokeOpacity="0.6" />
+                    {/* Vertical Panel Divider Line 2 (Dotted & Fading to Top) */}
+                    <line x1="108" y1="90" x2="108" y2="380" stroke="url(#rightGoldBorderFade)" strokeWidth="1.2" strokeDasharray="2 3.5" />
                   </svg>
 
                   {/* Right Pill Tag Indicator */}
