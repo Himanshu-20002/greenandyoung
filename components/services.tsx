@@ -54,26 +54,49 @@ export function Services() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [activePillar, setActivePillar] = useState<number | null>(null)
 
-  // 120 FPS Optimization: Pause video decoding when scrolled off-screen
+  // 120 FPS Optimization: Pause video decoding when scrolled off-screen or during fast scrolling
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
+    let isVisible = false
+    let scrollTimeout: NodeJS.Timeout | null = null
+
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            video.play().catch(() => {})
-          } else {
-            video.pause()
-          }
-        })
+      ([entry]) => {
+        isVisible = entry.isIntersecting
+        if (isVisible) {
+          video.play().catch(() => {})
+        } else {
+          video.pause()
+        }
       },
-      { threshold: 0.05 }
+      { threshold: 0.1, rootMargin: '100px 0px' }
     )
 
     observer.observe(video)
-    return () => observer.disconnect()
+
+    // Smooth scroll boost: pause video decoding during active scrolling to free GPU compositor
+    const handleScroll = () => {
+      if (!isVisible) return
+      if (!video.paused) {
+        video.pause()
+      }
+      if (scrollTimeout) clearTimeout(scrollTimeout)
+      scrollTimeout = setTimeout(() => {
+        if (isVisible) {
+          video.play().catch(() => {})
+        }
+      }, 180)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', handleScroll)
+      if (scrollTimeout) clearTimeout(scrollTimeout)
+    }
   }, [])
 
   return (
@@ -113,8 +136,7 @@ export function Services() {
 
         {/* Cinematic Video Showcase & 3D Interior Configurator Banner (Optimized for locked 120 FPS) */}
         <div
-          className="relative rounded-[28px] sm:rounded-[36px] overflow-hidden mb-16 shadow-2xl border border-[#2C3531]/15 min-h-[460px] sm:min-h-[520px] md:min-h-[580px] flex items-center justify-center p-6 sm:p-10 md:p-14 text-center transform-gpu"
-          style={{ willChange: 'transform', contain: 'paint' }}
+          className="relative rounded-[28px] sm:rounded-[36px] overflow-hidden mb-16 shadow-xl border border-[#2C3531]/15 min-h-[460px] sm:min-h-[520px] md:min-h-[580px] flex items-center justify-center p-6 sm:p-10 md:p-14 text-center"
         >
           {/* Background Loop Video with Intelligent Pause */}
           <video
@@ -123,15 +145,16 @@ export function Services() {
             muted
             playsInline
             preload="metadata"
+            disablePictureInPicture
+            disableRemotePlayback
             poster="/videos/hero-bg-poster.jpg"
-            className="absolute inset-0 w-full h-full object-cover pointer-events-none transform-gpu"
-            style={{ transform: 'translateZ(0)' }}
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
           >
             <source src="/videos/hero-bg.mp4" type="video/mp4" />
           </video>
 
           {/* Cinematic Dark & Gold Atmosphere Overlays */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F0D]/95 via-[#0B0F0D]/75 to-[#0B0F0D]/60 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F0D]/60 via-[#0B0F0D]/35 to-[#0B0F0D]/20 pointer-events-none" />
           <div
             className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(197,168,128,0.2)_0%,transparent_70%)] pointer-events-none"
             aria-hidden="true"
@@ -146,7 +169,7 @@ export function Services() {
             </div>
 
             {/* Main Headline */}
-            <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight leading-[1.15] text-balance">
+            <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight leading-[1.15] text-balance drop-shadow-md">
               Design Your Luxury Home, <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-[#C5A880] via-[#F4E6D0] to-[#C5A880] bg-clip-text text-transparent">
                 Space by Space
@@ -154,7 +177,7 @@ export function Services() {
             </h3>
 
             {/* Narrative Subtitle */}
-            <p className="mt-4 sm:mt-5 text-xs sm:text-sm md:text-base text-white/80 max-w-2xl font-sans leading-relaxed text-balance">
+            <p className="mt-4 sm:mt-5 text-xs sm:text-sm md:text-base text-white/95 max-w-2xl font-sans leading-relaxed text-balance drop-shadow">
               Take complete architectural control. Select your room, explore curated German joinery and Italian stone finishes, assemble your custom combinations, and receive a tailored quotation.
             </p>
 
@@ -247,13 +270,16 @@ export function Services() {
               return (
                 <div
                   key={pillar.number}
-                  onClick={() => setActivePillar((prev) => (prev === idx ? null : idx))}
-                  onTouchStart={() => setActivePillar((prev) => (prev === idx ? null : idx))}
+                  onTouchStart={() => setActivePillar(idx)}
+                  onTouchEnd={() => setActivePillar(null)}
+                  onTouchCancel={() => setActivePillar(null)}
+                  onTouchMove={() => setActivePillar(null)}
                   onMouseEnter={() => setActivePillar(idx)}
+                  onMouseLeave={() => setActivePillar(null)}
                   className={`group p-5 rounded-2xl transition-all duration-300 flex flex-col justify-between cursor-pointer select-none touch-manipulation ${
                     isActive
                       ? 'bg-white/[0.08] border border-[#DFBA73]/60 -translate-y-1 shadow-[0_8px_25px_rgba(223,186,115,0.15)]'
-                      : 'bg-white/5 border border-white/10 hover:border-[#DFBA73]/50 hover:-translate-y-1 hover:bg-white/[0.07]'
+                      : 'bg-white/5 border border-white/10 sm:hover:border-[#DFBA73]/50 sm:hover:-translate-y-1 sm:hover:bg-white/[0.07]'
                   }`}
                   style={{ WebkitTapHighlightColor: 'transparent' }}
                 >
@@ -263,7 +289,7 @@ export function Services() {
                         className={`w-8 h-8 rounded-lg border transition-all duration-300 flex items-center justify-center ${
                           isActive
                             ? 'bg-[#DFBA73] text-[#121614] border-[#DFBA73] scale-105 shadow-sm shadow-[#DFBA73]/30'
-                            : 'bg-white/5 border-white/10 text-white/70 group-hover:bg-[#DFBA73] group-hover:text-[#121614] group-hover:border-[#DFBA73] group-hover:scale-105'
+                            : 'bg-white/5 border-white/10 text-white/70 sm:group-hover:bg-[#DFBA73] sm:group-hover:text-[#121614] sm:group-hover:border-[#DFBA73] sm:group-hover:scale-105'
                         }`}
                       >
                         <Icon className="w-4 h-4" />
@@ -272,7 +298,7 @@ export function Services() {
                         className={`text-base font-mono font-bold transition-colors duration-300 ${
                           isActive
                             ? 'text-[#DFBA73]/60'
-                            : 'text-white/20 group-hover:text-[#DFBA73]/40'
+                            : 'text-white/20 sm:group-hover:text-[#DFBA73]/40'
                         }`}
                       >
                         {pillar.number}
@@ -296,7 +322,7 @@ export function Services() {
                       className={`h-full rounded-full bg-[#DFBA73] transition-all duration-500 ease-out ${
                         isActive
                           ? 'w-full shadow-[0_0_16px_rgba(223,186,115,0.85)]'
-                          : 'w-10 group-hover:w-full shadow-[0_0_8px_rgba(223,186,115,0.4)] group-hover:shadow-[0_0_16px_rgba(223,186,115,0.85)]'
+                          : 'w-10 sm:group-hover:w-full shadow-[0_0_8px_rgba(223,186,115,0.4)] sm:group-hover:shadow-[0_0_16px_rgba(223,186,115,0.85)]'
                       }`}
                     />
                   </div>

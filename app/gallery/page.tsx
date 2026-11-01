@@ -9,6 +9,7 @@ import {
   MessageCircle,
   Compass,
   ArrowRight,
+  ArrowUpRight,
   Layers,
   MapPin,
   Clock,
@@ -288,7 +289,7 @@ export default function GalleryArchivePage() {
                     <div className="pt-3 border-t border-[#2C3531]/10 flex items-center justify-between text-xs">
                       <span className="font-mono text-[#8E9F96]">{project.area}</span>
                       <span className="font-semibold text-[#121614] group-hover:text-[#C5A880] flex items-center gap-1 transition-colors">
-                        View Case Study <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        View Case Study <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </span>
                     </div>
                   </div>

@@ -120,13 +120,16 @@ export function EngineeredServices() {
             return (
               <div
                 key={item.id}
-                onClick={() => setActiveCard((prev) => (prev === idx ? null : idx))}
-                onTouchStart={() => setActiveCard((prev) => (prev === idx ? null : idx))}
+                onTouchStart={() => setActiveCard(idx)}
+                onTouchEnd={() => setActiveCard(null)}
+                onTouchCancel={() => setActiveCard(null)}
+                onTouchMove={() => setActiveCard(null)}
                 onMouseEnter={() => setActiveCard(idx)}
+                onMouseLeave={() => setActiveCard(null)}
                 className={`group relative p-4.5 sm:p-5 rounded-xl border transition-all duration-300 flex flex-col justify-between cursor-pointer select-none touch-manipulation active:scale-[0.99] ${
                   isActive
                     ? 'bg-[#18201b] border-[#DFBA73]/60 -translate-y-0.5 shadow-[0_8px_24px_rgba(223,186,115,0.18)]'
-                    : 'bg-[#141916]/90 border-white/8 hover:border-[#DFBA73]/40 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.35)]'
+                    : 'bg-[#141916]/90 border-white/8 sm:hover:border-[#DFBA73]/40 sm:hover:-translate-y-0.5 sm:hover:shadow-[0_8px_24px_rgba(0,0,0,0.35)]'
                 }`}
                 style={{ WebkitTapHighlightColor: 'transparent' }}
               >
@@ -137,14 +140,14 @@ export function EngineeredServices() {
                       className={`w-8 h-8 rounded-lg border flex items-center justify-center transition-all duration-300 ${
                         isActive
                           ? 'bg-[#DFBA73] text-[#121614] border-[#DFBA73] scale-105 shadow-sm shadow-[#DFBA73]/30'
-                          : 'bg-white/5 border-white/10 text-white/70 group-hover:bg-[#DFBA73] group-hover:text-[#121614] group-hover:border-[#DFBA73] group-hover:scale-105'
+                          : 'bg-white/5 border-white/10 text-white/70 sm:group-hover:bg-[#DFBA73] sm:group-hover:text-[#121614] sm:group-hover:border-[#DFBA73] sm:group-hover:scale-105'
                       }`}
                     >
                       <IconComponent className="w-4 h-4" />
                     </div>
                     <span
                       className={`font-mono text-lg font-bold transition-colors duration-300 ${
-                        isActive ? 'text-[#DFBA73]/70' : 'text-white/20 group-hover:text-[#DFBA73]/40'
+                        isActive ? 'text-[#DFBA73]/70' : 'text-white/20 sm:group-hover:text-[#DFBA73]/40'
                       }`}
                     >
                       {item.number}
@@ -174,7 +177,7 @@ export function EngineeredServices() {
                     className={`h-full rounded-full bg-[#DFBA73] transition-all duration-500 ease-out ${
                       isActive
                         ? 'w-full shadow-[0_0_16px_rgba(223,186,115,0.85)]'
-                        : 'w-12 group-hover:w-full shadow-[0_0_8px_rgba(223,186,115,0.4)] group-hover:shadow-[0_0_16px_rgba(223,186,115,0.85)]'
+                        : 'w-12 sm:group-hover:w-full shadow-[0_0_8px_rgba(223,186,115,0.4)] sm:group-hover:shadow-[0_0_16px_rgba(223,186,115,0.85)]'
                     }`}
                   />
                 </div>

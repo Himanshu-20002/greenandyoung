@@ -65,7 +65,7 @@ export function StatsStrip() {
           return (
             <div
               key={s.id}
-              className="group relative flex flex-col items-center text-center rounded-2xl px-5 py-8 sm:py-9 bg-gradient-to-b from-[#0E281A] via-[#0A1F14] to-[#07170F] border border-[#DFBA73]/30 shadow-[0_12px_32px_rgba(0,0,0,0.3)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#DFBA73]/50 overflow-hidden"
+              className="group relative flex flex-col items-center text-center rounded-2xl px-5 py-8 sm:py-9 bg-gradient-to-b from-[#0E281A] via-[#0A1F14] to-[#07170F] border border-[#DFBA73]/30 shadow-[0_12px_32px_rgba(0,0,0,0.3)] backdrop-blur-md transition-all duration-300 sm:hover:-translate-y-1 sm:hover:border-[#DFBA73]/50 overflow-hidden"
             >
               {/* Rough surface texture - Layer 1: High-frequency stone/mineral grain */}
               <div

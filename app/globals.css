@@ -209,8 +209,7 @@
 /* Off-screen section rendering virtualization for instantaneous scroll responsiveness */
 .section-render-optimize {
   content-visibility: auto;
-  contain-intrinsic-size: 1px 700px;
-  contain: layout paint style;
+  contain-intrinsic-size: auto 900px;
 }
 
 

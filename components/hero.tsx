@@ -353,9 +353,11 @@ export function Hero({ slides = [] }: Props) {
                 </span>
                 <h1 className="text-3xl sm:text-4xl lg:text-[38px] xl:text-[44px] font-serif font-extrabold text-white leading-[1.15] tracking-tight drop-shadow-md">
                   Design Your Home<br />
-                  With The <span className="bg-gradient-to-r from-[#DFBA73] via-[#FFEAA7] to-[#B59250] bg-clip-text text-transparent font-serif italic font-medium drop-shadow-[0_0_12px_rgba(223,186,115,0.4)]">Experts.</span><br />
-                  3D Design &amp; Measurement.
+                  With The <span className="bg-gradient-to-r from-[#DFBA73] via-[#FFEAA7] to-[#B59250] bg-clip-text text-transparent font-serif italic font-medium drop-shadow-[0_0_12px_rgba(223,186,115,0.4)]">Experts.</span>
                 </h1>
+                <p className="text-base sm:text-lg lg:text-xl font-medium text-[#E8D4B8] tracking-wide mt-1">
+                  3D Design &amp; Measurement.
+                </p>
               </div>
 
               {/* Subtitle */}

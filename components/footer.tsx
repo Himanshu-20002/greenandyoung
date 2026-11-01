@@ -223,11 +223,54 @@ export function Footer() {
           </div>
         </div>
 
-        {/* 🌟 GIGANTIC MONUMENTAL TYPOGRAPHY BANNER (Properly Scaled to Fill Width Without Truncating) */}
+        {/* 🌟 GIGANTIC MONUMENTAL TYPOGRAPHY BANNER WITH LUXURY MASKED REVEAL */}
         <div className="pt-6 sm:pt-8 md:pt-10 pb-3 sm:pb-4 overflow-hidden border-b border-[#14281E]">
-          <h1 className="text-[7.6vw] sm:text-[7.4vw] md:text-[7.2vw] font-black text-white tracking-tighter leading-none select-none whitespace-nowrap opacity-90 hover:opacity-100 transition-opacity">
-            Crafting since 2019
-          </h1>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.08,
+                  delayChildren: 0.04,
+                },
+              },
+            }}
+            className="flex items-center gap-x-[1.4vw] select-none whitespace-nowrap"
+          >
+            {[
+              { text: "Let's", highlight: false },
+              { text: "Build", highlight: false },
+              { text: "Your", highlight: false },
+              { text: "Masterpiece", highlight: true },
+            ].map((item, i) => (
+              <span key={i} className="inline-block overflow-hidden py-1">
+                <motion.span
+                  variants={{
+                    hidden: { y: '120%', opacity: 0, rotate: 2 },
+                    visible: {
+                      y: '0%',
+                      opacity: 1,
+                      rotate: 0,
+                      transition: {
+                        duration: 0.85,
+                        ease: [0.16, 1, 0.3, 1],
+                      },
+                    },
+                  }}
+                  className={`inline-block text-[5.8vw] sm:text-[5.4vw] md:text-[5.1vw] font-black tracking-tighter leading-none ${
+                    item.highlight
+                      ? 'bg-gradient-to-r from-white via-[#FFEAA7] to-[#DFBA73] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(223,186,115,0.3)]'
+                      : 'text-white'
+                  }`}
+                >
+                  {item.text}
+                </motion.span>
+              </span>
+            ))}
+          </motion.div>
         </div>
 
         {/* Ultra-Clean Bottom Credits Bar */}

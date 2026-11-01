@@ -149,11 +149,9 @@ export default async function Page() {
           <StatsStrip />
         </ErrorBoundary>
       </div>
-      <div className="section-render-optimize">
-        <ErrorBoundary>
-          <Services />
-        </ErrorBoundary>
-      </div>
+      <ErrorBoundary>
+        <Services />
+      </ErrorBoundary>
 
       <div className="section-render-optimize">
         <ErrorBoundary>

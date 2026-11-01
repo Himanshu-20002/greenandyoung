@@ -157,8 +157,9 @@ export function Gallery({ initialImages = [] }: Props) {
                     <span className="text-white/60 text-[9px] uppercase tracking-wider">
                       Complete Setup
                     </span>
-                    <span className="text-[#DFBA73] font-medium group-hover:translate-x-0.5 transition-transform">
-                      View Details →
+                    <span className="text-[#DFBA73] font-medium inline-flex items-center gap-1 group-hover:text-[#FFEAA7] transition-colors">
+                      <span>View Details</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.2] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>
                   </div>
                 </div>
