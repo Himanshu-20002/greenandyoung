@@ -201,7 +201,7 @@ export function BottomSheetForm({
               willChange: 'transform',
               transform: 'translateZ(0)',
             }}
-            className="relative w-full max-w-xl bg-[#090F0C] border-t sm:border border-[#C5A880]/30 sm:rounded-3xl rounded-t-[24px] shadow-2xl max-h-[78vh] max-h-[78dvh] sm:max-h-[82dvh] flex flex-col overflow-hidden text-neutral-200 z-10 transform-gpu"
+            className="relative w-full max-w-xl bg-[#090F0C] border-t sm:border border-[#C5A880]/30 sm:rounded-3xl rounded-t-[24px] shadow-2xl max-h-[92vh] sm:max-h-[88vh] h-auto flex flex-col overflow-hidden text-neutral-200 z-10 transform-gpu"
           >
             {/* Ambient Radial Luxury Glow (GPU gradient instead of CPU blur filter) */}
             <div
@@ -212,173 +212,164 @@ export function BottomSheetForm({
             />
 
             {/* Mobile Drag Handle Pill */}
-            <div className="pt-3 pb-1 flex justify-center items-center sm:hidden shrink-0">
-              <div className="w-12 h-1.5 rounded-full bg-white/20" />
+            <div className="pt-2 pb-0.5 flex justify-center items-center sm:hidden shrink-0">
+              <div className="w-10 h-1 rounded-full bg-white/20" />
             </div>
 
-            {/* Header Bar */}
-            <div className="px-5 sm:px-7 pt-3 pb-4 border-b border-white/10 flex items-start justify-between gap-4 shrink-0 relative z-10">
-              <div>
-                {/* Official Desk Badge */}
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-mono font-semibold tracking-wider uppercase mb-1.5">
-                  <ShieldCheck className="w-3 h-3" />
-                  <span>Design Desk</span>
+            {/* Header Bar - Compact & Streamlined */}
+            <div className="px-4 sm:px-6 pt-2 pb-2.5 border-b border-white/10 flex items-center justify-between gap-3 shrink-0 relative z-10">
+              <div className="flex items-center gap-2.5">
+                <div className="w-7 h-7 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                  <ShieldCheck className="w-3.5 h-3.5" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight uppercase font-serif">
-                  Plan Your Dream Home
-                </h3>
-                <p className="text-xs text-neutral-400">
-                  layout measurement &amp; complete home quotation
-                </p>
+                <div>
+                  <h3 className="text-sm sm:text-base font-bold text-white tracking-tight uppercase font-serif leading-none">
+                    Plan Your Dream Home
+                  </h3>
+                  <p className="text-[10px] text-neutral-400 mt-0.5 leading-none">
+                    3D Measurement &amp; Complete Home Quotation
+                  </p>
+                </div>
               </div>
 
               {/* Close Button */}
               <button
                 onClick={handleClose}
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 text-neutral-400 hover:text-white flex items-center justify-center transition-colors border border-white/10 shrink-0"
+                className="w-7 h-7 rounded-full bg-white/5 hover:bg-white/15 text-neutral-400 hover:text-white flex items-center justify-center transition-colors border border-white/10 shrink-0"
                 aria-label="Close modal"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3.5 h-3.5" />
               </button>
             </div>
 
-            {/* Scrollable Content Body */}
-            <div className="overflow-y-auto px-5 sm:px-6 py-4 space-y-4 sm:space-y-5 flex-grow custom-scrollbar overscroll-contain">
+            {/* Non-Scrollable Content Body - Fits all content directly */}
+            <div className="px-4 sm:px-6 py-3 space-y-2.5 flex-grow overflow-hidden">
               {submitted ? (
                 /* Success Confirmation State */
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="py-10 text-center space-y-5"
+                  className="py-8 text-center space-y-4"
                 >
-                  <div className="w-16 h-16 mx-auto rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.3)]">
-                    <CheckCircle2 className="w-8 h-8" />
+                  <div className="w-12 h-12 mx-auto rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                    <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <div className="space-y-2">
-                    <h4 className="text-xl sm:text-2xl font-serif font-bold text-white">
+                  <div className="space-y-1">
+                    <h4 className="text-lg font-serif font-bold text-white">
                       Request Confirmed
                     </h4>
-                    <p className="text-xs sm:text-sm text-neutral-400 max-w-md mx-auto leading-relaxed">
+                    <p className="text-xs text-neutral-400 max-w-md mx-auto leading-relaxed">
                       Thank you, <span className="text-white font-medium">{fullName}</span>. Our Senior Design Architect will review your specifications for <span className="text-[#C5A880]">{selectedType}</span> and contact you within 2 business hours.
                     </p>
                   </div>
 
                   {/* Immediate WhatsApp Action */}
-                  <div className="pt-2 max-w-sm mx-auto space-y-3">
+                  <div className="pt-2 max-w-sm mx-auto space-y-2">
                     <a
                       href={`https://wa.me/+919971813161?text=Hi%20Green%20%26%20Young%2C%20I%20just%20submitted%20a%20request%20for%20my%20${encodeURIComponent(selectedType)}%20at%20${encodeURIComponent(propertyName || selectedLocation)}.%20Looking%20forward%20to%20the%203D%20blueprint!`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-black font-bold text-xs uppercase tracking-wider shadow-lg transition-all"
+                      className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-black font-bold text-xs uppercase tracking-wider shadow-lg transition-all"
                     >
-                      <MessageCircle className="w-4 h-4" />
+                      <MessageCircle className="w-3.5 h-3.5" />
                       Instant Chat on WhatsApp
                     </a>
                     <button
                       onClick={resetForm}
-                      className="w-full py-2.5 text-xs text-neutral-400 hover:text-white transition-colors"
+                      className="w-full py-2 text-xs text-neutral-400 hover:text-white transition-colors"
                     >
                       Close Window
                     </button>
                   </div>
                 </motion.div>
               ) : (
-                /* The Luxury Multi-Step Form */
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* 3 Trust Highlight Cards */}
-                  <div className="grid grid-cols-3 gap-2.5 sm:gap-3 p-3 rounded-2xl bg-white/[0.03] border border-white/5">
-                    <div className="text-center space-y-0.5">
-                      <div className="flex items-center justify-center text-[#C5A880]">
-                        <Zap className="w-4 h-4" />
-                      </div>
-                      <span className="block text-[11px] font-bold text-white"> &lt; 24h Turnaround</span>
-                      <span className="block text-[9px] text-neutral-400 uppercase tracking-wider">Guaranteed SLA</span>
+                /* Compact Form - All fields visible without scrolling */
+                <form onSubmit={handleSubmit} className="space-y-2.5">
+                  {/* 3 Trust Highlight Cards - Sleek Micro Strip */}
+                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white/[0.03] border border-white/5 text-[9px] sm:text-[10px] text-neutral-400">
+                    <div className="flex items-center gap-1">
+                      <Zap className="w-3 h-3 text-[#C5A880]" />
+                      <span className="font-semibold text-white">&lt; 24h Turnaround</span>
                     </div>
-                    <div className="text-center space-y-0.5 border-x border-white/10">
-                      <div className="flex items-center justify-center text-emerald-400">
-                        <Lock className="w-4 h-4" />
-                      </div>
-                      <span className="block text-[11px] font-bold text-white">100% Confidential</span>
-                      <span className="block text-[9px] text-neutral-400 uppercase tracking-wider">NDA Protected</span>
+                    <span className="text-white/20">•</span>
+                    <div className="flex items-center gap-1">
+                      <Lock className="w-3 h-3 text-emerald-400" />
+                      <span className="font-semibold text-white">100% Confidential</span>
                     </div>
-                    <div className="text-center space-y-0.5">
-                      <div className="flex items-center justify-center text-[#C5A880]">
-                        <Compass className="w-4 h-4" />
-                      </div>
-                      <span className="block text-[11px] font-bold text-white">Senior Lead</span>
-                      <span className="block text-[9px] text-neutral-400 uppercase tracking-wider">Direct Access</span>
+                    <span className="text-white/20">•</span>
+                    <div className="flex items-center gap-1">
+                      <Compass className="w-3 h-3 text-[#C5A880]" />
+                      <span className="font-semibold text-white">Senior Lead Direct</span>
                     </div>
                   </div>
 
-                  {/* Section 1: Homeowner Contact Details */}
-                  <div className="space-y-3">
-                    <span className="text-[11px] font-mono font-bold tracking-wider text-[#C5A880] uppercase block">
-                      ● 1. Homeowner Contact Details
+                  {/* Section 1: Homeowner Contact Details (Compact 2x2 Grid) */}
+                  <div>
+                    <span className="text-[9px] font-mono font-bold tracking-wider text-[#C5A880] uppercase block mb-1">
+                      1. HOMEOWNER CONTACT DETAILS
                     </span>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-2">
                       {/* Full Name */}
                       <div className="relative">
-                        <User className="w-4 h-4 absolute left-3.5 top-3.5 text-neutral-500" />
+                        <User className="w-3 h-3 absolute left-2.5 top-2.5 text-neutral-500" />
                         <input
                           type="text"
                           required
                           value={fullName}
                           onChange={(e) => setFullName(e.target.value)}
                           placeholder="Your Full Name *"
-                          className="w-full bg-[#111A15] border border-white/10 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
+                          className="w-full bg-[#111A15] border border-white/10 rounded-lg pl-7 pr-2 py-1.5 text-[11px] text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
                         />
                       </div>
 
                       {/* Phone / WhatsApp */}
                       <div className="relative">
-                        <Phone className="w-4 h-4 absolute left-3.5 top-3.5 text-neutral-500" />
+                        <Phone className="w-3 h-3 absolute left-2.5 top-2.5 text-neutral-500" />
                         <input
                           type="tel"
                           required
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          placeholder="Phone / WhatsApp Number *"
-                          className="w-full bg-[#111A15] border border-white/10 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
+                          placeholder="Phone / WhatsApp *"
+                          className="w-full bg-[#111A15] border border-white/10 rounded-lg pl-7 pr-2 py-1.5 text-[11px] text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
                         />
                       </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {/* Email */}
                       <div className="relative">
-                        <Mail className="w-4 h-4 absolute left-3.5 top-3.5 text-neutral-500" />
+                        <Mail className="w-3 h-3 absolute left-2.5 top-2.5 text-neutral-500" />
                         <input
                           type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Email Address (Optional)"
-                          className="w-full bg-[#111A15] border border-white/10 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
+                          placeholder="Email Address"
+                          className="w-full bg-[#111A15] border border-white/10 rounded-lg pl-7 pr-2 py-1.5 text-[11px] text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
                         />
                       </div>
 
                       {/* Society / Property Name */}
                       <div className="relative">
-                        <Building2 className="w-4 h-4 absolute left-3.5 top-3.5 text-neutral-500" />
+                        <Building2 className="w-3 h-3 absolute left-2.5 top-2.5 text-neutral-500" />
                         <input
                           type="text"
                           value={propertyName}
                           onChange={(e) => setPropertyName(e.target.value)}
-                          placeholder="Society / Property (e.g. Godrej Woods)"
-                          className="w-full bg-[#111A15] border border-white/10 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
+                          placeholder="Society / Property"
+                          className="w-full bg-[#111A15] border border-white/10 rounded-lg pl-7 pr-2 py-1.5 text-[11px] text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
                         />
                       </div>
                     </div>
                   </div>
 
                   {/* Section 2: Property Configuration & Scope */}
-                  <div className="space-y-3">
-                    <span className="text-[11px] font-mono font-bold tracking-wider text-[#C5A880] uppercase block">
-                      ● 2. Property Configuration &amp; Scope
+                  <div>
+                    <span className="text-[9px] font-mono font-bold tracking-wider text-[#C5A880] uppercase block mb-1">
+                      2. PROPERTY CONFIGURATION &amp; LOCATION
                     </span>
 
-                    {/* Chips Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {/* Compact Chips Grid */}
+                    <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5 mb-1.5">
                       {PROPERTY_TYPES.map((type) => {
                         const Icon = type.icon
                         const isSelected = selectedType === type.label
@@ -387,25 +378,26 @@ export function BottomSheetForm({
                             type="button"
                             key={type.id}
                             onClick={() => setSelectedType(type.label)}
-                            className={`flex items-center gap-2 p-2.5 rounded-xl text-left border text-xs font-medium transition-all ${isSelected
-                              ? 'bg-gradient-to-r from-[#C5A880]/20 to-[#A38356]/15 border-[#C5A880] text-white shadow-[0_0_15px_rgba(197,168,128,0.2)]'
-                              : 'bg-[#111A15] border-white/10 text-neutral-400 hover:text-white hover:border-white/20'
-                              }`}
+                            className={`flex items-center justify-center gap-1 py-1.5 px-1.5 rounded-lg text-center border text-[10px] font-medium transition-all ${
+                              isSelected
+                                ? 'bg-gradient-to-r from-[#C5A880]/25 to-[#A38356]/20 border-[#C5A880] text-white shadow-xs'
+                                : 'bg-[#111A15] border-white/10 text-neutral-400 hover:text-white hover:border-white/20'
+                            }`}
                           >
-                            <Icon className={`w-3.5 h-3.5 shrink-0 ${isSelected ? 'text-[#C5A880]' : 'text-neutral-500'}`} />
-                            <span className="truncate">{type.label}</span>
+                            <Icon className={`w-3 h-3 shrink-0 ${isSelected ? 'text-[#C5A880]' : 'text-neutral-500'}`} />
+                            <span className="truncate">{type.label.replace(' Complete Setup', '')}</span>
                           </button>
                         )
                       })}
                     </div>
 
                     {/* Location Selector */}
-                    <div className="relative pt-1">
-                      <MapPin className="w-4 h-4 absolute left-3.5 top-4 text-neutral-500" />
+                    <div className="relative">
+                      <MapPin className="w-3 h-3 absolute left-2.5 top-2.5 text-neutral-500" />
                       <select
                         value={selectedLocation}
                         onChange={(e) => setSelectedLocation(e.target.value)}
-                        className="w-full bg-[#111A15] border border-white/10 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#C5A880] transition-all appearance-none cursor-pointer"
+                        className="w-full bg-[#111A15] border border-white/10 rounded-lg pl-7 pr-3 py-1.5 text-[11px] text-white focus:outline-none focus:border-[#C5A880] transition-all appearance-none cursor-pointer"
                       >
                         {LOCATIONS.map((loc) => (
                           <option key={loc} value={loc} className="bg-[#090F0C] text-white">
@@ -416,61 +408,61 @@ export function BottomSheetForm({
                     </div>
                   </div>
 
-                  {/* Section 3: Aspirations & Timeline */}
-                  <div className="space-y-2">
-                    <span className="text-[11px] font-mono font-bold tracking-wider text-[#C5A880] uppercase block">
-                      ● 3. Design Aspirations &amp; Timeline (Optional)
+                  {/* Section 3: Aspirations & Timeline (Compact Single Line) */}
+                  <div>
+                    <span className="text-[9px] font-mono font-bold tracking-wider text-[#C5A880] uppercase block mb-1">
+                      3. DESIGN ASPIRATIONS &amp; TIMELINE (OPTIONAL)
                     </span>
-                    <textarea
-                      rows={2}
+                    <input
+                      type="text"
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
-                      placeholder="e.g. Possession in 60 days, contemporary minimalist aesthetic with German Blum kitchen and Italian marble..."
-                      className="w-full bg-[#111A15] border border-white/10 rounded-xl p-3 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all resize-none"
+                      placeholder="e.g. Possession in 60 days, minimalist German Blum kitchen..."
+                      className="w-full bg-[#111A15] border border-white/10 rounded-lg px-2.5 py-1.5 text-[11px] text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
                     />
                   </div>
 
                   {errorMessage && (
-                    <div className="p-2.5 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs">
+                    <div className="p-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-[10px]">
                       {errorMessage}
                     </div>
                   )}
 
-                  {/* Submit CTA Button */}
-                  <div className="space-y-2 pt-1">
+                  {/* Submit CTA Button - Compact & Bold */}
+                  <div className="pt-0.5 space-y-1">
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#DFBA73] via-[#FFEAA7] to-[#B59250] hover:from-[#F0D598] hover:to-[#C5A880] text-black font-extrabold text-xs uppercase tracking-widest shadow-[0_4px_25px_rgba(223,186,115,0.3)] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                      className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#DFBA73] via-[#FFEAA7] to-[#B59250] hover:from-[#F0D598] hover:to-[#C5A880] text-black font-extrabold text-xs uppercase tracking-wider shadow-[0_2px_15px_rgba(223,186,115,0.25)] transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
                     >
                       {loading ? (
                         <span>Processing Request...</span>
                       ) : (
                         <>
                           <Send className="w-3.5 h-3.5" />
-                          <span>Request  Estimate</span>
+                          <span>Request Estimate</span>
                         </>
                       )}
                     </button>
-                    <p className="text-[10px] text-center text-neutral-500 flex items-center justify-center gap-1.5">
+                    <p className="text-[9px] text-center text-neutral-500 flex items-center justify-center gap-1">
                       <Lock className="w-2.5 h-2.5" />
-                      <span>Strict Non-Disclosure Protected • 3D Measurement &amp; Layout</span>
+                      <span>Strict NDA Protected • Free 3D Measurement &amp; Blueprint</span>
                     </p>
                   </div>
                 </form>
               )}
             </div>
 
-            {/* Footer Quick Bar */}
-            <div className="px-5 sm:px-7 py-3 bg-[#060B08] border-t border-white/5 flex items-center justify-between text-xs text-neutral-400 shrink-0">
-              <span className="text-[11px]">Need immediate consultation?</span>
+            {/* Footer Quick Bar - Compact */}
+            <div className="px-4 sm:px-6 py-2 bg-[#060B08] border-t border-white/5 flex items-center justify-between text-[11px] text-neutral-400 shrink-0">
+              <span className="text-[10px]">Need immediate consultation?</span>
               <a
                 href={siteConfig.whatsapp.directLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-medium text-[11px] transition-colors"
+                className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-medium text-[10px] transition-colors"
               >
-                <MessageCircle className="w-3.5 h-3.5" />
+                <MessageCircle className="w-3 h-3" />
                 <span>Chat on WhatsApp</span>
               </a>
             </div>
@@ -487,4 +479,3 @@ export function openEstimateSheet() {
     window.dispatchEvent(new CustomEvent('open-estimate-sheet'))
   }
 }
-
