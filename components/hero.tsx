@@ -194,6 +194,10 @@ export function Hero({ slides = [] }: Props) {
 
   const filmStripRef = useRef<HTMLDivElement>(null)
   const activeSlide = activeSlides[currentIndex]
+  const prevIndex = currentIndex === 0 ? activeSlides.length - 1 : currentIndex - 1
+  const nextIndex = currentIndex === activeSlides.length - 1 ? 0 : currentIndex + 1
+  const prevSlide = activeSlides[prevIndex]
+  const nextSlide = activeSlides[nextIndex]
   const trackedSlidesRef = useRef<Set<string>>(new Set())
 
   // Impression & A/B Shuffling on Load
@@ -473,55 +477,120 @@ export function Hero({ slides = [] }: Props) {
                 </AnimatePresence>
               </div>
 
-              {/* Mirror Frame Wrapper */}
-              <div className="relative w-[300px] h-[380px] sm:w-[340px] sm:h-[430px] z-10">
-                {/* Traditional Indian Palace Jharokha Arch Crown */}
-                <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-24 h-10 z-20 text-[#DFBA73] drop-shadow-[0_4px_10px_rgba(223,186,115,0.6)] pointer-events-none">
-                  <svg viewBox="0 0 100 40" fill="currentColor" className="w-full h-full">
-                    <circle cx="50" cy="2" r="3" fill="#FFFFFF" className="animate-pulse" />
-                  </svg>
-                </div>
-
-                {/* Top Left Gold Leaf Scroll Flourish */}
-                <div className="absolute top-2 left-6 w-10 h-10 sm:w-12 sm:h-12 text-[#DFBA73]/95 z-20 pointer-events-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.35)]">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M2 22 C6 18, 12 18, 14 12 C14 8, 10 10, 8 12 C6 14, 8 8, 12 6 C16 4, 20 2, 22 2" strokeLinecap="round" />
-                  </svg>
-                </div>
-
-                {/* Top Right Gold Leaf Scroll Flourish */}
-                <div className="absolute top-2 right-6 w-10 h-10 sm:w-12 sm:h-12 text-[#DFBA73]/95 z-20 pointer-events-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.35)] scale-x-[-1]">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M2 22 C6 18, 12 18, 14 12 C14 8, 10 10, 8 12 C6 14, 8 8, 12 6 C16 4, 20 2, 22 2" strokeLinecap="round" />
-                  </svg>
-                </div>
-
-                {/* Indian Golden Premium Mirror Outer Ring */}
-                <div className="absolute inset-[-10px] sm:inset-[-12px] rounded-t-full rounded-b-[2.5rem] border-[4px] border-[#DFBA73] pointer-events-none z-10 shadow-[0_20px_45px_rgba(0,0,0,0.45),0_0_25px_rgba(223,186,115,0.4)]">
-                  <div className="absolute inset-[3px] rounded-t-full rounded-b-[2.2rem] border-[1.5px] border-dashed border-[#B59250]" />
-                  <div className="absolute inset-[-6px] rounded-t-full rounded-b-[2.7rem] border border-[#FFEAA7]/30" />
-                </div>
-
-                {/* Model Image Frame - Linked to the package / category detail */}
-                <a
-                  href={linkedHref}
-                  onClick={handleCTAClick}
-                  className="relative w-full h-full rounded-t-full rounded-b-3xl overflow-hidden border border-accent/30 shadow-inner bg-black/40 group block cursor-pointer"
+              {/* Royal Triptych Mirror Ensemble */}
+              <div className="relative flex items-center justify-center">
+                {/* LEFT COMPANION MIRROR (Previous Slide Preview) */}
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  className="absolute -left-10 sm:-left-24 md:-left-32 lg:-left-36 xl:-left-44 top-1/2 -translate-y-1/2 w-[85px] h-[280px] sm:w-[130px] sm:h-[350px] lg:w-[155px] lg:h-[380px] z-10 rounded-t-full rounded-b-2xl overflow-hidden border-[2.5px] border-[#DFBA73]/65 bg-black/70 shadow-[0_15px_35px_rgba(0,0,0,0.6),0_0_20px_rgba(223,186,115,0.2)] opacity-50 sm:opacity-60 hover:opacity-100 hover:scale-[1.02] transition-all duration-500 cursor-pointer group/left"
+                  style={{ transform: 'perspective(1000px) rotateY(-8deg)' }}
+                  aria-label="Previous interior slide"
                 >
+                  {/* Inner Dashed Gold Stitching */}
+                  <div className="absolute inset-[2.5px] rounded-t-full rounded-b-xl border-[1px] border-dashed border-[#B59250]/45 pointer-events-none z-10" />
+
+                  {/* Previous Room Image */}
                   <Image
-                    src={activeSlide.frameImage}
-                    alt={activeSlide.imageAlt || `${siteConfig.name} Interior Showcase`}
+                    src={prevSlide.frameImage}
+                    alt={prevSlide.imageAlt || 'Previous Room Showcase'}
                     fill
-                    priority
-                    sizes="(max-width: 640px) 300px, 340px"
-                    className="object-cover object-center scale-[1.03] group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 640px) 90px, 160px"
+                    className="object-cover object-center scale-105 group-hover/left:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-                </a>
+
+                  {/* Luxury Glass Tint & Vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20 group-hover/left:from-black/50 transition-colors duration-500" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.65)_100%)] pointer-events-none" />
+
+                  {/* Left Pill Tag Indicator */}
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-black/85 border border-[#DFBA73]/40 text-[8px] sm:text-[9px] font-mono text-[#DFBA73] tracking-wider uppercase whitespace-nowrap opacity-0 group-hover/left:opacity-100 transition-opacity z-20 flex items-center gap-1 shadow-md">
+                    <ChevronLeft className="w-2.5 h-2.5" />
+                    <span>Prev</span>
+                  </div>
+                </button>
+
+                {/* Main Mirror Frame Wrapper - Dimensions & Styling 100% Locked */}
+                <div className="relative w-[300px] h-[380px] sm:w-[340px] sm:h-[430px] z-20 shrink-0">
+                  {/* Traditional Indian Palace Jharokha Arch Crown */}
+                  <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-24 h-10 z-20 text-[#DFBA73] drop-shadow-[0_4px_10px_rgba(223,186,115,0.6)] pointer-events-none">
+                    <svg viewBox="0 0 100 40" fill="currentColor" className="w-full h-full">
+                      <circle cx="50" cy="2" r="3" fill="#FFFFFF" className="animate-pulse" />
+                    </svg>
+                  </div>
+
+                  {/* Top Left Gold Leaf Scroll Flourish */}
+                  <div className="absolute top-2 left-6 w-10 h-10 sm:w-12 sm:h-12 text-[#DFBA73]/95 z-20 pointer-events-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.35)]">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M2 22 C6 18, 12 18, 14 12 C14 8, 10 10, 8 12 C6 14, 8 8, 12 6 C16 4, 20 2, 22 2" strokeLinecap="round" />
+                    </svg>
+                  </div>
+
+                  {/* Top Right Gold Leaf Scroll Flourish */}
+                  <div className="absolute top-2 right-6 w-10 h-10 sm:w-12 sm:h-12 text-[#DFBA73]/95 z-20 pointer-events-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.35)] scale-x-[-1]">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M2 22 C6 18, 12 18, 14 12 C14 8, 10 10, 8 12 C6 14, 8 8, 12 6 C16 4, 20 2, 22 2" strokeLinecap="round" />
+                    </svg>
+                  </div>
+
+                  {/* Indian Golden Premium Mirror Outer Ring */}
+                  <div className="absolute inset-[-10px] sm:inset-[-12px] rounded-t-full rounded-b-[2.5rem] border-[4px] border-[#DFBA73] pointer-events-none z-10 shadow-[0_20px_45px_rgba(0,0,0,0.45),0_0_25px_rgba(223,186,115,0.4)]">
+                    <div className="absolute inset-[3px] rounded-t-full rounded-b-[2.2rem] border-[1.5px] border-dashed border-[#B59250]" />
+                    <div className="absolute inset-[-6px] rounded-t-full rounded-b-[2.7rem] border border-[#FFEAA7]/30" />
+                  </div>
+
+                  {/* Model Image Frame - Linked to the package / category detail */}
+                  <a
+                    href={linkedHref}
+                    onClick={handleCTAClick}
+                    className="relative w-full h-full rounded-t-full rounded-b-3xl overflow-hidden border border-accent/30 shadow-inner bg-black/40 group block cursor-pointer"
+                  >
+                    <Image
+                      src={activeSlide.frameImage}
+                      alt={activeSlide.imageAlt || `${siteConfig.name} Interior Showcase`}
+                      fill
+                      priority
+                      sizes="(max-width: 640px) 300px, 340px"
+                      className="object-cover object-center scale-[1.03] group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                  </a>
+                </div>
+
+                {/* RIGHT COMPANION MIRROR (Next Slide Preview) */}
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="absolute -right-10 sm:-right-24 md:-right-32 lg:-right-36 xl:-right-44 top-1/2 -translate-y-1/2 w-[85px] h-[280px] sm:w-[130px] sm:h-[350px] lg:w-[155px] lg:h-[380px] z-10 rounded-t-full rounded-b-2xl overflow-hidden border-[2.5px] border-[#DFBA73]/65 bg-black/70 shadow-[0_15px_35px_rgba(0,0,0,0.6),0_0_20px_rgba(223,186,115,0.2)] opacity-50 sm:opacity-60 hover:opacity-100 hover:scale-[1.02] transition-all duration-500 cursor-pointer group/right"
+                  style={{ transform: 'perspective(1000px) rotateY(8deg)' }}
+                  aria-label="Next interior slide"
+                >
+                  {/* Inner Dashed Gold Stitching */}
+                  <div className="absolute inset-[2.5px] rounded-t-full rounded-b-xl border-[1px] border-dashed border-[#B59250]/45 pointer-events-none z-10" />
+
+                  {/* Next Room Image */}
+                  <Image
+                    src={nextSlide.frameImage}
+                    alt={nextSlide.imageAlt || 'Next Room Showcase'}
+                    fill
+                    sizes="(max-width: 640px) 90px, 160px"
+                    className="object-cover object-center scale-105 group-hover/right:scale-110 transition-transform duration-700"
+                  />
+
+                  {/* Luxury Glass Tint & Vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20 group-hover/right:from-black/50 transition-colors duration-500" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.65)_100%)] pointer-events-none" />
+
+                  {/* Right Pill Tag Indicator */}
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-black/85 border border-[#DFBA73]/40 text-[8px] sm:text-[9px] font-mono text-[#DFBA73] tracking-wider uppercase whitespace-nowrap opacity-0 group-hover/right:opacity-100 transition-opacity z-20 flex items-center gap-1 shadow-md">
+                    <span>Next</span>
+                    <ChevronRight className="w-2.5 h-2.5" />
+                  </div>
+                </button>
               </div>
 
               {/* Mini Floating Offer Badge on Right (Desktop Only) */}
-              <div className="hidden xl:flex absolute -right-10 top-1/6 bg-black/85 border border-accent/30 rounded-2xl p-4 shadow-2xl backdrop-blur-md flex-col items-center gap-1.5 w-48 text-center z-10">
+              <div className="hidden xl:flex absolute -right-6 top-1/6 bg-black/90 border border-accent/30 rounded-2xl p-4 shadow-2xl backdrop-blur-md flex-col items-center gap-1.5 w-48 text-center z-30">
                 <span className="text-[8px] font-extrabold uppercase tracking-widest text-accent">{activeSlide.badgeLabel}</span>
                 <span className="font-serif text-base font-bold text-white leading-tight">{activeSlide.badgeText}</span>
                 <span className="text-[8px] uppercase tracking-wider text-white/70 font-semibold leading-normal">Exclusive Experience</span>
