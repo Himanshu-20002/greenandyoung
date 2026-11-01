@@ -69,6 +69,10 @@ const CAPABILITIES: CapabilityItem[] = [
   },
 ]
 
+const isHoverDevice = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(hover: hover) and (pointer: fine)').matches
+
 export function EngineeredServices() {
   const [activeCard, setActiveCard] = useState<number | null>(null)
   return (
@@ -113,7 +117,7 @@ export function EngineeredServices() {
         </div>
 
         {/* 6-Card Capability Matrix (Sleek & Low Profile) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4 pt-1" onMouseLeave={() => setActiveCard(null)}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4 pt-1" onMouseLeave={() => { if (isHoverDevice()) setActiveCard(null) }}>
           {CAPABILITIES.map((item, idx) => {
             const IconComponent = item.icon
             const isActive = activeCard === idx
@@ -124,8 +128,8 @@ export function EngineeredServices() {
                 onTouchEnd={() => setActiveCard(null)}
                 onTouchCancel={() => setActiveCard(null)}
                 onTouchMove={() => setActiveCard(null)}
-                onMouseEnter={() => setActiveCard(idx)}
-                onMouseLeave={() => setActiveCard(null)}
+                onMouseEnter={() => { if (isHoverDevice()) setActiveCard(idx) }}
+                onMouseLeave={() => { if (isHoverDevice()) setActiveCard(null) }}
                 className={`group relative p-4.5 sm:p-5 rounded-xl border transition-all duration-300 flex flex-col justify-between cursor-pointer select-none touch-manipulation active:scale-[0.99] ${
                   isActive
                     ? 'bg-[#18201b] border-[#DFBA73]/60 -translate-y-0.5 shadow-[0_8px_24px_rgba(223,186,115,0.18)]'

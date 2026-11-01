@@ -126,7 +126,7 @@ export function Reviews() {
               ))}
             </div>
             <span className="text-xs sm:text-sm font-medium text-[#C5A880]/90">
-              4.9/5.0 Rating across Delhi NCR &middot; 100% On-Time Handover
+              4.7/5.0 Rating across Delhi NCR &middot; 100% On-Time Handover
             </span>
           </div>
         </div>

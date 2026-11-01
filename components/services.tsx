@@ -14,6 +14,7 @@ import {
   Layers,
   ChevronRight,
   ArrowRight,
+  ArrowUpRight,
 } from 'lucide-react'
 import { GY_28_DESIGN_ELEMENTS } from '@/lib/interior-packages'
 
@@ -49,6 +50,10 @@ const PILLARS = [
     desc: '24/7 high-definition live site cameras accessible right from your smartphone for complete peace of mind.',
   },
 ]
+
+const isHoverDevice = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(hover: hover) and (pointer: fine)').matches
 
 export function Services() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -203,7 +208,7 @@ export function Services() {
               >
                 <Compass className="w-4 h-4 text-[#121614] group-hover/btn:rotate-45 transition-transform duration-300" />
                 <span>Launch Interior Configurator</span>
-                <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
               </Link>
 
               {/* Secondary Gallery Explorer */}
@@ -262,7 +267,7 @@ export function Services() {
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 pt-1" onMouseLeave={() => setActivePillar(null)}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 pt-1" onMouseLeave={() => { if (isHoverDevice()) setActivePillar(null) }}>
             {PILLARS.map((pillar, idx) => {
               const Icon = pillar.icon
               const isActive = activePillar === idx
@@ -274,8 +279,8 @@ export function Services() {
                   onTouchEnd={() => setActivePillar(null)}
                   onTouchCancel={() => setActivePillar(null)}
                   onTouchMove={() => setActivePillar(null)}
-                  onMouseEnter={() => setActivePillar(idx)}
-                  onMouseLeave={() => setActivePillar(null)}
+                  onMouseEnter={() => { if (isHoverDevice()) setActivePillar(idx) }}
+                  onMouseLeave={() => { if (isHoverDevice()) setActivePillar(null) }}
                   className={`group p-5 rounded-2xl transition-all duration-300 flex flex-col justify-between cursor-pointer select-none touch-manipulation ${
                     isActive
                       ? 'bg-white/[0.08] border border-[#DFBA73]/60 -translate-y-1 shadow-[0_8px_25px_rgba(223,186,115,0.15)]'

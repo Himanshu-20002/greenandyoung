@@ -15,6 +15,7 @@ import {
   Compass,
   ArrowLeft,
   ArrowRight,
+  ArrowUpRight,
   Maximize2,
   ShieldCheck,
 } from 'lucide-react'
@@ -278,7 +279,7 @@ export default function ProjectDetailPage({ params }: PageProps) {
                 href="/gallery"
                 className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#121614] hover:text-[#C5A880] transition-colors"
               >
-                View Full Archive <ArrowRight className="w-4 h-4" />
+                View Full Archive <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
             </div>
 

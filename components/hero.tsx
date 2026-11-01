@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, MessageCircle, Star, Sparkles, Shield, User, Award, ArrowRight, Calendar, Users, ChevronLeft, ChevronRight, Compass, Layers, Video } from 'lucide-react'
+import { Phone, MessageCircle, Star, Sparkles, Shield, User, Award, ArrowRight, ArrowUpRight, Calendar, Users, ChevronLeft, ChevronRight, Compass, Layers, Video } from 'lucide-react'
 import { useEffect, useState, useRef, TouchEvent, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { authClient } from '@/lib/auth-client'
@@ -525,7 +525,7 @@ export function Hero({ slides = [] }: Props) {
                 <span className="text-[8px] font-extrabold uppercase tracking-widest text-accent">{activeSlide.badgeLabel}</span>
                 <span className="font-serif text-base font-bold text-white leading-tight">{activeSlide.badgeText}</span>
                 <span className="text-[8px] uppercase tracking-wider text-white/70 font-semibold leading-normal">Exclusive Experience</span>
-                <button type="button" onClick={() => openEstimateSheet()} className="mt-1.5 text-[8px] font-extrabold uppercase tracking-widest text-black bg-gradient-to-r from-[#DFBA73] to-[#B59250] px-3.5 py-1.5 rounded-lg flex items-center gap-1 hover:from-[#8A7142] hover:to-[#6E5932] transition-all cursor-pointer">Plan <ArrowRight className="w-2.5 h-2.5" /></button>
+                <button type="button" onClick={() => openEstimateSheet()} className="mt-1.5 text-[8px] font-extrabold uppercase tracking-widest text-black bg-gradient-to-r from-[#DFBA73] to-[#B59250] px-3.5 py-1.5 rounded-lg flex items-center gap-1 hover:from-[#8A7142] hover:to-[#6E5932] transition-all cursor-pointer">Plan <ArrowUpRight className="w-2.5 h-2.5 stroke-[2.2]" /></button>
               </div>
 
               {/* Indicator Dots and Navigation Controls */}

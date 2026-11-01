@@ -322,7 +322,7 @@ export function MarketIntelligence() {
               className="group inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[#08100C] hover:bg-[#D8BC95] text-white hover:text-[#0A110D] border border-white/15 hover:border-[#D8BC95] text-xs sm:text-[13px] font-bold tracking-wider uppercase transition-all duration-300 shadow-md hover:shadow-[0_0_24px_rgba(216,188,149,0.35)]"
             >
               <span>Explore All Insights &amp; Articles</span>
-              <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+              <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
             </Link>
           </div>
         </div>

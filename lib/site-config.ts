@@ -80,15 +80,15 @@ export const siteConfig: SiteConfig = {
     admin: "admin@greenandyoung.in",
   },
   address: {
-    building: "C619, KLJ Building, Noida One",
+    building: "C - 619, Noida One",
     area: "Rasoolpur Nawada, Industrial Area, Sector 62",
     city: "Noida",
     state: "Uttar Pradesh",
-    postalCode: "201306",
+    postalCode: "201309",
     country: "India",
     displayShort: "Sector 62, Noida (Delhi NCR)",
     fullDisplay:
-      "C619, KLJ Building, Noida One, Sector 62, Noida, Uttar Pradesh 201306",
+      "Noida One, Rasoolpur Nawada, Industrial Area, C - 619, Sector 62, Noida, Uttar Pradesh 201309",
     serviceAreas: ["Noida", "Greater Noida", "Greater Noida West", "Ghaziabad"],
   },
   hours: {
@@ -100,7 +100,7 @@ export const siteConfig: SiteConfig = {
     ga4Id: "G-Q8MZP37MHY",
   },
   social: {
-    instagram: "https://www.instagram.com/greenandyoung.in",
+    instagram: "https://www.instagram.com/gnyinterior/",
     facebook: "https://www.facebook.com/greenandyoung.in",
     whatsapp: "https://wa.me/+919971813161",
   },

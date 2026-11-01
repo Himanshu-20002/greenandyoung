@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   Sparkles,
   ArrowRight,
+  ArrowUpRight,
   MapPin,
   Phone,
   Compass,
@@ -98,7 +99,7 @@ export default function AboutPage() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#E4D7BE] hover:bg-white text-[#0A140F] font-semibold text-xs sm:text-sm tracking-wide shadow-md transition-all"
               >
                 <span>Book a Consultation</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowUpRight className="w-4 h-4" />
               </a>
               <Link
                 href="/#portfolio"
@@ -298,7 +299,7 @@ export default function AboutPage() {
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E4D7BE] hover:bg-white text-[#0A140F] font-semibold text-xs sm:text-sm tracking-wide shadow-xl transition-all"
             >
               <span>WhatsApp Principal Designer</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowUpRight className="w-4 h-4" />
             </a>
             <a
               href={`tel:${siteConfig.phone.primaryRaw}`}

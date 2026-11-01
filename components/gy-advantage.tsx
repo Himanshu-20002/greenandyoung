@@ -41,6 +41,10 @@ const ADVANTAGE_CARDS: AdvantageCard[] = [
   },
 ]
 
+const isHoverDevice = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(hover: hover) and (pointer: fine)').matches
+
 export function GyAdvantage({ className = '' }: { className?: string }) {
   const [activeCard, setActiveCard] = useState<number | null>(null)
 
@@ -87,7 +91,7 @@ export function GyAdvantage({ className = '' }: { className?: string }) {
         </div>
 
         {/* 4 Cards Grid - Compact on Mobile, Slender on Desktop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 xl:gap-7 max-w-[1300px] pt-1" onMouseLeave={() => setActiveCard(null)}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 xl:gap-7 max-w-[1300px] pt-1" onMouseLeave={() => { if (isHoverDevice()) setActiveCard(null) }}>
           {ADVANTAGE_CARDS.map((card, idx) => {
             const Icon = card.icon
             const isActive = activeCard === idx
@@ -99,8 +103,8 @@ export function GyAdvantage({ className = '' }: { className?: string }) {
                 onTouchEnd={() => setActiveCard(null)}
                 onTouchCancel={() => setActiveCard(null)}
                 onTouchMove={() => setActiveCard(null)}
-                onMouseEnter={() => setActiveCard(idx)}
-                onMouseLeave={() => setActiveCard(null)}
+                onMouseEnter={() => { if (isHoverDevice()) setActiveCard(idx) }}
+                onMouseLeave={() => { if (isHoverDevice()) setActiveCard(null) }}
                 className={`group relative rounded-xl sm:rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-0 sm:min-h-[290px] md:min-h-[310px] transition-all duration-300 cursor-default sm:cursor-pointer touch-manipulation select-none active:transform-none ${
                   isActive
                     ? 'bg-white border border-[#E7E5E4] sm:border-t-2 sm:border-l-2 sm:border-[#C5A880] sm:border-r sm:border-b sm:border-[#C5A880]/30 sm:shadow-[0_12px_32px_rgba(197,168,128,0.2)] sm:-translate-y-1'

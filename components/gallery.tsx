@@ -208,7 +208,7 @@ export function Gallery({ initialImages = [] }: Props) {
             className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#121614] hover:bg-[#222924] text-white font-mono text-xs sm:text-sm font-bold tracking-widest uppercase transition-all duration-300 shadow-md hover:shadow-xl hover:scale-[1.02]"
           >
             <span>Explore Complete Project Archive</span>
-            <span className="text-[#DFBA73] group-hover:translate-x-1 transition-transform">→</span>
+            <ArrowUpRight className="w-4 h-4 text-[#DFBA73] stroke-[2.2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
         </div>
 
