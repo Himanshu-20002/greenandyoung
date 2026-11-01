@@ -95,14 +95,18 @@ export function BottomSheetForm({
     }
   }, [isControlled, controlledOnClose])
 
-  // Prevent background scroll when open
+  // Prevent background scroll when open without frame-0 layout reflow
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
+    if (!isOpen) {
       document.body.style.overflow = ''
+      return
     }
+    // Delay scroll lock slightly so GPU slide-up animation begins with zero layout reflow
+    const timer = setTimeout(() => {
+      document.body.style.overflow = 'hidden'
+    }, 120)
     return () => {
+      clearTimeout(timer)
       document.body.style.overflow = ''
     }
   }, [isOpen])
@@ -178,7 +182,7 @@ export function BottomSheetForm({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.22, ease: 'easeOut' }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
             onClick={handleClose}
             className="fixed inset-0 bg-black/80 sm:bg-black/75 sm:backdrop-blur-sm"
             aria-hidden="true"
@@ -187,14 +191,17 @@ export function BottomSheetForm({
           {/* Bottom Sheet Container (Hardware-Accelerated GPU Sheet Animation) */}
           <motion.div
             initial={{ y: '100%' }}
-            animate={{ y: 0 }}
+            animate={{ y: '0%' }}
             exit={{ y: '100%' }}
             transition={{
-              duration: 0.32,
-              ease: [0.32, 0.72, 0, 1],
+              duration: 0.28,
+              ease: [0.16, 1, 0.3, 1],
             }}
-            style={{ willChange: 'transform' }}
-            className="relative w-full max-w-2xl bg-[#090F0C] border-t sm:border border-[#C5A880]/30 sm:rounded-3xl rounded-t-[28px] shadow-[0_-8px_30px_rgba(0,0,0,0.6)] max-h-[92vh] sm:max-h-[88vh] flex flex-col overflow-hidden text-neutral-200 z-10 transform-gpu"
+            style={{
+              willChange: 'transform',
+              transform: 'translateZ(0)',
+            }}
+            className="relative w-full max-w-xl bg-[#090F0C] border-t sm:border border-[#C5A880]/30 sm:rounded-3xl rounded-t-[24px] shadow-2xl max-h-[78vh] max-h-[78dvh] sm:max-h-[82dvh] flex flex-col overflow-hidden text-neutral-200 z-10 transform-gpu"
           >
             {/* Ambient Radial Luxury Glow (GPU gradient instead of CPU blur filter) */}
             <div
@@ -236,7 +243,7 @@ export function BottomSheetForm({
             </div>
 
             {/* Scrollable Content Body */}
-            <div className="overflow-y-auto px-5 sm:px-7 py-5 space-y-6 flex-grow custom-scrollbar">
+            <div className="overflow-y-auto px-5 sm:px-6 py-4 space-y-4 sm:space-y-5 flex-grow custom-scrollbar overscroll-contain">
               {submitted ? (
                 /* Success Confirmation State */
                 <motion.div
