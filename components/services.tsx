@@ -275,12 +275,20 @@ export function Services() {
               return (
                 <div
                   key={pillar.number}
-                  onTouchStart={() => setActivePillar(idx)}
-                  onTouchEnd={() => setActivePillar(null)}
-                  onTouchCancel={() => setActivePillar(null)}
-                  onTouchMove={() => setActivePillar(null)}
-                  onMouseEnter={() => { if (isHoverDevice()) setActivePillar(idx) }}
-                  onMouseLeave={() => { if (isHoverDevice()) setActivePillar(null) }}
+                  onPointerDown={(e) => {
+                    if (e.pointerType === 'touch') {
+                      setActivePillar(idx)
+                    }
+                  }}
+                  onPointerUp={() => setActivePillar(null)}
+                  onPointerCancel={() => setActivePillar(null)}
+                  onPointerLeave={() => setActivePillar(null)}
+                  onPointerEnter={(e) => {
+                    if (e.pointerType === 'mouse' && isHoverDevice()) {
+                      setActivePillar(idx)
+                    }
+                  }}
+                  onClick={() => setActivePillar(null)}
                   className={`group p-5 rounded-2xl transition-all duration-300 flex flex-col justify-between cursor-pointer select-none touch-manipulation ${
                     isActive
                       ? 'bg-white/[0.08] border border-[#DFBA73]/60 -translate-y-1 shadow-[0_8px_25px_rgba(223,186,115,0.15)]'
@@ -313,7 +321,7 @@ export function Services() {
                       className={`text-sm font-serif font-bold mb-1.5 transition-colors duration-300 ${
                         isActive
                           ? 'text-[#DFBA73]'
-                          : 'text-white group-hover:text-[#DFBA73]'
+                          : 'text-white sm:group-hover:text-[#DFBA73]'
                       }`}
                     >
                       {pillar.title}

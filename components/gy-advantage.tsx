@@ -99,12 +99,20 @@ export function GyAdvantage({ className = '' }: { className?: string }) {
             return (
               <div
                 key={card.number}
-                onTouchStart={() => setActiveCard(idx)}
-                onTouchEnd={() => setActiveCard(null)}
-                onTouchCancel={() => setActiveCard(null)}
-                onTouchMove={() => setActiveCard(null)}
-                onMouseEnter={() => { if (isHoverDevice()) setActiveCard(idx) }}
-                onMouseLeave={() => { if (isHoverDevice()) setActiveCard(null) }}
+                onPointerDown={(e) => {
+                  if (e.pointerType === 'touch') {
+                    setActiveCard(idx)
+                  }
+                }}
+                onPointerUp={() => setActiveCard(null)}
+                onPointerCancel={() => setActiveCard(null)}
+                onPointerLeave={() => setActiveCard(null)}
+                onPointerEnter={(e) => {
+                  if (e.pointerType === 'mouse' && isHoverDevice()) {
+                    setActiveCard(idx)
+                  }
+                }}
+                onClick={() => setActiveCard(null)}
                 className={`group relative rounded-xl sm:rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-0 sm:min-h-[290px] md:min-h-[310px] transition-all duration-300 cursor-default sm:cursor-pointer touch-manipulation select-none active:transform-none ${
                   isActive
                     ? 'bg-white border border-[#E7E5E4] sm:border-t-2 sm:border-l-2 sm:border-[#C5A880] sm:border-r sm:border-b sm:border-[#C5A880]/30 sm:shadow-[0_12px_32px_rgba(197,168,128,0.2)] sm:-translate-y-1'

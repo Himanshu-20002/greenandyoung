@@ -124,12 +124,20 @@ export function EngineeredServices() {
             return (
               <div
                 key={item.id}
-                onTouchStart={() => setActiveCard(idx)}
-                onTouchEnd={() => setActiveCard(null)}
-                onTouchCancel={() => setActiveCard(null)}
-                onTouchMove={() => setActiveCard(null)}
-                onMouseEnter={() => { if (isHoverDevice()) setActiveCard(idx) }}
-                onMouseLeave={() => { if (isHoverDevice()) setActiveCard(null) }}
+                onPointerDown={(e) => {
+                  if (e.pointerType === 'touch') {
+                    setActiveCard(idx)
+                  }
+                }}
+                onPointerUp={() => setActiveCard(null)}
+                onPointerCancel={() => setActiveCard(null)}
+                onPointerLeave={() => setActiveCard(null)}
+                onPointerEnter={(e) => {
+                  if (e.pointerType === 'mouse' && isHoverDevice()) {
+                    setActiveCard(idx)
+                  }
+                }}
+                onClick={() => setActiveCard(null)}
                 className={`group relative p-4.5 sm:p-5 rounded-xl border transition-all duration-300 flex flex-col justify-between cursor-pointer select-none touch-manipulation active:scale-[0.99] ${
                   isActive
                     ? 'bg-[#18201b] border-[#DFBA73]/60 -translate-y-0.5 shadow-[0_8px_24px_rgba(223,186,115,0.18)]'

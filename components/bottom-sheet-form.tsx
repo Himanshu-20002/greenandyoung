@@ -173,32 +173,36 @@ export function BottomSheetForm({
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
-          {/* Backdrop Blur Overlay */}
+          {/* High-Performance Backdrop Overlay (zero filter blur lag on mobile) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.22, ease: 'easeOut' }}
             onClick={handleClose}
-            className="fixed inset-0 bg-black/75 backdrop-blur-md transition-opacity"
+            className="fixed inset-0 bg-black/80 sm:bg-black/75 sm:backdrop-blur-sm"
             aria-hidden="true"
           />
 
-          {/* Bottom Sheet Container */}
+          {/* Bottom Sheet Container (Hardware-Accelerated GPU Sheet Animation) */}
           <motion.div
-            initial={{ y: '100%', opacity: 0.8 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: '100%', opacity: 0 }}
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
             transition={{
-              type: 'spring',
-              damping: 30,
-              stiffness: 320,
-              mass: 0.9,
+              duration: 0.32,
+              ease: [0.32, 0.72, 0, 1],
             }}
-            className="relative w-full max-w-2xl bg-[#090F0C] border-t sm:border border-[#C5A880]/30 sm:rounded-3xl rounded-t-[28px] shadow-[0_-15px_60px_rgba(0,0,0,0.85)] max-h-[92vh] sm:max-h-[88vh] flex flex-col overflow-hidden text-neutral-200 z-10"
+            style={{ willChange: 'transform' }}
+            className="relative w-full max-w-2xl bg-[#090F0C] border-t sm:border border-[#C5A880]/30 sm:rounded-3xl rounded-t-[28px] shadow-[0_-8px_30px_rgba(0,0,0,0.6)] max-h-[92vh] sm:max-h-[88vh] flex flex-col overflow-hidden text-neutral-200 z-10 transform-gpu"
           >
-            {/* Ambient Radial Luxury Glow */}
-            <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 bg-[#C5A880]/15 rounded-full blur-[100px]" />
+            {/* Ambient Radial Luxury Glow (GPU gradient instead of CPU blur filter) */}
+            <div
+              className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 rounded-full"
+              style={{
+                background: 'radial-gradient(circle, rgba(197, 168, 128, 0.15) 0%, transparent 70%)',
+              }}
+            />
 
             {/* Mobile Drag Handle Pill */}
             <div className="pt-3 pb-1 flex justify-center items-center sm:hidden shrink-0">
