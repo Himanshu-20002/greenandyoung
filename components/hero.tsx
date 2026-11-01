@@ -479,11 +479,11 @@ export function Hero({ slides = [] }: Props) {
 
               {/* Royal Triptych Mirror Ensemble */}
               <div className="relative flex items-center justify-center">
-                {/* LEFT COMPANION MIRROR (Cascading 3-Panel Faceted Shape) */}
+                {/* LEFT COMPANION MIRROR (Cascading 3-Panel Faceted Shape - Subtle Ambient Wing) */}
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="absolute -left-10 sm:-left-24 md:-left-32 lg:-left-36 xl:-left-44 top-1/2 -translate-y-1/2 w-[90px] h-[280px] sm:w-[135px] sm:h-[350px] lg:w-[160px] lg:h-[380px] z-10 opacity-60 sm:opacity-75 hover:opacity-100 hover:scale-[1.03] transition-all duration-500 cursor-pointer group/left drop-shadow-[0_15px_30px_rgba(0,0,0,0.65)]"
+                  className="absolute -left-14 sm:-left-22 md:-left-30 lg:-left-34 xl:-left-42 top-1/2 -translate-y-1/2 w-[75px] h-[220px] sm:w-[115px] sm:h-[285px] lg:w-[135px] lg:h-[315px] xl:w-[145px] xl:h-[335px] z-10 opacity-40 sm:opacity-45 hover:opacity-90 hover:scale-[1.03] transition-all duration-500 cursor-pointer group/left drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
                   style={{ transform: 'perspective(1000px) rotateY(-6deg)' }}
                   aria-label="Previous interior slide"
                 >
@@ -493,17 +493,17 @@ export function Hero({ slides = [] }: Props) {
                         <path d="M 0 380 L 0 135 L 52 90 L 106 45 Q 135 15 160 30 L 160 380 Z" />
                       </clipPath>
                       <linearGradient id="leftMirrorGrad" x1="0" y1="1" x2="0" y2="0">
-                        <stop offset="0%" stopColor="#000000" stopOpacity="0.85" />
-                        <stop offset="50%" stopColor="#000000" stopOpacity="0.35" />
-                        <stop offset="100%" stopColor="#000000" stopOpacity="0.15" />
+                        <stop offset="0%" stopColor="#000000" stopOpacity="0.55" />
+                        <stop offset="50%" stopColor="#000000" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#000000" stopOpacity="0.05" />
                       </linearGradient>
                       <radialGradient id="leftMirrorVignette" cx="50%" cy="50%" r="50%">
                         <stop offset="40%" stopColor="#000000" stopOpacity="0" />
-                        <stop offset="100%" stopColor="#000000" stopOpacity="0.65" />
+                        <stop offset="100%" stopColor="#000000" stopOpacity="0.45" />
                       </radialGradient>
                     </defs>
 
-                    {/* Clipped Image & Luxury Vignette */}
+                    {/* Clipped Image & Subtle Translucent Overlay */}
                     <g clipPath="url(#leftMirrorClip)">
                       <image
                         href={prevSlide.frameImage}
@@ -520,32 +520,31 @@ export function Hero({ slides = [] }: Props) {
                     <path
                       d="M 1.5 379 L 1.5 135 L 52 90 L 106 45 Q 135 15 158.5 30 L 158.5 379 Z"
                       stroke="#DFBA73"
-                      strokeWidth="3"
+                      strokeWidth="2.5"
+                      strokeOpacity="0.85"
                       fill="none"
-                      className="drop-shadow-[0_0_8px_rgba(223,186,115,0.4)]"
+                      className="drop-shadow-[0_0_6px_rgba(223,186,115,0.3)]"
                     />
 
                     {/* Inner Dashed Gold Stitching */}
                     <path
                       d="M 4.5 376 L 4.5 138 L 52 94 L 106 50 Q 133 21 155.5 34 L 155.5 376 Z"
                       stroke="#B59250"
-                      strokeWidth="1.2"
+                      strokeWidth="1"
                       strokeDasharray="3 3"
-                      strokeOpacity="0.85"
+                      strokeOpacity="0.6"
                       fill="none"
                     />
 
-                    {/* Vertical Panel Divider Line 1 */}
-                    <line x1="52" y1="90" x2="52" y2="380" stroke="#DFBA73" strokeWidth="1.6" strokeOpacity="0.8" />
-                    <line x1="52" y1="90" x2="52" y2="380" stroke="#B59250" strokeWidth="0.8" strokeDasharray="3 3" strokeOpacity="0.6" />
+                    {/* Vertical Panel Divider Line 1 (Dotted) */}
+                    <line x1="52" y1="90" x2="52" y2="380" stroke="#DFBA73" strokeWidth="1.2" strokeDasharray="2 3.5" strokeOpacity="0.6" />
 
-                    {/* Vertical Panel Divider Line 2 */}
-                    <line x1="106" y1="45" x2="106" y2="380" stroke="#DFBA73" strokeWidth="1.6" strokeOpacity="0.8" />
-                    <line x1="106" y1="45" x2="106" y2="380" stroke="#B59250" strokeWidth="0.8" strokeDasharray="3 3" strokeOpacity="0.6" />
+                    {/* Vertical Panel Divider Line 2 (Dotted) */}
+                    <line x1="106" y1="45" x2="106" y2="380" stroke="#DFBA73" strokeWidth="1.2" strokeDasharray="2 3.5" strokeOpacity="0.6" />
                   </svg>
 
                   {/* Left Pill Tag Indicator */}
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-black/85 border border-[#DFBA73]/40 text-[8px] sm:text-[9px] font-mono text-[#DFBA73] tracking-wider uppercase whitespace-nowrap opacity-0 group-hover/left:opacity-100 transition-opacity z-20 flex items-center gap-1 shadow-md">
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-black/85 border border-[#DFBA73]/40 text-[8px] sm:text-[9px] font-mono text-[#DFBA73] tracking-wider uppercase whitespace-nowrap opacity-0 group-hover/left:opacity-100 transition-opacity z-20 flex items-center gap-1 shadow-md">
                     <ChevronLeft className="w-2.5 h-2.5" />
                     <span>Prev</span>
                   </div>
@@ -598,11 +597,11 @@ export function Hero({ slides = [] }: Props) {
                   </a>
                 </div>
 
-                {/* RIGHT COMPANION MIRROR (Cascading 3-Panel Faceted Shape) */}
+                {/* RIGHT COMPANION MIRROR (Cascading 3-Panel Faceted Shape - Subtle Ambient Wing) */}
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="absolute -right-10 sm:-right-24 md:-right-32 lg:-right-36 xl:-right-44 top-1/2 -translate-y-1/2 w-[90px] h-[280px] sm:w-[135px] sm:h-[350px] lg:w-[160px] lg:h-[380px] z-10 opacity-60 sm:opacity-75 hover:opacity-100 hover:scale-[1.03] transition-all duration-500 cursor-pointer group/right drop-shadow-[0_15px_30px_rgba(0,0,0,0.65)]"
+                  className="absolute -right-14 sm:-right-22 md:-right-30 lg:-right-34 xl:-right-42 top-1/2 -translate-y-1/2 w-[75px] h-[220px] sm:w-[115px] sm:h-[285px] lg:w-[135px] lg:h-[315px] xl:w-[145px] xl:h-[335px] z-10 opacity-40 sm:opacity-45 hover:opacity-90 hover:scale-[1.03] transition-all duration-500 cursor-pointer group/right drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
                   style={{ transform: 'perspective(1000px) rotateY(6deg)' }}
                   aria-label="Next interior slide"
                 >
@@ -612,17 +611,17 @@ export function Hero({ slides = [] }: Props) {
                         <path d="M 0 380 L 0 30 Q 25 15 54 45 L 108 90 L 160 135 L 160 380 Z" />
                       </clipPath>
                       <linearGradient id="rightMirrorGrad" x1="0" y1="1" x2="0" y2="0">
-                        <stop offset="0%" stopColor="#000000" stopOpacity="0.85" />
-                        <stop offset="50%" stopColor="#000000" stopOpacity="0.35" />
-                        <stop offset="100%" stopColor="#000000" stopOpacity="0.15" />
+                        <stop offset="0%" stopColor="#000000" stopOpacity="0.55" />
+                        <stop offset="50%" stopColor="#000000" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#000000" stopOpacity="0.05" />
                       </linearGradient>
                       <radialGradient id="rightMirrorVignette" cx="50%" cy="50%" r="50%">
                         <stop offset="40%" stopColor="#000000" stopOpacity="0" />
-                        <stop offset="100%" stopColor="#000000" stopOpacity="0.65" />
+                        <stop offset="100%" stopColor="#000000" stopOpacity="0.45" />
                       </radialGradient>
                     </defs>
 
-                    {/* Clipped Image & Luxury Vignette */}
+                    {/* Clipped Image & Subtle Translucent Overlay */}
                     <g clipPath="url(#rightMirrorClip)">
                       <image
                         href={nextSlide.frameImage}
@@ -639,32 +638,31 @@ export function Hero({ slides = [] }: Props) {
                     <path
                       d="M 1.5 379 L 1.5 30 Q 25 15 54 45 L 108 90 L 158.5 135 L 158.5 379 Z"
                       stroke="#DFBA73"
-                      strokeWidth="3"
+                      strokeWidth="2.5"
+                      strokeOpacity="0.85"
                       fill="none"
-                      className="drop-shadow-[0_0_8px_rgba(223,186,115,0.4)]"
+                      className="drop-shadow-[0_0_6px_rgba(223,186,115,0.3)]"
                     />
 
                     {/* Inner Dashed Gold Stitching */}
                     <path
                       d="M 4.5 376 L 4.5 34 Q 27 21 54 50 L 108 94 L 155.5 138 L 155.5 376 Z"
                       stroke="#B59250"
-                      strokeWidth="1.2"
+                      strokeWidth="1"
                       strokeDasharray="3 3"
-                      strokeOpacity="0.85"
+                      strokeOpacity="0.6"
                       fill="none"
                     />
 
-                    {/* Vertical Panel Divider Line 1 */}
-                    <line x1="54" y1="45" x2="54" y2="380" stroke="#DFBA73" strokeWidth="1.6" strokeOpacity="0.8" />
-                    <line x1="54" y1="45" x2="54" y2="380" stroke="#B59250" strokeWidth="0.8" strokeDasharray="3 3" strokeOpacity="0.6" />
+                    {/* Vertical Panel Divider Line 1 (Dotted) */}
+                    <line x1="54" y1="45" x2="54" y2="380" stroke="#DFBA73" strokeWidth="1.2" strokeDasharray="2 3.5" strokeOpacity="0.6" />
 
-                    {/* Vertical Panel Divider Line 2 */}
-                    <line x1="108" y1="90" x2="108" y2="380" stroke="#DFBA73" strokeWidth="1.6" strokeOpacity="0.8" />
-                    <line x1="108" y1="90" x2="108" y2="380" stroke="#B59250" strokeWidth="0.8" strokeDasharray="3 3" strokeOpacity="0.6" />
+                    {/* Vertical Panel Divider Line 2 (Dotted) */}
+                    <line x1="108" y1="90" x2="108" y2="380" stroke="#DFBA73" strokeWidth="1.2" strokeDasharray="2 3.5" strokeOpacity="0.6" />
                   </svg>
 
                   {/* Right Pill Tag Indicator */}
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-black/85 border border-[#DFBA73]/40 text-[8px] sm:text-[9px] font-mono text-[#DFBA73] tracking-wider uppercase whitespace-nowrap opacity-0 group-hover/right:opacity-100 transition-opacity z-20 flex items-center gap-1 shadow-md">
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-black/85 border border-[#DFBA73]/40 text-[8px] sm:text-[9px] font-mono text-[#DFBA73] tracking-wider uppercase whitespace-nowrap opacity-0 group-hover/right:opacity-100 transition-opacity z-20 flex items-center gap-1 shadow-md">
                     <span>Next</span>
                     <ChevronRight className="w-2.5 h-2.5" />
                   </div>
