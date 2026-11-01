@@ -479,29 +479,70 @@ export function Hero({ slides = [] }: Props) {
 
               {/* Royal Triptych Mirror Ensemble */}
               <div className="relative flex items-center justify-center">
-                {/* LEFT COMPANION MIRROR (Previous Slide Preview) */}
+                {/* LEFT COMPANION MIRROR (Cascading 3-Panel Faceted Shape) */}
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="absolute -left-10 sm:-left-24 md:-left-32 lg:-left-36 xl:-left-44 top-1/2 -translate-y-1/2 w-[85px] h-[280px] sm:w-[130px] sm:h-[350px] lg:w-[155px] lg:h-[380px] z-10 rounded-t-full rounded-b-2xl overflow-hidden border-[2.5px] border-[#DFBA73]/65 bg-black/70 shadow-[0_15px_35px_rgba(0,0,0,0.6),0_0_20px_rgba(223,186,115,0.2)] opacity-50 sm:opacity-60 hover:opacity-100 hover:scale-[1.02] transition-all duration-500 cursor-pointer group/left"
-                  style={{ transform: 'perspective(1000px) rotateY(-8deg)' }}
+                  className="absolute -left-10 sm:-left-24 md:-left-32 lg:-left-36 xl:-left-44 top-1/2 -translate-y-1/2 w-[90px] h-[280px] sm:w-[135px] sm:h-[350px] lg:w-[160px] lg:h-[380px] z-10 opacity-60 sm:opacity-75 hover:opacity-100 hover:scale-[1.03] transition-all duration-500 cursor-pointer group/left drop-shadow-[0_15px_30px_rgba(0,0,0,0.65)]"
+                  style={{ transform: 'perspective(1000px) rotateY(-6deg)' }}
                   aria-label="Previous interior slide"
                 >
-                  {/* Inner Dashed Gold Stitching */}
-                  <div className="absolute inset-[2.5px] rounded-t-full rounded-b-xl border-[1px] border-dashed border-[#B59250]/45 pointer-events-none z-10" />
+                  <svg viewBox="0 0 160 380" className="w-full h-full overflow-visible" fill="none">
+                    <defs>
+                      <clipPath id="leftMirrorClip">
+                        <path d="M 0 380 L 0 135 L 52 90 L 106 45 Q 135 15 160 30 L 160 380 Z" />
+                      </clipPath>
+                      <linearGradient id="leftMirrorGrad" x1="0" y1="1" x2="0" y2="0">
+                        <stop offset="0%" stopColor="#000000" stopOpacity="0.85" />
+                        <stop offset="50%" stopColor="#000000" stopOpacity="0.35" />
+                        <stop offset="100%" stopColor="#000000" stopOpacity="0.15" />
+                      </linearGradient>
+                      <radialGradient id="leftMirrorVignette" cx="50%" cy="50%" r="50%">
+                        <stop offset="40%" stopColor="#000000" stopOpacity="0" />
+                        <stop offset="100%" stopColor="#000000" stopOpacity="0.65" />
+                      </radialGradient>
+                    </defs>
 
-                  {/* Previous Room Image */}
-                  <Image
-                    src={prevSlide.frameImage}
-                    alt={prevSlide.imageAlt || 'Previous Room Showcase'}
-                    fill
-                    sizes="(max-width: 640px) 90px, 160px"
-                    className="object-cover object-center scale-105 group-hover/left:scale-110 transition-transform duration-700"
-                  />
+                    {/* Clipped Image & Luxury Vignette */}
+                    <g clipPath="url(#leftMirrorClip)">
+                      <image
+                        href={prevSlide.frameImage}
+                        width="160"
+                        height="380"
+                        preserveAspectRatio="xMidYMid slice"
+                        className="scale-105 group-hover/left:scale-110 transition-transform duration-700"
+                      />
+                      <rect width="160" height="380" fill="url(#leftMirrorGrad)" />
+                      <rect width="160" height="380" fill="url(#leftMirrorVignette)" />
+                    </g>
 
-                  {/* Luxury Glass Tint & Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20 group-hover/left:from-black/50 transition-colors duration-500" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.65)_100%)] pointer-events-none" />
+                    {/* Outer Gold Border */}
+                    <path
+                      d="M 1.5 379 L 1.5 135 L 52 90 L 106 45 Q 135 15 158.5 30 L 158.5 379 Z"
+                      stroke="#DFBA73"
+                      strokeWidth="3"
+                      fill="none"
+                      className="drop-shadow-[0_0_8px_rgba(223,186,115,0.4)]"
+                    />
+
+                    {/* Inner Dashed Gold Stitching */}
+                    <path
+                      d="M 4.5 376 L 4.5 138 L 52 94 L 106 50 Q 133 21 155.5 34 L 155.5 376 Z"
+                      stroke="#B59250"
+                      strokeWidth="1.2"
+                      strokeDasharray="3 3"
+                      strokeOpacity="0.85"
+                      fill="none"
+                    />
+
+                    {/* Vertical Panel Divider Line 1 */}
+                    <line x1="52" y1="90" x2="52" y2="380" stroke="#DFBA73" strokeWidth="1.6" strokeOpacity="0.8" />
+                    <line x1="52" y1="90" x2="52" y2="380" stroke="#B59250" strokeWidth="0.8" strokeDasharray="3 3" strokeOpacity="0.6" />
+
+                    {/* Vertical Panel Divider Line 2 */}
+                    <line x1="106" y1="45" x2="106" y2="380" stroke="#DFBA73" strokeWidth="1.6" strokeOpacity="0.8" />
+                    <line x1="106" y1="45" x2="106" y2="380" stroke="#B59250" strokeWidth="0.8" strokeDasharray="3 3" strokeOpacity="0.6" />
+                  </svg>
 
                   {/* Left Pill Tag Indicator */}
                   <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-black/85 border border-[#DFBA73]/40 text-[8px] sm:text-[9px] font-mono text-[#DFBA73] tracking-wider uppercase whitespace-nowrap opacity-0 group-hover/left:opacity-100 transition-opacity z-20 flex items-center gap-1 shadow-md">
@@ -557,29 +598,70 @@ export function Hero({ slides = [] }: Props) {
                   </a>
                 </div>
 
-                {/* RIGHT COMPANION MIRROR (Next Slide Preview) */}
+                {/* RIGHT COMPANION MIRROR (Cascading 3-Panel Faceted Shape) */}
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="absolute -right-10 sm:-right-24 md:-right-32 lg:-right-36 xl:-right-44 top-1/2 -translate-y-1/2 w-[85px] h-[280px] sm:w-[130px] sm:h-[350px] lg:w-[155px] lg:h-[380px] z-10 rounded-t-full rounded-b-2xl overflow-hidden border-[2.5px] border-[#DFBA73]/65 bg-black/70 shadow-[0_15px_35px_rgba(0,0,0,0.6),0_0_20px_rgba(223,186,115,0.2)] opacity-50 sm:opacity-60 hover:opacity-100 hover:scale-[1.02] transition-all duration-500 cursor-pointer group/right"
-                  style={{ transform: 'perspective(1000px) rotateY(8deg)' }}
+                  className="absolute -right-10 sm:-right-24 md:-right-32 lg:-right-36 xl:-right-44 top-1/2 -translate-y-1/2 w-[90px] h-[280px] sm:w-[135px] sm:h-[350px] lg:w-[160px] lg:h-[380px] z-10 opacity-60 sm:opacity-75 hover:opacity-100 hover:scale-[1.03] transition-all duration-500 cursor-pointer group/right drop-shadow-[0_15px_30px_rgba(0,0,0,0.65)]"
+                  style={{ transform: 'perspective(1000px) rotateY(6deg)' }}
                   aria-label="Next interior slide"
                 >
-                  {/* Inner Dashed Gold Stitching */}
-                  <div className="absolute inset-[2.5px] rounded-t-full rounded-b-xl border-[1px] border-dashed border-[#B59250]/45 pointer-events-none z-10" />
+                  <svg viewBox="0 0 160 380" className="w-full h-full overflow-visible" fill="none">
+                    <defs>
+                      <clipPath id="rightMirrorClip">
+                        <path d="M 0 380 L 0 30 Q 25 15 54 45 L 108 90 L 160 135 L 160 380 Z" />
+                      </clipPath>
+                      <linearGradient id="rightMirrorGrad" x1="0" y1="1" x2="0" y2="0">
+                        <stop offset="0%" stopColor="#000000" stopOpacity="0.85" />
+                        <stop offset="50%" stopColor="#000000" stopOpacity="0.35" />
+                        <stop offset="100%" stopColor="#000000" stopOpacity="0.15" />
+                      </linearGradient>
+                      <radialGradient id="rightMirrorVignette" cx="50%" cy="50%" r="50%">
+                        <stop offset="40%" stopColor="#000000" stopOpacity="0" />
+                        <stop offset="100%" stopColor="#000000" stopOpacity="0.65" />
+                      </radialGradient>
+                    </defs>
 
-                  {/* Next Room Image */}
-                  <Image
-                    src={nextSlide.frameImage}
-                    alt={nextSlide.imageAlt || 'Next Room Showcase'}
-                    fill
-                    sizes="(max-width: 640px) 90px, 160px"
-                    className="object-cover object-center scale-105 group-hover/right:scale-110 transition-transform duration-700"
-                  />
+                    {/* Clipped Image & Luxury Vignette */}
+                    <g clipPath="url(#rightMirrorClip)">
+                      <image
+                        href={nextSlide.frameImage}
+                        width="160"
+                        height="380"
+                        preserveAspectRatio="xMidYMid slice"
+                        className="scale-105 group-hover/right:scale-110 transition-transform duration-700"
+                      />
+                      <rect width="160" height="380" fill="url(#rightMirrorGrad)" />
+                      <rect width="160" height="380" fill="url(#rightMirrorVignette)" />
+                    </g>
 
-                  {/* Luxury Glass Tint & Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20 group-hover/right:from-black/50 transition-colors duration-500" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.65)_100%)] pointer-events-none" />
+                    {/* Outer Gold Border */}
+                    <path
+                      d="M 1.5 379 L 1.5 30 Q 25 15 54 45 L 108 90 L 158.5 135 L 158.5 379 Z"
+                      stroke="#DFBA73"
+                      strokeWidth="3"
+                      fill="none"
+                      className="drop-shadow-[0_0_8px_rgba(223,186,115,0.4)]"
+                    />
+
+                    {/* Inner Dashed Gold Stitching */}
+                    <path
+                      d="M 4.5 376 L 4.5 34 Q 27 21 54 50 L 108 94 L 155.5 138 L 155.5 376 Z"
+                      stroke="#B59250"
+                      strokeWidth="1.2"
+                      strokeDasharray="3 3"
+                      strokeOpacity="0.85"
+                      fill="none"
+                    />
+
+                    {/* Vertical Panel Divider Line 1 */}
+                    <line x1="54" y1="45" x2="54" y2="380" stroke="#DFBA73" strokeWidth="1.6" strokeOpacity="0.8" />
+                    <line x1="54" y1="45" x2="54" y2="380" stroke="#B59250" strokeWidth="0.8" strokeDasharray="3 3" strokeOpacity="0.6" />
+
+                    {/* Vertical Panel Divider Line 2 */}
+                    <line x1="108" y1="90" x2="108" y2="380" stroke="#DFBA73" strokeWidth="1.6" strokeOpacity="0.8" />
+                    <line x1="108" y1="90" x2="108" y2="380" stroke="#B59250" strokeWidth="0.8" strokeDasharray="3 3" strokeOpacity="0.6" />
+                  </svg>
 
                   {/* Right Pill Tag Indicator */}
                   <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-black/85 border border-[#DFBA73]/40 text-[8px] sm:text-[9px] font-mono text-[#DFBA73] tracking-wider uppercase whitespace-nowrap opacity-0 group-hover/right:opacity-100 transition-opacity z-20 flex items-center gap-1 shadow-md">
