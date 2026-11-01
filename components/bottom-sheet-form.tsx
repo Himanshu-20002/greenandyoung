@@ -201,7 +201,7 @@ export function BottomSheetForm({
               willChange: 'transform',
               transform: 'translateZ(0)',
             }}
-            className="relative w-full max-w-xl bg-[#090F0C] border-t sm:border border-[#C5A880]/30 sm:rounded-3xl rounded-t-[24px] shadow-2xl max-h-[92vh] sm:max-h-[88vh] h-auto flex flex-col overflow-hidden text-neutral-200 z-10 transform-gpu"
+            className="relative w-full max-w-xl bg-[#090F0C] border-t sm:border border-[#C5A880]/30 sm:rounded-3xl rounded-t-[28px] shadow-2xl max-h-[92vh] sm:max-h-[88vh] h-auto flex flex-col overflow-hidden text-neutral-200 z-10 transform-gpu"
           >
             {/* Ambient Radial Luxury Glow (GPU gradient instead of CPU blur filter) */}
             <div
@@ -212,21 +212,21 @@ export function BottomSheetForm({
             />
 
             {/* Mobile Drag Handle Pill */}
-            <div className="pt-2 pb-0.5 flex justify-center items-center sm:hidden shrink-0">
-              <div className="w-10 h-1 rounded-full bg-white/20" />
+            <div className="pt-2.5 pb-1 flex justify-center items-center sm:hidden shrink-0">
+              <div className="w-12 h-1.5 rounded-full bg-white/20" />
             </div>
 
-            {/* Header Bar - Compact & Streamlined */}
-            <div className="px-4 sm:px-6 pt-2 pb-2.5 border-b border-white/10 flex items-center justify-between gap-3 shrink-0 relative z-10">
-              <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
-                  <ShieldCheck className="w-3.5 h-3.5" />
+            {/* Header Bar - Slightly taller & balanced */}
+            <div className="px-5 sm:px-7 pt-2.5 pb-3 border-b border-white/10 flex items-center justify-between gap-3 shrink-0 relative z-10">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                  <ShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm sm:text-base font-bold text-white tracking-tight uppercase font-serif leading-none">
+                  <h3 className="text-base sm:text-lg font-bold text-white tracking-tight uppercase font-serif leading-tight">
                     Plan Your Dream Home
                   </h3>
-                  <p className="text-[10px] text-neutral-400 mt-0.5 leading-none">
+                  <p className="text-[11px] text-neutral-400 leading-none mt-0.5">
                     3D Measurement &amp; Complete Home Quotation
                   </p>
                 </div>
@@ -235,43 +235,43 @@ export function BottomSheetForm({
               {/* Close Button */}
               <button
                 onClick={handleClose}
-                className="w-7 h-7 rounded-full bg-white/5 hover:bg-white/15 text-neutral-400 hover:text-white flex items-center justify-center transition-colors border border-white/10 shrink-0"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/5 hover:bg-white/15 text-neutral-400 hover:text-white flex items-center justify-center transition-colors border border-white/10 shrink-0"
                 aria-label="Close modal"
               >
-                <X className="w-3.5 h-3.5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Non-Scrollable Content Body - Fits all content directly */}
-            <div className="px-4 sm:px-6 py-3 space-y-2.5 flex-grow overflow-hidden">
+            {/* Content Body - Fits all content directly without internal scrollbar */}
+            <div className="px-5 sm:px-7 py-3.5 space-y-3.5 flex-grow overflow-hidden">
               {submitted ? (
                 /* Success Confirmation State */
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="py-8 text-center space-y-4"
+                  className="py-10 text-center space-y-4"
                 >
-                  <div className="w-12 h-12 mx-auto rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.3)]">
-                    <CheckCircle2 className="w-6 h-6" />
+                  <div className="w-14 h-14 mx-auto rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-[0_0_24px_rgba(16,185,129,0.3)]">
+                    <CheckCircle2 className="w-7 h-7" />
                   </div>
-                  <div className="space-y-1">
-                    <h4 className="text-lg font-serif font-bold text-white">
+                  <div className="space-y-1.5">
+                    <h4 className="text-xl font-serif font-bold text-white">
                       Request Confirmed
                     </h4>
-                    <p className="text-xs text-neutral-400 max-w-md mx-auto leading-relaxed">
+                    <p className="text-xs sm:text-sm text-neutral-400 max-w-md mx-auto leading-relaxed">
                       Thank you, <span className="text-white font-medium">{fullName}</span>. Our Senior Design Architect will review your specifications for <span className="text-[#C5A880]">{selectedType}</span> and contact you within 2 business hours.
                     </p>
                   </div>
 
                   {/* Immediate WhatsApp Action */}
-                  <div className="pt-2 max-w-sm mx-auto space-y-2">
+                  <div className="pt-2 max-w-sm mx-auto space-y-2.5">
                     <a
                       href={`https://wa.me/+919971813161?text=Hi%20Green%20%26%20Young%2C%20I%20just%20submitted%20a%20request%20for%20my%20${encodeURIComponent(selectedType)}%20at%20${encodeURIComponent(propertyName || selectedLocation)}.%20Looking%20forward%20to%20the%203D%20blueprint!`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-black font-bold text-xs uppercase tracking-wider shadow-lg transition-all"
+                      className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-black font-bold text-xs uppercase tracking-wider shadow-lg transition-all"
                     >
-                      <MessageCircle className="w-3.5 h-3.5" />
+                      <MessageCircle className="w-4 h-4" />
                       Instant Chat on WhatsApp
                     </a>
                     <button
@@ -283,80 +283,80 @@ export function BottomSheetForm({
                   </div>
                 </motion.div>
               ) : (
-                /* Compact Form - All fields visible without scrolling */
-                <form onSubmit={handleSubmit} className="space-y-2.5">
+                /* Balanced Form with Slightly Increased Height & Zero Scrolling */
+                <form onSubmit={handleSubmit} className="space-y-3.5">
                   {/* 3 Trust Highlight Cards - Sleek Micro Strip */}
-                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white/[0.03] border border-white/5 text-[9px] sm:text-[10px] text-neutral-400">
-                    <div className="flex items-center gap-1">
-                      <Zap className="w-3 h-3 text-[#C5A880]" />
+                  <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-white/[0.03] border border-white/5 text-[10px] sm:text-[11px] text-neutral-400">
+                    <div className="flex items-center gap-1.5">
+                      <Zap className="w-3.5 h-3.5 text-[#C5A880]" />
                       <span className="font-semibold text-white">&lt; 24h Turnaround</span>
                     </div>
                     <span className="text-white/20">•</span>
-                    <div className="flex items-center gap-1">
-                      <Lock className="w-3 h-3 text-emerald-400" />
+                    <div className="flex items-center gap-1.5">
+                      <Lock className="w-3.5 h-3.5 text-emerald-400" />
                       <span className="font-semibold text-white">100% Confidential</span>
                     </div>
                     <span className="text-white/20">•</span>
-                    <div className="flex items-center gap-1">
-                      <Compass className="w-3 h-3 text-[#C5A880]" />
+                    <div className="flex items-center gap-1.5">
+                      <Compass className="w-3.5 h-3.5 text-[#C5A880]" />
                       <span className="font-semibold text-white">Senior Lead Direct</span>
                     </div>
                   </div>
 
-                  {/* Section 1: Homeowner Contact Details (Compact 2x2 Grid) */}
+                  {/* Section 1: Homeowner Contact Details */}
                   <div>
-                    <span className="text-[9px] font-mono font-bold tracking-wider text-[#C5A880] uppercase block mb-1">
+                    <span className="text-[10px] font-mono font-bold tracking-wider text-[#C5A880] uppercase block mb-1.5">
                       1. HOMEOWNER CONTACT DETAILS
                     </span>
 
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 gap-2.5">
                       {/* Full Name */}
                       <div className="relative">
-                        <User className="w-3 h-3 absolute left-2.5 top-2.5 text-neutral-500" />
+                        <User className="w-3.5 h-3.5 absolute left-3 top-3 text-neutral-500" />
                         <input
                           type="text"
                           required
                           value={fullName}
                           onChange={(e) => setFullName(e.target.value)}
                           placeholder="Your Full Name *"
-                          className="w-full bg-[#111A15] border border-white/10 rounded-lg pl-7 pr-2 py-1.5 text-[11px] text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
+                          className="w-full bg-[#111A15] border border-white/10 rounded-xl pl-8 pr-2.5 py-2 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
                         />
                       </div>
 
                       {/* Phone / WhatsApp */}
                       <div className="relative">
-                        <Phone className="w-3 h-3 absolute left-2.5 top-2.5 text-neutral-500" />
+                        <Phone className="w-3.5 h-3.5 absolute left-3 top-3 text-neutral-500" />
                         <input
                           type="tel"
                           required
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="Phone / WhatsApp *"
-                          className="w-full bg-[#111A15] border border-white/10 rounded-lg pl-7 pr-2 py-1.5 text-[11px] text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
+                          className="w-full bg-[#111A15] border border-white/10 rounded-xl pl-8 pr-2.5 py-2 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
                         />
                       </div>
 
                       {/* Email */}
                       <div className="relative">
-                        <Mail className="w-3 h-3 absolute left-2.5 top-2.5 text-neutral-500" />
+                        <Mail className="w-3.5 h-3.5 absolute left-3 top-3 text-neutral-500" />
                         <input
                           type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Email Address"
-                          className="w-full bg-[#111A15] border border-white/10 rounded-lg pl-7 pr-2 py-1.5 text-[11px] text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
+                          className="w-full bg-[#111A15] border border-white/10 rounded-xl pl-8 pr-2.5 py-2 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
                         />
                       </div>
 
                       {/* Society / Property Name */}
                       <div className="relative">
-                        <Building2 className="w-3 h-3 absolute left-2.5 top-2.5 text-neutral-500" />
+                        <Building2 className="w-3.5 h-3.5 absolute left-3 top-3 text-neutral-500" />
                         <input
                           type="text"
                           value={propertyName}
                           onChange={(e) => setPropertyName(e.target.value)}
                           placeholder="Society / Property"
-                          className="w-full bg-[#111A15] border border-white/10 rounded-lg pl-7 pr-2 py-1.5 text-[11px] text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
+                          className="w-full bg-[#111A15] border border-white/10 rounded-xl pl-8 pr-2.5 py-2 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
                         />
                       </div>
                     </div>
@@ -364,12 +364,12 @@ export function BottomSheetForm({
 
                   {/* Section 2: Property Configuration & Scope */}
                   <div>
-                    <span className="text-[9px] font-mono font-bold tracking-wider text-[#C5A880] uppercase block mb-1">
+                    <span className="text-[10px] font-mono font-bold tracking-wider text-[#C5A880] uppercase block mb-1.5">
                       2. PROPERTY CONFIGURATION &amp; LOCATION
                     </span>
 
                     {/* Compact Chips Grid */}
-                    <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5 mb-1.5">
+                    <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-2">
                       {PROPERTY_TYPES.map((type) => {
                         const Icon = type.icon
                         const isSelected = selectedType === type.label
@@ -378,13 +378,13 @@ export function BottomSheetForm({
                             type="button"
                             key={type.id}
                             onClick={() => setSelectedType(type.label)}
-                            className={`flex items-center justify-center gap-1 py-1.5 px-1.5 rounded-lg text-center border text-[10px] font-medium transition-all ${
+                            className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-xl text-center border text-[11px] font-medium transition-all ${
                               isSelected
                                 ? 'bg-gradient-to-r from-[#C5A880]/25 to-[#A38356]/20 border-[#C5A880] text-white shadow-xs'
                                 : 'bg-[#111A15] border-white/10 text-neutral-400 hover:text-white hover:border-white/20'
                             }`}
                           >
-                            <Icon className={`w-3 h-3 shrink-0 ${isSelected ? 'text-[#C5A880]' : 'text-neutral-500'}`} />
+                            <Icon className={`w-3.5 h-3.5 shrink-0 ${isSelected ? 'text-[#C5A880]' : 'text-neutral-500'}`} />
                             <span className="truncate">{type.label.replace(' Complete Setup', '')}</span>
                           </button>
                         )
@@ -393,11 +393,11 @@ export function BottomSheetForm({
 
                     {/* Location Selector */}
                     <div className="relative">
-                      <MapPin className="w-3 h-3 absolute left-2.5 top-2.5 text-neutral-500" />
+                      <MapPin className="w-3.5 h-3.5 absolute left-3 top-3 text-neutral-500" />
                       <select
                         value={selectedLocation}
                         onChange={(e) => setSelectedLocation(e.target.value)}
-                        className="w-full bg-[#111A15] border border-white/10 rounded-lg pl-7 pr-3 py-1.5 text-[11px] text-white focus:outline-none focus:border-[#C5A880] transition-all appearance-none cursor-pointer"
+                        className="w-full bg-[#111A15] border border-white/10 rounded-xl pl-8 pr-3 py-2 text-xs text-white focus:outline-none focus:border-[#C5A880] transition-all appearance-none cursor-pointer"
                       >
                         {LOCATIONS.map((loc) => (
                           <option key={loc} value={loc} className="bg-[#090F0C] text-white">
@@ -408,9 +408,9 @@ export function BottomSheetForm({
                     </div>
                   </div>
 
-                  {/* Section 3: Aspirations & Timeline (Compact Single Line) */}
+                  {/* Section 3: Aspirations & Timeline */}
                   <div>
-                    <span className="text-[9px] font-mono font-bold tracking-wider text-[#C5A880] uppercase block mb-1">
+                    <span className="text-[10px] font-mono font-bold tracking-wider text-[#C5A880] uppercase block mb-1.5">
                       3. DESIGN ASPIRATIONS &amp; TIMELINE (OPTIONAL)
                     </span>
                     <input
@@ -418,34 +418,34 @@ export function BottomSheetForm({
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
                       placeholder="e.g. Possession in 60 days, minimalist German Blum kitchen..."
-                      className="w-full bg-[#111A15] border border-white/10 rounded-lg px-2.5 py-1.5 text-[11px] text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
+                      className="w-full bg-[#111A15] border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all"
                     />
                   </div>
 
                   {errorMessage && (
-                    <div className="p-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-[10px]">
+                    <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs">
                       {errorMessage}
                     </div>
                   )}
 
-                  {/* Submit CTA Button - Compact & Bold */}
-                  <div className="pt-0.5 space-y-1">
+                  {/* Submit CTA Button - Slightly taller & prominent */}
+                  <div className="pt-1 space-y-1.5">
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#DFBA73] via-[#FFEAA7] to-[#B59250] hover:from-[#F0D598] hover:to-[#C5A880] text-black font-extrabold text-xs uppercase tracking-wider shadow-[0_2px_15px_rgba(223,186,115,0.25)] transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
+                      className="w-full py-3 px-5 rounded-xl bg-gradient-to-r from-[#DFBA73] via-[#FFEAA7] to-[#B59250] hover:from-[#F0D598] hover:to-[#C5A880] text-black font-extrabold text-xs sm:text-[13px] uppercase tracking-wider shadow-[0_4px_20px_rgba(223,186,115,0.25)] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                     >
                       {loading ? (
                         <span>Processing Request...</span>
                       ) : (
                         <>
-                          <Send className="w-3.5 h-3.5" />
+                          <Send className="w-4 h-4" />
                           <span>Request Estimate</span>
                         </>
                       )}
                     </button>
-                    <p className="text-[9px] text-center text-neutral-500 flex items-center justify-center gap-1">
-                      <Lock className="w-2.5 h-2.5" />
+                    <p className="text-[10px] text-center text-neutral-500 flex items-center justify-center gap-1.5">
+                      <Lock className="w-3 h-3" />
                       <span>Strict NDA Protected • Free 3D Measurement &amp; Blueprint</span>
                     </p>
                   </div>
@@ -453,16 +453,16 @@ export function BottomSheetForm({
               )}
             </div>
 
-            {/* Footer Quick Bar - Compact */}
-            <div className="px-4 sm:px-6 py-2 bg-[#060B08] border-t border-white/5 flex items-center justify-between text-[11px] text-neutral-400 shrink-0">
-              <span className="text-[10px]">Need immediate consultation?</span>
+            {/* Footer Quick Bar */}
+            <div className="px-5 sm:px-7 py-2.5 bg-[#060B08] border-t border-white/5 flex items-center justify-between text-xs text-neutral-400 shrink-0">
+              <span className="text-[11px]">Need immediate consultation?</span>
               <a
                 href={siteConfig.whatsapp.directLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-medium text-[10px] transition-colors"
+                className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-medium text-[11px] transition-colors"
               >
-                <MessageCircle className="w-3 h-3" />
+                <MessageCircle className="w-3.5 h-3.5" />
                 <span>Chat on WhatsApp</span>
               </a>
             </div>
