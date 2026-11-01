@@ -109,13 +109,15 @@ export function LatestTrends() {
       aria-label="Latest Trends - 2025/2026 Luxury Interior Design Directions"
     >
       <div id="trends" className="-top-24 relative" />
-      {/* Ambient Radial Haze */}
+      {/* Ambient Radial Glow (Zero-GPU-Blur) */}
       <div
-        className="pointer-events-none absolute -top-32 -right-32 w-[600px] h-[450px] bg-[#C5A880]/[0.08] rounded-full blur-[140px]"
+        className="pointer-events-none absolute -top-32 -right-32 w-[600px] h-[450px] rounded-full"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(197,168,128,0.12) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -bottom-32 -left-32 w-[600px] h-[450px] bg-emerald-500/[0.04] rounded-full blur-[140px]"
+        className="pointer-events-none absolute -bottom-32 -left-32 w-[600px] h-[450px] rounded-full"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(16,185,129,0.08) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
 
@@ -224,7 +226,7 @@ export function LatestTrends() {
                 <span>Consult on this Trend</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
-              <span className="text-[11px] text-[#7E9388] font-mono">Turnkey Execution</span>
+              <span className="text-[11px] text-[#7E9388] font-mono">Complete Home Setup</span>
             </div>
           </div>
         </div>

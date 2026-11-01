@@ -42,7 +42,7 @@ const ADVANTAGE_CARDS: AdvantageCard[] = [
 ]
 
 export function GyAdvantage({ className = '' }: { className?: string }) {
-  const [activeCard, setActiveCard] = useState<number>(0)
+  const [activeCard, setActiveCard] = useState<number | null>(null)
 
   return (
     <section
@@ -52,13 +52,15 @@ export function GyAdvantage({ className = '' }: { className?: string }) {
     >
       <div id="why-gy" className="-top-24 relative" />
       <div id="why-choose-us" className="-top-24 relative" />
-      {/* Subtle Warm & Brass Ambient Radial Haze */}
+      {/* Subtle Warm & Brass Ambient Radial Glow (Zero-GPU-Blur) */}
       <div
-        className="pointer-events-none absolute -top-32 -left-32 w-[600px] h-[450px] bg-[#C5A880]/[0.05] rounded-full blur-[140px]"
+        className="pointer-events-none absolute -top-32 -left-32 w-[600px] h-[450px] rounded-full"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(197,168,128,0.09) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -bottom-32 -right-32 w-[600px] h-[450px] bg-[#C5A880]/[0.06] rounded-full blur-[140px]"
+        className="pointer-events-none absolute -bottom-32 -right-32 w-[600px] h-[450px] rounded-full"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(197,168,128,0.1) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
 
@@ -85,7 +87,7 @@ export function GyAdvantage({ className = '' }: { className?: string }) {
         </div>
 
         {/* 4 Cards Grid - Compact on Mobile, Slender on Desktop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 xl:gap-7 max-w-[1300px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 xl:gap-7 max-w-[1300px] pt-1" onMouseLeave={() => setActiveCard(null)}>
           {ADVANTAGE_CARDS.map((card, idx) => {
             const Icon = card.icon
             const isActive = activeCard === idx
@@ -93,6 +95,8 @@ export function GyAdvantage({ className = '' }: { className?: string }) {
             return (
               <div
                 key={card.number}
+                onClick={() => setActiveCard((prev) => (prev === idx ? null : idx))}
+                onTouchStart={() => setActiveCard((prev) => (prev === idx ? null : idx))}
                 onMouseEnter={() => setActiveCard(idx)}
                 className={`group relative rounded-xl sm:rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-0 sm:min-h-[290px] md:min-h-[310px] transition-all duration-300 cursor-default sm:cursor-pointer touch-manipulation select-none active:transform-none ${
                   isActive

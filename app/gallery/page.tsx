@@ -95,21 +95,21 @@ export default function GalleryArchivePage() {
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif font-bold text-[#121614] tracking-tight leading-[1.08] max-w-4xl mb-5">
             Our Real-World{' '}
             <span className="bg-gradient-to-r from-[#C5A880] via-[#DFBA73] to-[#8C6D3F] bg-clip-text text-transparent">
-              Turnkey Residences
+              Complete Residences
             </span>{' '}
             &amp; Sanctuaries
           </h1>
 
           {/* Subtitle */}
           <p className="text-sm sm:text-base md:text-lg text-[#2C3531]/75 max-w-3xl font-sans leading-relaxed mb-8">
-            Explore our turnkey builds across ATS Knightsbridge, DLF Magnolias, The Camellias, Jaypee Greens, and major luxury societies across Delhi NCR. Designed for refined living, built with zero-compromise German precision.
+            Explore our complete home builds across ATS Knightsbridge, DLF Magnolias, The Camellias, Jaypee Greens, and major luxury societies across Delhi NCR. Designed for refined living, built with zero-compromise German precision.
           </p>
 
           {/* Metric / Trust Pills Bar */}
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-8">
             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#2C3531]/10 text-xs sm:text-[13px] font-medium text-[#2C3531] shadow-xs">
               <Award className="w-4 h-4 text-[#C5A880]" />
-              <span>150+ Turnkey Homes Delivered</span>
+              <span>150+ Complete Homes Delivered</span>
             </div>
             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#2C3531]/10 text-xs sm:text-[13px] font-medium text-[#2C3531] shadow-xs">
               <Clock className="w-4 h-4 text-[#22c55e]" />
@@ -124,7 +124,7 @@ export default function GalleryArchivePage() {
           {/* Dual Action CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
             <a
-              href="https://wa.me/919999999999?text=Hello%20Green%20%26%20Young%20Team%2C%20I%20would%20like%20to%20discuss%20a%20turnkey%20interior%20project."
+              href="https://wa.me/919999999999?text=Hello%20Green%20%26%20Young%20Team%2C%20I%20would%20like%20to%20discuss%20a%20complete%20home%20setup%20project."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-md transition-all duration-300 hover:scale-[1.02]"
@@ -205,7 +205,7 @@ export default function GalleryArchivePage() {
               Showing <span className="font-bold text-[#121614]">{filteredProjects.length}</span> Projects
             </h2>
             <span className="text-[11px] font-mono text-[#8E9F96]">
-              All High-Resolution Archival Turnkey Handaways
+              All High-Resolution Archival Complete Handaways
             </span>
           </div>
 

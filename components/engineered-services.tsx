@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Compass,
   Layers,
@@ -62,7 +62,7 @@ const CAPABILITIES: CapabilityItem[] = [
   {
     id: 'turnkey-pm',
     number: '06',
-    title: 'WHITE-GLOVE TURNKEY PM',
+    title: 'WHITE-GLOVE PROJECT MANAGEMENT',
     description:
       'Dedicated on-site chartered project engineer, single-point accountability, 150-point audit, and strict timeline handover.',
     icon: ShieldCheck,
@@ -70,6 +70,7 @@ const CAPABILITIES: CapabilityItem[] = [
 ]
 
 export function EngineeredServices() {
+  const [activeCard, setActiveCard] = useState<number | null>(null)
   return (
     <section
       id="capabilities"
@@ -86,9 +87,10 @@ export function EngineeredServices() {
         aria-hidden="true"
       />
 
-      {/* Ambient Radial Glow */}
+      {/* Ambient Radial Glow (Zero-GPU-Blur) */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[#DFBA73]/5 rounded-full blur-[100px] pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(223,186,115,0.08) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
 
@@ -105,43 +107,76 @@ export function EngineeredServices() {
           </h2>
 
           <p className="text-xs sm:text-sm text-[#8E9F96] font-sans leading-relaxed">
-            We provide a complete turnkey ecosystem engineered for zero-compromise
+            We provide a complete home setup ecosystem engineered for zero-compromise
             luxury residential architecture across Noida &amp; Delhi NCR.
           </p>
         </div>
 
         {/* 6-Card Capability Matrix (Sleek & Low Profile) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
-          {CAPABILITIES.map((item) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4 pt-1" onMouseLeave={() => setActiveCard(null)}>
+          {CAPABILITIES.map((item, idx) => {
             const IconComponent = item.icon
+            const isActive = activeCard === idx
             return (
               <div
                 key={item.id}
-                className="group relative p-4.5 sm:p-5 rounded-xl bg-[#141916]/90 border border-white/8 hover:border-[#DFBA73]/40 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.35)] flex flex-col justify-between"
+                onClick={() => setActiveCard((prev) => (prev === idx ? null : idx))}
+                onTouchStart={() => setActiveCard((prev) => (prev === idx ? null : idx))}
+                onMouseEnter={() => setActiveCard(idx)}
+                className={`group relative p-4.5 sm:p-5 rounded-xl border transition-all duration-300 flex flex-col justify-between cursor-pointer select-none touch-manipulation active:scale-[0.99] ${
+                  isActive
+                    ? 'bg-[#18201b] border-[#DFBA73]/60 -translate-y-0.5 shadow-[0_8px_24px_rgba(223,186,115,0.18)]'
+                    : 'bg-[#141916]/90 border-white/8 hover:border-[#DFBA73]/40 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.35)]'
+                }`}
+                style={{ WebkitTapHighlightColor: 'transparent' }}
               >
                 <div>
                   {/* Top Row: Icon + Number */}
                   <div className="flex items-center justify-between mb-3">
-                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/70 group-hover:bg-[#DFBA73] group-hover:text-[#121614] group-hover:border-[#DFBA73] group-hover:scale-105 transition-all duration-300">
+                    <div
+                      className={`w-8 h-8 rounded-lg border flex items-center justify-center transition-all duration-300 ${
+                        isActive
+                          ? 'bg-[#DFBA73] text-[#121614] border-[#DFBA73] scale-105 shadow-sm shadow-[#DFBA73]/30'
+                          : 'bg-white/5 border-white/10 text-white/70 group-hover:bg-[#DFBA73] group-hover:text-[#121614] group-hover:border-[#DFBA73] group-hover:scale-105'
+                      }`}
+                    >
                       <IconComponent className="w-4 h-4" />
                     </div>
-                    <span className="font-mono text-lg font-bold text-white/20 group-hover:text-[#DFBA73]/40 transition-colors duration-300">
+                    <span
+                      className={`font-mono text-lg font-bold transition-colors duration-300 ${
+                        isActive ? 'text-[#DFBA73]/70' : 'text-white/20 group-hover:text-[#DFBA73]/40'
+                      }`}
+                    >
                       {item.number}
                     </span>
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xs sm:text-[13px] font-mono font-bold tracking-wider uppercase text-white mb-1.5 group-hover:text-[#DFBA73] transition-colors duration-300">
+                  <h3
+                    className={`text-xs sm:text-[13px] font-mono font-bold tracking-wider uppercase mb-1.5 transition-colors duration-300 ${
+                      isActive ? 'text-[#DFBA73]' : 'text-white group-hover:text-[#DFBA73]'
+                    }`}
+                  >
                     {item.title}
                   </h3>
-                  <p className="text-[11px] sm:text-xs text-white/60 leading-relaxed font-sans mb-3.5">
+                  <p
+                    className={`text-[11px] sm:text-xs leading-relaxed font-sans mb-3.5 transition-colors duration-300 ${
+                      isActive ? 'text-white/85' : 'text-white/60'
+                    }`}
+                  >
                     {item.description}
                   </p>
                 </div>
 
                 {/* Video Reference Hover Animation: Expanding Bottom Glow Bar */}
                 <div className="relative w-full h-[2.5px] flex items-center justify-center mt-1">
-                  <span className="h-full rounded-full bg-[#DFBA73] w-12 group-hover:w-full transition-all duration-500 ease-out shadow-[0_0_8px_rgba(223,186,115,0.4)] group-hover:shadow-[0_0_16px_rgba(223,186,115,0.85)]" />
+                  <span
+                    className={`h-full rounded-full bg-[#DFBA73] transition-all duration-500 ease-out ${
+                      isActive
+                        ? 'w-full shadow-[0_0_16px_rgba(223,186,115,0.85)]'
+                        : 'w-12 group-hover:w-full shadow-[0_0_8px_rgba(223,186,115,0.4)] group-hover:shadow-[0_0_16px_rgba(223,186,115,0.85)]'
+                    }`}
+                  />
                 </div>
               </div>
             )

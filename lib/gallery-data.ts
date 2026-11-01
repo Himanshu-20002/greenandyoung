@@ -34,7 +34,7 @@ export const GALLERY_PROJECTS: ProjectCaseStudy[] = [
   {
     id: 'ats-knightsbridge-duplex-suite',
     title: 'The Duplex Suite',
-    subtitle: 'Double-Height Turnkey Living Lounge with Travertine & Architectural Lighting',
+    subtitle: 'Double-Height Complete Living Lounge with Travertine & Architectural Lighting',
     society: 'ATS Knightsbridge',
     location: 'Sector 124, Noida Expressway',
     category: 'Living & Lounges',
@@ -46,7 +46,7 @@ export const GALLERY_PROJECTS: ProjectCaseStudy[] = [
     ],
     area: '6,200 sq.ft.',
     handoverYear: '2025',
-    executionType: 'Turnkey Architectural Interior',
+    executionType: 'Complete Architectural Interior',
     scope: 'Double-height civil reconfiguration, bespoke millwork, acoustic walling & smart automation',
     rendersCount: 6,
     description:
@@ -60,7 +60,7 @@ export const GALLERY_PROJECTS: ProjectCaseStudy[] = [
       { label: 'Super Built-Up Area', value: '6,200 sq.ft. Duplex' },
       { label: 'Turnaround Timeline', value: '75 Working Days' },
       { label: 'Ceiling Clearance', value: '22 Feet Double-Height' },
-      { label: 'Warranty & Support', value: '10-Year Turnkey Warranty' },
+      { label: 'Warranty & Support', value: '10-Year Complete Setup Warranty' },
     ],
     materials: [
       'Navona Italian Travertine',
@@ -134,7 +134,7 @@ export const GALLERY_PROJECTS: ProjectCaseStudy[] = [
     ],
     area: '850 sq.ft.',
     handoverYear: '2025',
-    executionType: 'Turnkey Luxury Bedroom Fit-Out',
+    executionType: 'Complete Luxury Bedroom Fit-Out',
     scope: 'Acoustic architectural walling, bespoke king bouclé bed, fluted walnut joinery, smart automated drape integration',
     rendersCount: 4,
     description:
@@ -221,7 +221,7 @@ export const GALLERY_PROJECTS: ProjectCaseStudy[] = [
     ],
     area: '480 sq.ft.',
     handoverYear: '2025',
-    executionType: 'Turnkey Wardrobe & Dressing Suite',
+    executionType: 'Complete Wardrobe & Dressing Suite',
     scope: 'Custom bronze aluminium extrusion framing, fluted glass doors, central watch island, shoe wall illumination',
     rendersCount: 5,
     description:
@@ -265,7 +265,7 @@ export const GALLERY_PROJECTS: ProjectCaseStudy[] = [
     ],
     area: '920 sq.ft.',
     handoverYear: '2025',
-    executionType: 'Turnkey Dining & Bar Fit-Out',
+    executionType: 'Complete Dining & Bar Fit-Out',
     scope: 'Monolithic table engineering, blown-glass chandelier mounting, climate-controlled wine wall, acoustics',
     rendersCount: 5,
     description:
@@ -405,7 +405,7 @@ export const GALLERY_PROJECTS: ProjectCaseStudy[] = [
     ],
     specs: [
       { label: 'Society', value: 'M3M Golfestate, Gurgaon' },
-      { label: 'Kitchen Style', value: 'Japandi Minimalist Turnkey' },
+      { label: 'Kitchen Style', value: 'Japandi Minimalist Setup' },
       { label: 'Cabinetry', value: 'Solid White Oak & Natural Fluting' },
       { label: 'Countertop', value: 'Calacatta Gold Bookmatched Marble' },
       { label: 'Ventilation', value: 'Integrated Flush Downdraft System' },
@@ -438,7 +438,7 @@ export const GALLERY_PROJECTS: ProjectCaseStudy[] = [
     ],
     area: '720 sq.ft.',
     handoverYear: '2024',
-    executionType: 'Turnkey Master Bedroom Renovation',
+    executionType: 'Complete Master Bedroom Renovation',
     scope: 'Full acoustic headboard wall, chevron oak parquet, indirect architectural tray lighting, motorized curtains',
     rendersCount: 4,
     description:
@@ -524,7 +524,7 @@ export const GALLERY_PROJECTS: ProjectCaseStudy[] = [
     ],
     area: '310 sq.ft. Dedicated Sanctum',
     handoverYear: '2025',
-    executionType: 'Turnkey Spiritual Sanctum',
+    executionType: 'Complete Spiritual Sanctum',
     scope: 'Waterjet Statuario lotus brass inlay, floating white marble sanctum counter, teak architraves, ambient gold cove',
     rendersCount: 4,
     description:

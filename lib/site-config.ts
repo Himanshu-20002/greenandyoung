@@ -58,9 +58,9 @@ export const siteConfig: SiteConfig = {
   legalName: "Green & Young Interiors",
   shortName: "Green & Young",
   tagline: "Design Your Home With The Experts",
-  subTagline: "3D Design & Measurement • Turnkey Home & Office Interiors",
+  subTagline: "3D Design & Measurement • Complete Home & Office Setup",
   description:
-    "Transform your living space with Green & Young Interiors. Premier turnkey interior design, modular kitchens, luxury living spaces, and 3D architectural planning across Noida, Greater Noida, and Delhi NCR.",
+    "Transform your living space with Green & Young Interiors. Premier complete home interior design, modular kitchens, luxury living spaces, and 3D architectural planning across Noida, Greater Noida, and Delhi NCR.",
   url: "https://greenandyoung.in",
   phone: {
     primary: "+91 99718 13161",

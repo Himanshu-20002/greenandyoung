@@ -52,7 +52,7 @@ const PILLARS = [
 
 export function Services() {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [activePillar, setActivePillar] = useState<number>(0)
+  const [activePillar, setActivePillar] = useState<number | null>(null)
 
   // 120 FPS Optimization: Pause video decoding when scrolled off-screen
   useEffect(() => {
@@ -95,10 +95,10 @@ export function Services() {
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#121614]/5 border border-[#121614]/10 text-[#8C6D3F] text-xs font-mono tracking-widest uppercase mb-3 shadow-xs">
               <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
-              <span>/ TURNKEY CAPABILITIES · 3D DESIGN &amp; MEASUREMENT</span>
+              <span>/ COMPLETE HOME SETUP · 3D DESIGN &amp; MEASUREMENT</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-[#121614] tracking-tight">
-              Interior Architecture &amp;<br /> Turnkey Services
+              Interior Architecture &amp;<br /> Complete Home Setup
             </h2>
           </div>
           <p className="text-sm sm:text-base text-[#2C3531]/75 max-w-xl font-sans leading-relaxed">
@@ -235,11 +235,11 @@ export function Services() {
               THE GREEN &amp; YOUNG STANDARD
             </span>
             <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#FAF8F5]">
-              Seamless Turnkey Experience
+              Seamless Complete Home Setup
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 pt-1" onMouseLeave={() => setActivePillar(null)}>
             {PILLARS.map((pillar, idx) => {
               const Icon = pillar.icon
               const isActive = activePillar === idx
@@ -247,8 +247,8 @@ export function Services() {
               return (
                 <div
                   key={pillar.number}
-                  onClick={() => setActivePillar(idx)}
-                  onTouchStart={() => setActivePillar(idx)}
+                  onClick={() => setActivePillar((prev) => (prev === idx ? null : idx))}
+                  onTouchStart={() => setActivePillar((prev) => (prev === idx ? null : idx))}
                   onMouseEnter={() => setActivePillar(idx)}
                   className={`group p-5 rounded-2xl transition-all duration-300 flex flex-col justify-between cursor-pointer select-none touch-manipulation ${
                     isActive

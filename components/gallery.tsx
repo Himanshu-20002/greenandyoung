@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { X } from 'lucide-react'
+import { X, ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GALLERY_PROJECTS } from '@/lib/gallery-data'
@@ -127,7 +127,7 @@ export function Gallery({ initialImages = [] }: Props) {
               <Link
                 key={image.id}
                 href={`/gallery/${projectSlug}`}
-                className="relative h-64 rounded-xl overflow-hidden cursor-pointer group shadow-md block"
+                className="relative h-64 rounded-xl overflow-hidden cursor-pointer group shadow-md hover:shadow-lg transition-all duration-300 block"
               >
                 <Image
                   src={image.imageUrl}
@@ -140,17 +140,25 @@ export function Gallery({ initialImages = [] }: Props) {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="text-center p-4">
-                    <p className="text-white font-bold text-lg leading-snug">
-                      {image.caption || 'Turnkey Project'}
-                    </p>
-                    <p className="text-[#DFBA73] font-semibold text-xs mt-1 uppercase tracking-widest">
-                      {image.category}
-                    </p>
-                    <span className="inline-flex items-center gap-1.5 mt-3 px-3.5 py-1 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-[11px] font-mono tracking-wider transition-colors">
-                      View Case Study →
+                {/* Minimal Top-Left Category Micro-Pill */}
+                <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-mono font-medium tracking-wider uppercase bg-black/40 backdrop-blur-[2px] text-[#DFBA73] border border-white/15">
+                    <span className="w-1 h-1 rounded-full bg-[#DFBA73]" />
+                    {image.category}
+                  </span>
+                </div>
+
+                {/* Minimal Bottom Fade Scrim (Reduced tint, image stays clear & vibrant) */}
+                <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/75 via-black/25 to-transparent pt-8 pb-3 px-3.5 flex flex-col justify-end">
+                  <h3 className="text-white font-serif font-bold text-xs sm:text-[13px] leading-snug line-clamp-1 drop-shadow-md group-hover:text-[#FFEAA7] transition-colors">
+                    {image.caption || 'Bespoke Complete Home Setup'}
+                  </h3>
+                  <div className="mt-0.5 flex items-center justify-between text-[10px] font-mono">
+                    <span className="text-white/60 text-[9px] uppercase tracking-wider">
+                      Complete Setup
+                    </span>
+                    <span className="text-[#DFBA73] font-medium group-hover:translate-x-0.5 transition-transform">
+                      View Details →
                     </span>
                   </div>
                 </div>
@@ -228,7 +236,7 @@ export function Gallery({ initialImages = [] }: Props) {
                     />
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-sm border border-white/10 px-6 py-2.5 rounded-full text-center max-w-sm">
                       <p className="text-white font-bold text-sm">
-                        {currentImg.caption || 'Turnkey Project'}
+                        {currentImg.caption || 'Complete Home Project'}
                       </p>
                       <p className="text-[#DFBA73] text-[10px] font-bold uppercase tracking-wider mt-0.5">
                         {currentImg.category}

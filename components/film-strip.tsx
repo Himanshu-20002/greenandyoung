@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 interface StripItem {
   text: string
@@ -13,7 +13,7 @@ const STRIP_ITEMS: StripItem[] = [
   {
     text: 'LUXURY INTERIOR DESIGN',
     highlight: 'Bespoke Craftsmanship',
-    badge: 'TURNKEY',
+    badge: 'COMPLETE SETUP',
     symbol: '✦',
   },
   {
@@ -57,11 +57,28 @@ const STRIP_ITEMS: StripItem[] = [
 ]
 
 export function FilmStrip() {
+  const [isInView, setIsInView] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { rootMargin: '200px 0px', threshold: 0 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   // Triple the array for an unbroken, perfectly seamless marquee loop
   const ribbon = [...STRIP_ITEMS, ...STRIP_ITEMS, ...STRIP_ITEMS]
 
   return (
     <div
+      ref={containerRef}
       className="relative w-full py-2 sm:py-3 bg-[#FAF8F5] overflow-hidden select-none"
       aria-label="Green and Young Highlights"
     >
@@ -99,7 +116,7 @@ export function FilmStrip() {
         />
 
         {/* Scrolling Typography Track */}
-        <div className="text-strip-track flex items-center gap-6 sm:gap-10">
+        <div className="text-strip-track flex items-center gap-6 sm:gap-10" style={{ animationPlayState: isInView ? 'running' : 'paused' }}>
           {ribbon.map((item, index) => (
             <div
               key={`${item.text}-${index}`}

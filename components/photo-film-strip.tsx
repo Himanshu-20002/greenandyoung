@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 
 interface FilmFrame {
@@ -16,7 +16,7 @@ const FILM_FRAMES: FilmFrame[] = [
     id: 'f-1',
     src: '/images/interiors/penthouse-living.jpg',
     title: 'THE DUPLEX SUITE',
-    caption: 'Double-Height Turnkey Living',
+    caption: 'Double-Height Complete Living',
     frameNumber: '01A',
   },
   {
@@ -71,11 +71,27 @@ const FILM_FRAMES: FilmFrame[] = [
 ]
 
 export function PhotoFilmStrip() {
+  const [isInView, setIsInView] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { rootMargin: '200px 0px', threshold: 0 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   // Duplicated for continuous horizontal marquee glide
   const frames = [...FILM_FRAMES, ...FILM_FRAMES]
 
   return (
-    <div className="relative w-full pt-8 pb-4 bg-[#FAF8F5] overflow-hidden select-none">
+    <div ref={containerRef} className="relative w-full pt-8 pb-4 bg-[#FAF8F5] overflow-hidden select-none">
       {/* Self-contained CSS Animation for seamless glide */}
       <style>{`
         @keyframes photoFilmStripScroll {
@@ -131,7 +147,7 @@ export function PhotoFilmStrip() {
         />
 
         {/* Moving Film Frames */}
-        <div className="photo-film-strip-track flex items-center gap-4 sm:gap-6 py-3 px-4">
+        <div className="photo-film-strip-track flex items-center gap-4 sm:gap-6 py-3 px-4" style={{ animationPlayState: isInView ? 'running' : 'paused' }}>
           {frames.map((frame, index) => (
             <div
               key={`${frame.id}-${index}`}
@@ -152,8 +168,8 @@ export function PhotoFilmStrip() {
                   fill
                   sizes="(max-width: 640px) 250px, (max-width: 768px) 290px, 330px"
                   className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  quality={95}
-                  loading="eager"
+                  quality={80}
+                  loading={index < 3 ? 'eager' : 'lazy'}
                 />
               </div>
 

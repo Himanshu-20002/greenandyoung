@@ -139,35 +139,53 @@ export default async function Page() {
       <ErrorBoundary>
         <Hero slides={plainSlides} />
       </ErrorBoundary>
-      <ErrorBoundary>
-        <EngineeredServices />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <StatsStrip />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <Services />
-      </ErrorBoundary>
+      <div className="section-render-optimize">
+        <ErrorBoundary>
+          <EngineeredServices />
+        </ErrorBoundary>
+      </div>
+      <div className="section-render-optimize">
+        <ErrorBoundary>
+          <StatsStrip />
+        </ErrorBoundary>
+      </div>
+      <div className="section-render-optimize">
+        <ErrorBoundary>
+          <Services />
+        </ErrorBoundary>
+      </div>
 
-      <ErrorBoundary>
-        <Gallery initialImages={plainGalleryImages} />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <BrandShowcase />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <Reviews />
-      </ErrorBoundary>
+      <div className="section-render-optimize">
+        <ErrorBoundary>
+          <Gallery initialImages={plainGalleryImages} />
+        </ErrorBoundary>
+      </div>
+      <div className="section-render-optimize">
+        <ErrorBoundary>
+          <BrandShowcase />
+        </ErrorBoundary>
+      </div>
+      <div className="section-render-optimize">
+        <ErrorBoundary>
+          <Reviews />
+        </ErrorBoundary>
+      </div>
 
-      <ErrorBoundary>
-        <BeforeAfter initialImages={plainBeforeAfterImages} />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <PhotoFilmStrip />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <ClientQuote />
-      </ErrorBoundary>
+      <div className="section-render-optimize">
+        <ErrorBoundary>
+          <BeforeAfter initialImages={plainBeforeAfterImages} />
+        </ErrorBoundary>
+      </div>
+      <div className="section-render-optimize">
+        <ErrorBoundary>
+          <PhotoFilmStrip />
+        </ErrorBoundary>
+      </div>
+      <div className="section-render-optimize">
+        <ErrorBoundary>
+          <ClientQuote />
+        </ErrorBoundary>
+      </div>
       <div className="section-render-optimize">
         <ErrorBoundary>
           <WallOfFame />

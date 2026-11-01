@@ -38,9 +38,9 @@ export function Footer() {
       {/* Outer Floating Panoramic Card Shell */}
       <div className="relative w-full max-w-[1700px] mx-auto bg-[#07110C] text-[#8E9F96] rounded-[24px] sm:rounded-[36px] md:rounded-[44px] border border-[#14281E] px-6 sm:px-10 md:px-12 py-7 sm:py-9 md:py-10 overflow-hidden shadow-2xl">
         
-        {/* Subtle Ambient Radial Glow */}
-        <div className="absolute -top-32 -left-32 w-80 h-80 bg-[#C5A880]/[0.03] rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute -bottom-32 -right-32 w-80 h-80 bg-emerald-500/[0.03] rounded-full blur-[120px] pointer-events-none" />
+        {/* Subtle Ambient Radial Glow (Zero-GPU-Blur) */}
+        <div className="absolute -top-32 -left-32 w-80 h-80 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(197,168,128,0.06) 0%, transparent 70%)' }} />
+        <div className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 70%)' }} />
 
         {/* Top Header Row with Social Rail + Whimsical Badge */}
         <div className="flex items-center justify-between gap-4 mb-6 sm:mb-8">
@@ -80,7 +80,7 @@ export function Footer() {
           {/* Whimsical / Playful Studio Badge (Top Right) */}
           <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/5 text-[11px] text-[#A2B3AA] tracking-wide">
             <Sparkles className="w-3 h-3 text-[#C5A880]" />
-            <span>Turnkey Architectural Luxury • Delhi NCR</span>
+            <span>Complete Architectural Luxury • Delhi NCR</span>
           </div>
         </div>
 
@@ -124,7 +124,7 @@ export function Footer() {
 
             {/* Brief Narrative */}
             <p className="text-xs text-[#7E9388] leading-relaxed max-w-sm">
-              Bespoke residential architectural execution, modular German fittings, and turnkey spatial elegance.
+              Bespoke residential architectural execution, modular German fittings, and complete spatial elegance.
             </p>
           </div>
 

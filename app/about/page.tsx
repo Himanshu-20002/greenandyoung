@@ -21,9 +21,9 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'About Green & Young | Turnkey Luxury Interior Designers in Delhi NCR',
+  title: 'About Green & Young | Complete Home Luxury Interior Designers in Delhi NCR',
   description:
-    'Learn about Green & Young Interiors. Founded in 2019, Green & Young delivers bespoke turnkey residential interiors, German modular engineering, and architectural luxury across Noida, Greater Noida, and Delhi NCR.',
+    'Learn about Green & Young Interiors. Founded in 2019, Green & Young delivers bespoke complete residential interiors, German modular engineering, and architectural luxury across Noida, Greater Noida, and Delhi NCR.',
 }
 
 const PILLARS = [
@@ -51,7 +51,7 @@ const PILLARS = [
 
 const KEY_METRICS = [
   { value: '500+', label: 'Luxury Residences Crafted' },
-  { value: '45 Days', label: 'Average Turnkey Handover' },
+  { value: '45 Days', label: 'Average Complete Handover' },
   { value: '10 Years', label: 'Modular Cabinetry Warranty' },
   { value: '8+', label: 'National Industry Awards' },
 ]

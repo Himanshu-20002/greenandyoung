@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: `${siteConfig.legalName} | Luxury Turnkey Interiors`,
+    title: `${siteConfig.legalName} | Luxury Complete Home Interiors`,
     description: siteConfig.description,
     type: 'website',
     url: siteConfig.url,
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.legalName} | Luxury Turnkey Interiors`,
+    title: `${siteConfig.legalName} | Luxury Complete Home Interiors`,
     description: siteConfig.description,
     images: [siteConfig.assets.ogImage],
   },
@@ -128,7 +128,7 @@ export default function RootLayout({
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "Luxury Residential Turnkey Interiors",
+                      "name": "Luxury Residential Complete Home Interiors",
                       "description": "Complete 3 BHK, 4 BHK, Villa interior designing, false ceiling & 3D measurements."
                     }
                   },

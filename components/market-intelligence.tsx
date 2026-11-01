@@ -89,13 +89,15 @@ export function MarketIntelligence() {
         background: 'linear-gradient(180deg, #06120B 0%, #091910 24%, #0D2418 42%, #EEF4F0 72%, #FAF8F5 100%)',
       }}
     >
-      {/* Luxury Champagne Brass & Deep Forest Ambient Glow */}
+      {/* Luxury Champagne Brass & Deep Forest Ambient Radial Glow (Zero-GPU-Blur) */}
       <div
-        className="pointer-events-none absolute -top-24 left-1/4 w-[700px] h-[320px] bg-[#C5A880]/[0.06] rounded-full blur-[140px] transform-gpu"
+        className="pointer-events-none absolute -top-24 left-1/4 w-[700px] h-[320px] rounded-full transform-gpu"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(197,168,128,0.1) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute top-1/4 right-1/4 w-[550px] h-[280px] bg-[#0E2E1F]/[0.16] rounded-full blur-[130px] transform-gpu"
+        className="pointer-events-none absolute top-1/4 right-1/4 w-[550px] h-[280px] rounded-full transform-gpu"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(14,46,31,0.25) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
 
@@ -168,7 +170,7 @@ export function MarketIntelligence() {
           {/* Right: Subtitle Narrative & Category Filters & Controls - Lowered down intentionally */}
           <div className="max-w-xl lg:text-right flex flex-col lg:items-end pt-2 sm:pt-4 lg:pt-14">
             <p className="text-xs sm:text-sm text-[#A8A29E] font-normal leading-relaxed">
-              Authoritative architectural briefings, lifecycle material audits, and turnkey intelligence curated by Green &amp; Young&apos;s senior project engineers.
+              Authoritative architectural briefings, lifecycle material audits, and complete home intelligence curated by Green &amp; Young&apos;s senior project engineers.
             </p>
 
             <div className="flex flex-wrap items-center gap-2 lg:justify-end mt-4">

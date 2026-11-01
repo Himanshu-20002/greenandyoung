@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Star, Sparkles, Quote } from 'lucide-react'
 import { openEstimateSheet } from './bottom-sheet-form'
 
@@ -19,7 +19,7 @@ const reviews: ReviewItem[] = [
     initials: 'VM',
     property: 'Godrej Woods, Sector 43, Noida (4 BHK)',
     rating: 5,
-    tag: 'Turnkey Handover',
+    tag: 'Complete Handover',
     text: 'From the Italian marble polishing to the custom fluted acoustic living room, Green & Young delivered pure perfection in 45 days. The 3D VR walkthrough matched the physical handover 1:1.',
   },
   {
@@ -36,7 +36,7 @@ const reviews: ReviewItem[] = [
     property: 'Jaypee Greens, Greater Noida (Golf Villa)',
     rating: 5,
     tag: 'Villa Architecture',
-    text: 'Our double-height chandelier feature wall and custom onyx-backlit Mandir are absolute showstoppers. Their turnkey design team handled civil & MEP hurdles effortlessly.',
+    text: 'Our double-height chandelier feature wall and custom onyx-backlit Mandir are absolute showstoppers. Their complete interior team handled civil & MEP hurdles effortlessly.',
   },
   {
     name: 'Siddharth & Priya Singhania',
@@ -59,7 +59,7 @@ const reviews: ReviewItem[] = [
     initials: 'HR',
     property: 'Ace Starlit, Sector 152, Noida (4 BHK)',
     rating: 5,
-    tag: 'Turnkey Handover',
+    tag: 'Complete Handover',
     text: 'The master suite with its floating vanity and ambient warm cove lighting exceeded every expectation. Green & Young turned our bare apartment shell into an architectural masterpiece.',
   },
   {
@@ -82,15 +82,30 @@ const reviews: ReviewItem[] = [
 
 export function Reviews() {
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
+  const [isInView, setIsInView] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { rootMargin: '200px 0px', threshold: 0 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   // Duplicate reviews array to ensure seamless infinite looping
   const duplicatedReviews = [...reviews, ...reviews]
 
   return (
-    <section id="reviews" className="py-12 sm:py-16 md:py-20 bg-[#060A07] relative overflow-hidden text-[#8E9F96]">
+    <section ref={sectionRef} id="reviews" className="py-12 sm:py-16 md:py-20 bg-[#060A07] relative overflow-hidden text-[#8E9F96]">
       {/* Luxury Editorial Ambient Backlights */}
-      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#C5A880]/[0.04] rounded-full blur-[160px] pointer-events-none transform-gpu" />
-      <div className="absolute bottom-1/4 right-1/3 translate-x-1/2 translate-y-1/2 w-[600px] h-[320px] bg-[#142318]/[0.3] rounded-full blur-[140px] pointer-events-none transform-gpu" />
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] rounded-full pointer-events-none transform-gpu" style={{ background: 'radial-gradient(ellipse at center, rgba(197,168,128,0.08) 0%, transparent 70%)' }} />
+      <div className="absolute bottom-1/4 right-1/3 translate-x-1/2 translate-y-1/2 w-[600px] h-[320px] rounded-full pointer-events-none transform-gpu" style={{ background: 'radial-gradient(ellipse at center, rgba(20,35,24,0.45) 0%, transparent 70%)' }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Editorial Section Header */}
@@ -130,7 +145,7 @@ export function Reviews() {
         />
 
         {/* Moving Ticker with Smoked Obsidian & Champagne Brass Cards */}
-        <div className="animate-marquee-reviews flex items-stretch gap-4 sm:gap-5 py-3 px-4">
+        <div className="animate-marquee-reviews flex items-stretch gap-4 sm:gap-5 py-3 px-4" style={{ animationPlayState: isInView ? 'running' : 'paused' }}>
           {duplicatedReviews.map((review, idx) => {
             const isActive = activeIdx === idx
             return (

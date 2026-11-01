@@ -24,7 +24,7 @@ import {
 import { siteConfig } from '@/lib/site-config'
 
 const PROPERTY_TYPES = [
-  { id: '3-bhk', label: '3 BHK Turnkey', icon: Home },
+  { id: '3-bhk', label: '3 BHK Complete Setup', icon: Home },
   { id: '4-bhk-penthouse', label: '4 BHK / Penthouse', icon: Sparkles },
   { id: 'luxury-villa', label: 'Luxury Villa', icon: Compass },
   { id: 'modular-kitchen', label: 'Modular Kitchen', icon: Layers },
@@ -112,7 +112,7 @@ export function BottomSheetForm({
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [propertyName, setPropertyName] = useState('')
-  const [selectedType, setSelectedType] = useState('3 BHK Turnkey')
+  const [selectedType, setSelectedType] = useState('3 BHK Complete Setup')
   const [selectedLocation, setSelectedLocation] = useState(LOCATIONS[0])
   const [notes, setNotes] = useState('')
 
@@ -217,7 +217,7 @@ export function BottomSheetForm({
                   Plan Your Dream Home
                 </h3>
                 <p className="text-xs text-neutral-400">
-                  layout measurement &amp; turnkey quotation
+                  layout measurement &amp; complete home quotation
                 </p>
               </div>
 

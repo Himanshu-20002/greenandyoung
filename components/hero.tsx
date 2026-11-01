@@ -52,20 +52,20 @@ const fallbackSlides: HeroSlide[] = [
     bgImage: '/images/interiors/penthouse-living.jpg',
     frameImage: '/images/interiors/penthouse-living.jpg',
     badgeText: 'Free 3D Laser Measurement',
-    badgeLabel: 'TURNKEY FIT-OUT',
-    imageAlt: 'Turnkey Luxury Living & Penthouse Fit-Out by Green & Young',
+    badgeLabel: 'COMPLETE HOME SETUP',
+    imageAlt: 'Complete Luxury Living & Penthouse Setup by Green & Young',
     campaignName: 'Penthouse Campaign',
     categoryId: 'turnkey-residences',
     packageId: 'pkg-3bhk-turnkey',
     category: {
       id: 'turnkey-residences',
-      name: 'Turnkey Residences',
+      name: 'Complete Home Residences',
       slug: 'turnkey-residences',
       gender: 'RESIDENTIAL'
     },
     package: {
       id: 'pkg-3bhk-turnkey',
-      title: '3 BHK Turnkey Fit-Out',
+      title: '3 BHK Complete Home Setup',
       slug: '3-bhk-turnkey',
       portfolioItems: [
         { imageUrl: '/images/interiors/penthouse-living.jpg', title: 'Duplex Living Lounge' },
@@ -140,7 +140,22 @@ export function Hero({ slides = [] }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isInView, setIsInView] = useState(true)
   const [particles, setParticles] = useState<{ id: number; left: string; size: number; delay: number; duration: number }[]>([])
+  const heroRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const el = heroRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { threshold: 0.05 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   const handlePrev = useCallback(() => {
     setCurrentIndex((prev) => (prev === 0 ? activeSlides.length - 1 : prev - 1))
@@ -151,6 +166,10 @@ export function Hero({ slides = [] }: Props) {
   }, [activeSlides.length])
 
   useEffect(() => {
+    if (!isInView) {
+      setParticles([])
+      return
+    }
     // Generate tiny, star-like falling glitter particles on slide change
     const newParticles = Array.from({ length: 45 }).map((_, i) => ({
       id: Date.now() + i,
@@ -199,12 +218,12 @@ export function Hero({ slides = [] }: Props) {
 
   // Autoplay Rotation (7.5 Seconds)
   useEffect(() => {
-    if (isPaused) return
+    if (isPaused || !isInView) return
     const interval = setInterval(() => {
       handleNext()
     }, 7500)
     return () => clearInterval(interval)
-  }, [isPaused, handleNext])
+  }, [isPaused, isInView, handleNext])
 
   const handleDotClick = (idx: number) => {
     setCurrentIndex(idx)
@@ -271,6 +290,7 @@ export function Hero({ slides = [] }: Props) {
     <>
       {/* SECTION 1: Clean 100vh First Viewport Fold (Zero Cutoffs) */}
       <section
+        ref={heroRef}
         id="home"
         className="min-h-[100dvh] lg:h-[100dvh] bg-[#0F0D0C] pt-40 sm:pt-32 lg:pt-22 pb-4 sm:pb-6 px-4 md:px-8 relative overflow-hidden flex flex-col justify-between"
         onMouseEnter={() => setIsPaused(true)}
@@ -313,8 +333,8 @@ export function Hero({ slides = [] }: Props) {
         </div>
 
         {/* Glow overlays */}
-        <div className="absolute top-1/4 left-1/10 w-80 h-80 bg-accent/5 rounded-full blur-[120px] pointer-events-none z-0" />
-        <div className="absolute bottom-1/3 right-1/10 w-96 h-96 bg-accent/5 rounded-full blur-[140px] pointer-events-none z-0" />
+        <div className="absolute top-1/4 left-1/10 w-80 h-80 rounded-full pointer-events-none z-0" style={{ background: 'radial-gradient(circle, rgba(197,168,128,0.12) 0%, transparent 70%)' }} />
+        <div className="absolute bottom-1/3 right-1/10 w-96 h-96 rounded-full pointer-events-none z-0" style={{ background: 'radial-gradient(circle, rgba(197,168,128,0.1) 0%, transparent 70%)' }} />
 
         {/* Main Split Grid (Content & Model) */}
         <div className="max-w-7xl mx-auto w-full flex-grow flex items-center z-10 py-1 sm:py-2 relative">
@@ -353,7 +373,7 @@ export function Hero({ slides = [] }: Props) {
                     {activeSlide.badgeText || '3D Design & Measurement'}
                   </span>
                   <span className="block text-[8px] uppercase tracking-widest text-white/50 mt-0.5">
-                    Turnkey Interior Execution
+                    Complete Home Setup
                   </span>
                 </div>
               </div>
@@ -552,7 +572,7 @@ export function Hero({ slides = [] }: Props) {
         </div>
       </section>
 
-      {/* SECTION 2: Turnkey Spaces Lookbook & 4 Value Proposition Cards (Seamless Gradient & High Contrast) */}
+      {/* SECTION 2: Complete Living Spaces Lookbook & 4 Value Proposition Cards (Seamless Gradient & High Contrast) */}
       <section
         id="hero-lookbook"
         className="relative bg-gradient-to-b from-[#0F0D0C] via-[#F3E5CA] to-[#FAF8F5] pt-12 pb-16 px-4 md:px-8 overflow-hidden select-none"
@@ -562,10 +582,10 @@ export function Hero({ slides = [] }: Props) {
           <div className="flex items-center justify-between">
             <div>
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#DFBA73] block drop-shadow-xs">
-                {hasPackagePortfolio ? `${activeSlide.package?.title} lookbook` : 'Turnkey Spaces'}
+                {hasPackagePortfolio ? `${activeSlide.package?.title} lookbook` : 'Complete Living Spaces'}
               </span>
               <p className="text-xs sm:text-sm text-white/80 font-medium mt-1">
-                Real residential transformations &amp; turnkey execution across Delhi NCR
+                Real residential transformations &amp; complete home setup across Delhi NCR
               </p>
             </div>
             <div className="flex gap-2">

@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { Award, Trophy, Star, ShieldCheck, Sparkles } from 'lucide-react'
 
@@ -24,7 +24,7 @@ export const AWARDS_DATA: AwardItem[] = [
     category: 'STATE & MEDIA HONOR',
     conclave: 'Dainik Jagran Leadership Conclave',
     description:
-      'Presented by Gautam Buddha Nagar Police Commissioner Laxmi Singh and MLA Pankaj Singh for exemplary integrity, execution speed, and quality in turnkey luxury interiors.',
+      'Presented by Gautam Buddha Nagar Police Commissioner Laxmi Singh and MLA Pankaj Singh for exemplary integrity, execution speed, and quality in complete luxury interiors.',
     image: '/awards/Award0.jpg',
   },
   {
@@ -35,7 +35,7 @@ export const AWARDS_DATA: AwardItem[] = [
     category: 'INDUSTRY TITANS',
     conclave: 'Business Titans Dubai Conclave',
     description:
-      'Awarded at the prestigious Business Titans Dubai Conclave for groundbreaking luxury home transformations and superior turnkey execution.',
+      'Awarded at the prestigious Business Titans Dubai Conclave for groundbreaking luxury home transformations and superior complete home execution.',
     image: '/awards/Award1.jpg',
   },
   {
@@ -107,11 +107,28 @@ export const AWARDS_DATA: AwardItem[] = [
 ]
 
 export function WallOfFame() {
+  const [isInView, setIsInView] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { rootMargin: '200px 0px', threshold: 0 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   // Seamless loop marquee data
   const duplicatedAwards = [...AWARDS_DATA, ...AWARDS_DATA]
 
   return (
     <section
+      ref={sectionRef}
       id="achievements"
       className="relative w-full pt-8 sm:pt-10 md:pt-12 pb-12 sm:pb-16 bg-[#FAF8F5] overflow-hidden"
       aria-label="Achievements - Awards and Recognitions"
@@ -148,9 +165,10 @@ export function WallOfFame() {
         }
       `}</style>
 
-      {/* Subtle Warm Luxury Ambient Glow */}
+      {/* Subtle Warm Luxury Ambient Radial Glow (Zero-GPU-Blur) */}
       <div
-        className="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-[#C5A880]/15 rounded-full blur-[140px]"
+        className="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 w-[720px] h-[360px] rounded-full"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(197,168,128,0.14) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
 
@@ -199,7 +217,7 @@ export function WallOfFame() {
         />
 
         {/* Moving Cards Track - 120 FPS Optimized */}
-        <div className="fame-marquee-track px-4 gap-5 sm:gap-6">
+        <div className="fame-marquee-track px-4 gap-5 sm:gap-6" style={{ animationPlayState: isInView ? 'running' : 'paused' }}>
           {duplicatedAwards.map((item, index) => (
             <article
               key={`${item.id}-${index}`}
@@ -214,9 +232,8 @@ export function WallOfFame() {
                     fill
                     sizes="(max-width: 640px) 310px, (max-width: 768px) 345px, 360px"
                     className="object-cover object-[center_8%] transition-transform duration-500 ease-out group-hover:scale-105"
-                    priority={index < 8}
-                    loading="eager"
-                    quality={90}
+                    loading={index < 3 ? 'eager' : 'lazy'}
+                    quality={80}
                   />
 
                   {/* Top-Left Category Transparent Glass Micro-Pill */}

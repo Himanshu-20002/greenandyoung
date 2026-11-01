@@ -16,22 +16,33 @@ export function Header() {
   const navLinks = siteConfig.navLinks
 
   useEffect(() => {
+    let rafId: number | null = null
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 25)
+      if (rafId !== null) return
+      rafId = window.requestAnimationFrame(() => {
+        const scrolled = window.scrollY > 25
+        setIsScrolled((prev) => (prev !== scrolled ? scrolled : prev))
+        rafId = null
+      })
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (rafId !== null) window.cancelAnimationFrame(rafId)
+    }
   }, [])
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      {/* Collapsible Professional TopBar on scroll */}
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform-gpu" style={{ transform: 'translateZ(0)' }}>
+      {/* Collapsible Professional TopBar on scroll (Reflow-Free CSS Grid Transition) */}
       <div
-        className={`transition-all duration-300 ease-in-out overflow-hidden ${isScrolled ? 'max-h-0 opacity-50 pointer-events-none' : 'max-h-20 opacity-100'
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${isScrolled ? 'grid-rows-[0fr] opacity-0 pointer-events-none' : 'grid-rows-[1fr] opacity-100'
           }`}
       >
-        <TopBar />
+        <div className="overflow-hidden">
+          <TopBar />
+        </div>
       </div>
 
       {/* Main Navbar with Glassmorphism and Dynamic Padding */}
@@ -47,7 +58,7 @@ export function Header() {
             {!logoError ? (
               <Image
                 src={siteConfig.assets.logo}
-                alt="Green & Young Interiors — Luxury Turnkey Interior Designers"
+                alt="Green & Young Interiors — Luxury Complete Home Interior Designers"
                 width={180}
                 height={42}
                 style={{ width: 'auto' }}

@@ -64,7 +64,7 @@ export const fallbackInteriorServicesData: Category[] = [
   // 1. COMPLETE TURNKEY RESIDENCES
   {
     id: 'turnkey-residences',
-    title: 'Turnkey Residences',
+    title: 'Complete Home Setup',
     subtitle: 'End-to-End Bare-Shell to Move-In Handover for 3BHK, 4BHK, Penthouses & Villas',
     iconName: 'Home',
     gradient: 'from-amber-500/10 to-orange-500/10',
@@ -73,11 +73,11 @@ export const fallbackInteriorServicesData: Category[] = [
     packages: [
       {
         id: 'pkg-3bhk-turnkey',
-        name: '3 BHK Luxury Turnkey Fit-Out',
+        name: '3 BHK Luxury Complete Home Setup',
         duration: '45 DAYS',
         tag: 'MOST POPULAR',
         image: '/images/interiors/penthouse-living.jpg',
-        desc: 'Complete turnkey architectural execution from 3D laser survey to final key handover for luxury 3 BHK residences across Noida & Gurgaon.',
+        desc: 'Complete end-to-end architectural execution from 3D laser survey to final key handover for luxury 3 BHK residences across Noida & Gurgaon.',
         subServices: [
           '3D BIM Laser Survey & Space Reconfiguration',
           'German Blum Modular Kitchen with Quartz Island',
@@ -94,7 +94,7 @@ export const fallbackInteriorServicesData: Category[] = [
         ],
         faqs: [
           {
-            q: 'What is covered under the 3 BHK Turnkey Package?',
+            q: 'What is covered under the 3 BHK Complete Home Setup Package?',
             a: 'It includes modular kitchen with hardware, false ceilings with concealed wiring and lighting, wardrobes in all bedrooms, living room accent walls, electrical switches, paint, and complete civil management.',
           },
           {
