@@ -45,14 +45,17 @@ export function Header() {
         </div>
       </div>
 
-      {/* Main Navbar with Glassmorphism and Dynamic Padding */}
+      {/* Main Navbar with Glassmorphism and Consistent Padding */}
       <div
         className={`transition-all duration-300 border-b ${isScrolled
-          ? 'bg-white/99 backdrop-blur-xl border-[#E7E5E4] shadow-md py-2 sm:py-2.5'
-          : 'bg-white/99 backdrop-blur-lg border-[#FAF8F5]/50 shadow-sm py-2.5 sm:py-3.5'
+          ? 'bg-white/99 backdrop-blur-xl border-[#E7E5E4] shadow-md'
+          : 'bg-white/99 backdrop-blur-lg border-[#FAF8F5]/50 shadow-sm'
           }`}
       >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 lg:gap-6">
+        <nav
+          className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 lg:gap-6 transition-all duration-300 ${isScrolled ? 'py-2.5 sm:py-3' : 'py-3.5 sm:py-4'
+            }`}
+        >
           {/* Logo */}
           <Link href="/" className="flex items-center text-[#0A140F] group flex-shrink-0 transition-transform duration-200 hover:scale-[1.01]">
             {!logoError ? (
@@ -62,7 +65,7 @@ export function Header() {
                 width={180}
                 height={42}
                 style={{ width: 'auto' }}
-                className={`object-contain max-lg:px-2 w-auto scale-125 transition-all duration-300 ${isScrolled ? 'h-7 sm:h-8 md:h-9' : 'h-8 sm:h-9 md:h-10'
+                className={`object-contain w-auto transition-all duration-300 ${isScrolled ? 'h-8 sm:h-8 md:h-9' : 'h-9 sm:h-9 md:h-10'
                   }`}
                 priority
                 onError={() => setLogoError(true)}
@@ -118,41 +121,41 @@ export function Header() {
             {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </nav>
-
-        {/* Mobile Drawer with Smooth Fade-In & Hover Slide */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#0A140F]/95 backdrop-blur-2xl border-b border-white/10 py-5 px-6 space-y-4 shadow-2xl transition-all duration-300">
-            <div className="flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-white/85 hover:text-white hover:translate-x-1.5 transition-all duration-200 font-medium text-sm py-2.5 border-b border-white/10 flex items-center justify-between"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span>{link.label}</span>
-                  <span className="text-[#DFBA73] text-xs">→</span>
-                </Link>
-              ))}
-
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false)
-                  openEstimateSheet()
-                }}
-                className="mt-4 flex items-center justify-between px-5 py-3 rounded-full bg-gradient-to-r from-[#09110D] to-[#122018] text-white border border-[#C5A880]/50 hover:border-[#DFBA73] shadow-lg transition-all duration-200 w-full cursor-pointer active:scale-95"
-              >
-                <span className="text-xs font-bold tracking-wider text-white uppercase">
-                  Get a Quote
-                </span>
-                <span className="w-6 h-6 rounded-full bg-gradient-to-tr from-[#C5A880] to-[#E8D4B8] text-[#09110D] flex items-center justify-center">
-                  <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.4]" />
-                </span>
-              </button>
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Mobile Drawer with Premium Translucent Green Glass Effect */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden bg-gradient-to-b from-[#0E2A1B]/85 via-[#14391F]/80 to-[#0E2A1B]/88 backdrop-blur-2xl text-neutral-100 border-b border-[#DFBA73]/30 py-6 px-6 space-y-4 shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_0_0_rgba(255,255,255,0.08)] transition-all duration-300">
+          <div className="flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="group text-neutral-100 hover:text-white transition-all duration-200 font-semibold text-sm py-3 border-b border-white/[0.08] flex items-center justify-between"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="group-hover:translate-x-1 transition-transform duration-200">{link.label}</span>
+                <ArrowUpRight className="w-4 h-4 text-[#DFBA73] stroke-[2.2] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            ))}
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false)
+                openEstimateSheet()
+              }}
+              className="mt-5 flex items-center justify-between px-5 py-3 rounded-full bg-[#081810]/90 hover:bg-[#0c2418] text-white border border-[#DFBA73]/50 shadow-lg shadow-black/30 backdrop-blur-sm transition-all duration-200 w-full cursor-pointer active:scale-95"
+            >
+              <span className="text-xs font-bold tracking-wider text-white uppercase">
+                Get a Quote
+              </span>
+              <span className="w-6 h-6 rounded-full bg-gradient-to-tr from-[#C5A880] to-[#E8D4B8] text-[#09110D] flex items-center justify-center">
+                <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.4]" />
+              </span>
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   )
 }
