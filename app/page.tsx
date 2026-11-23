@@ -6,6 +6,7 @@ import {
 import dynamicImport from 'next/dynamic'
 import { Header } from '@/components/header'
 import { Hero } from '@/components/hero'
+import { HeroAppleScroll } from '@/components/hero-apple-scroll'
 import { EngineeredServices } from '@/components/engineered-services'
 import { Services } from '@/components/services'
 import { ClientQuote } from '@/components/client-quote'
@@ -54,7 +55,9 @@ const Footer = dynamicImport(() => import('@/components/footer').then(mod => mod
 
 export const revalidate = 60
 
-export default async function Page() {
+export default async function Page({ searchParams }: { searchParams?: Promise<{ hero?: string }> }) {
+  const resolvedSearchParams = searchParams ? await searchParams : undefined
+  const showClassicHero = resolvedSearchParams?.hero === 'classic'
   let plainSlides: any[] = []
   let plainGalleryImages: any[] = [
     {
@@ -137,7 +140,7 @@ export default async function Page() {
         <Header />
       </ErrorBoundary>
       <ErrorBoundary>
-        <Hero slides={plainSlides} />
+        {showClassicHero ? <Hero slides={plainSlides} /> : <HeroAppleScroll slides={plainSlides} />}
       </ErrorBoundary>
       <div className="section-render-optimize">
         <ErrorBoundary>
